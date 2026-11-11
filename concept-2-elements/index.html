@@ -1,0 +1,1452 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IN FLOW — Стихии</title>
+<meta name="description" content="Концепт редизайна 2 «Стихии»: In Flow, пространство души и тела в Санкт-Петербурге.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..500&family=Spectral:ital,wght@0,400;0,500;1,400&family=Tenor+Sans&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..500&family=Spectral:ital,wght@0,400;0,500;1,400&family=Tenor+Sans&display=swap"></noscript>
+<style>
+:root{
+  /* layout: 12-колоночная сетка, контейнер 1320px, поля clamp(16px,4vw,56px), волосяные линии 1px вместо карточек с тенью */
+  --bg:#E1E6E2;          /* известняк с зелёным отливом */
+  --bg-2:#D6DCD7;
+  --paper:#ECEFEB;
+  --line:#B4BEB8;
+  --line-soft:#C9D0CB;
+  --ink:#1B2220;          /* графит, 13.9:1 на --bg */
+  --ink-2:#434E49;        /* 7.3:1 */
+  --ink-3:#55605B;        /* 5.2:1 */
+  --on-dark:#F1F3EF;
+
+  --earth:#5B5232;  --earth-tone:#8C7F55;   /* умбра/мох, 6.9:1 */
+  --water:#0E4A50;  --water-tone:#3F8A8A;   /* чернильная бирюза, 8.8:1 */
+  --fire:#944424;   --fire-tone:#C9774A;    /* окисленная медь, 5.2:1 */
+  --air:#3E5A70;    --air-tone:#A9BCCB;     /* серебристо-голубой (текст — тёмный вариант), 5.9:1 */
+
+  --accent:#0E4A50;
+  --accent-tone:#3F8A8A;
+
+  --f-display:"Tenor Sans","Helvetica Neue",Arial,sans-serif;
+  --f-text:"Spectral",Georgia,"Times New Roman",serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+
+  --gut:clamp(16px,4vw,56px);
+  --ease:cubic-bezier(.22,.7,.18,1);
+}
+@property --accent{syntax:"<color>";inherits:true;initial-value:#0E4A50}
+@property --accent-tone{syntax:"<color>";inherits:true;initial-value:#3F8A8A}
+:root{transition:--accent .9s var(--ease),--accent-tone .9s var(--ease)}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-text);font-size:18px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.32;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .4 0 0 0 0 .37 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body>*{position:relative;z-index:1}
+img,svg,canvas{display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:400;margin:0;letter-spacing:.04em}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:16px;top:-60px;z-index:100;background:var(--ink);color:var(--on-dark);padding:10px 14px;text-decoration:none}
+.skip:focus{top:12px}
+
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--gut)}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;line-height:1.5}
+.g{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.5;flex:none;overflow:visible}
+.c-earth{color:var(--earth)}.c-water{color:var(--water)}.c-fire{color:var(--fire)}.c-air{color:var(--air)}
+
+/* кнопки */
+.btn{display:inline-flex;align-items:center;gap:.7em;min-height:48px;padding:12px 22px;border:1px solid var(--accent);background:var(--accent);color:var(--on-dark);
+  font-family:var(--f-display);font-size:14px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:0;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.btn:hover{background:var(--ink);border-color:var(--ink)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--on-dark)}
+.btn--sm{min-height:40px;padding:8px 16px;font-size:13px}
+.btn .g{font-size:15px}
+.link{font-family:var(--f-mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+/* служебная плашка */
+.banner{background:var(--ink);color:var(--on-dark);text-align:center;padding:7px 16px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
+/* шапка */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(225,230,226,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.hdr .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.logo svg{width:30px;height:30px;color:var(--accent)}
+.logo span{font-family:var(--f-display);font-size:17px;letter-spacing:.38em;margin-right:-.38em}
+.nav{display:flex;gap:26px;margin-left:auto}
+.nav a{white-space:nowrap;font-family:var(--f-display);font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
+.nav a:hover{border-color:currentColor}
+.hdr-tel{font-family:var(--f-mono);font-size:13px;text-decoration:none;white-space:nowrap}
+.menu-btn{display:none;background:none;border:1px solid var(--line);width:44px;height:44px;cursor:pointer;margin-left:auto;align-items:center;justify-content:center}
+.menu-btn span{display:block;width:18px;height:1px;background:var(--ink);box-shadow:0 -5px 0 var(--ink),0 5px 0 var(--ink)}
+@media (max-width:1160px){.hdr-tel{display:none}.nav{gap:18px}.nav a{letter-spacing:.1em}}
+@media (max-width:960px){
+  .menu-btn{display:inline-flex}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--gut) 18px}
+  .nav.is-open{display:flex}
+  .nav a{padding:14px 0;border-bottom:1px solid var(--line-soft)}
+  .hdr .wrap{gap:12px}
+}
+@media (max-width:420px){.hdr .btn{padding:8px 12px;letter-spacing:.08em}.logo span{font-size:15px;letter-spacing:.3em}}
+
+/* hero */
+.hero{padding-top:clamp(36px,6vw,80px)}
+.hero-top{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;padding-bottom:clamp(28px,4vw,48px)}
+.hero-copy{grid-column:1/9}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--ink-2);margin-bottom:22px}
+.eyebrow .g{color:var(--accent);font-size:14px}
+.hero h1{font-size:clamp(38px,6.4vw,96px);line-height:1;text-transform:uppercase;letter-spacing:.05em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{max-width:36em;margin-top:26px;font-size:clamp(17px,1.4vw,20px);color:var(--ink-2)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-facts{grid-column:9/13;border-left:1px solid var(--line);padding-left:24px;display:grid;gap:14px}
+.hero-facts div{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line-soft);padding-bottom:10px}
+.hero-facts dt{color:var(--ink-3)}
+.hero-facts dd{margin:0;font-family:var(--f-display);font-size:18px;letter-spacing:.04em;text-align:right}
+
+.cols{display:flex;height:min(70vh,680px);min-height:520px;border-top:1px solid var(--line)}
+.col{position:relative;flex:1 1 0;min-width:0;overflow:hidden;transition:flex-grow .9s var(--ease);cursor:pointer;color:var(--on-dark)}
+.col+.col{border-left:1px solid rgba(225,230,226,.5)}
+.col canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.col::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(10,14,13,.72),rgba(10,14,13,.18) 55%,rgba(10,14,13,0) 80%)}
+.col--air{color:var(--ink)}
+.col--air::after{background:linear-gradient(to top,rgba(226,233,238,.9),rgba(226,233,238,.35) 55%,rgba(226,233,238,0) 80%)}
+.col-in{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,2vw,30px)}
+.col-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.col-head .g{font-size:44px;stroke-width:1.3}
+.col-toggle{all:unset;cursor:pointer;display:block;text-align:left}
+.col-toggle:focus-visible{outline:2px solid currentColor;outline-offset:6px}
+.col h3{font-size:clamp(26px,2.6vw,40px);text-transform:uppercase;letter-spacing:.12em;line-height:1.1}
+.col .q{margin-top:8px;opacity:.92}
+.col-more{min-width:280px;max-width:380px;margin-top:20px;padding-top:16px;border-top:1px solid currentColor;opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.col-more p{font-size:16px;line-height:1.5}
+.col-more .num{font-family:var(--f-display);font-size:22px;letter-spacing:.04em;margin:8px 0 14px}
+.col-more .link{color:inherit}
+.col.is-open,.col:has(:focus-visible){flex-grow:2.6}
+.col.is-open .col-more,.col:has(:focus-visible) .col-more{opacity:1;transform:none}
+@media (hover:hover){
+  .cols:hover .col{flex-grow:1}
+  .cols:hover .col:hover{flex-grow:2.6}
+  .cols:hover .col:not(:hover) .col-more{opacity:0;transform:translateY(10px)}
+  .col:hover .col-more{opacity:1;transform:none}
+}
+.hero-note{display:flex;justify-content:space-between;gap:16px;padding:12px 0;color:var(--ink-3);border-bottom:1px solid var(--line)}
+
+@media (max-width:900px){
+  .hero-top{grid-template-columns:1fr}
+  .hero-copy,.hero-facts{grid-column:1/-1}
+  .hero-facts{border-left:0;padding-left:0;grid-template-columns:1fr 1fr;gap:10px 20px}
+}
+@media (max-width:560px){.hero-facts{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .cols{flex-direction:column;height:640px;min-height:0}
+  .col+.col{border-left:0;border-top:1px solid rgba(225,230,226,.5)}
+  .col::after{background:linear-gradient(to right,rgba(10,14,13,.7),rgba(10,14,13,.15) 75%)}
+  .col--air::after{background:linear-gradient(to right,rgba(226,233,238,.9),rgba(226,233,238,.3) 75%)}
+  .col-in{justify-content:flex-start;padding:18px}
+  .col-head{flex-direction:row-reverse;justify-content:flex-end;align-items:center;gap:14px}
+  .col-head .g{font-size:30px}
+  .col-more{min-width:0;margin-top:14px;padding-top:12px}
+  .col-more .num{font-size:19px;margin:4px 0 10px}
+  .hero-note{flex-direction:column;gap:4px}
+}
+
+/* секции */
+.sec{padding:clamp(72px,10vw,140px) 0 0}
+.sec-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;border-top:1px solid var(--ink);padding-top:22px;margin-bottom:clamp(36px,5vw,64px)}
+.sec-label{grid-column:1/4;display:flex;align-items:center;gap:10px;color:var(--ink-2)}
+.sec-label .g{color:var(--accent);font-size:15px}
+.sec-head h2{grid-column:4/13;font-size:clamp(30px,4.2vw,58px);line-height:1.06;text-transform:uppercase}
+.sec-head .lead{grid-column:4/12;color:var(--ink-2);font-size:clamp(17px,1.3vw,19px);max-width:40em}
+.sec-cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:clamp(36px,5vw,56px);padding-top:20px;border-top:1px solid var(--line-soft)}
+.sec-cta .mono{color:var(--ink-3)}
+@media (max-width:760px){
+  .sec-head{grid-template-columns:1fr;gap:14px}
+  .sec-label,.sec-head h2,.sec-head .lead{grid-column:1/-1}
+}
+
+/* фото-окна */
+.ph{position:relative;overflow:hidden;background:
+  radial-gradient(120% 80% at 80% 10%,rgba(255,255,255,.55),rgba(255,255,255,0) 60%),
+  repeating-linear-gradient(176deg,rgba(27,34,32,.045) 0 1px,transparent 1px 9px),
+  linear-gradient(160deg,#CBD3CD,#B6C0BA 55%,#A9B4AE);border:1px solid var(--line)}
+.ph::before{content:"";position:absolute;inset:14%;border:1px solid rgba(27,34,32,.14)}
+.ph::after{content:"";position:absolute;left:50%;top:50%;width:46%;aspect-ratio:1;transform:translate(-50%,-56%);
+  background:conic-gradient(from 210deg,transparent 0 60deg,rgba(27,34,32,.06) 60deg 120deg,transparent 120deg);clip-path:polygon(50% 6%,94% 84%,6% 84%)}
+.ph figcaption{position:absolute;left:14px;bottom:12px;z-index:1;color:var(--ink-2);background:rgba(236,239,235,.85);padding:3px 8px}
+
+/* философия */
+.philo{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.philo-quote{grid-column:1/9;font-family:var(--f-display);font-size:clamp(26px,3.3vw,46px);line-height:1.22;letter-spacing:.02em}
+.philo-quote span{color:var(--accent)}
+.philo-ph{grid-column:9/13;grid-row:1/3;aspect-ratio:3/4}
+.philo-pts{grid-column:1/9;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+.philo-pts p{padding:22px 24px 0 0;display:flex;gap:14px;color:var(--ink-2)}
+.philo-pts .g{font-size:22px;margin-top:4px;color:var(--ink)}
+.practices{grid-column:1/-1;display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:20px}
+.practices li{flex:1 1 160px;list-style:none;padding:16px 16px 16px 0;display:flex;align-items:center;gap:10px}
+.practices li+li{padding-left:16px;border-left:1px solid var(--line-soft)}
+.practices{padding:0;margin-bottom:0}
+@media (max-width:900px){
+  .philo-quote,.philo-pts,.philo-ph{grid-column:1/-1;grid-row:auto}
+  .philo-ph{aspect-ratio:16/10}
+  .philo-pts{grid-template-columns:1fr}
+}
+@media (max-width:560px){.practices li{flex-basis:50%}.practices li+li{border-left:0;padding-left:0}}
+
+/* узнаёте себя */
+.pains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.pains li{padding:28px 28px 30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.pains li:not(:nth-child(3n+1)){padding-left:28px;border-left:1px solid var(--line-soft)}
+.pains .g{font-size:20px;margin-top:6px}
+.pains p{font-family:var(--f-display);font-size:clamp(19px,1.6vw,24px);line-height:1.3;letter-spacing:.02em}
+@media (max-width:900px){
+  .pains{grid-template-columns:1fr 1fr}
+  .pains li:not(:nth-child(3n+1)){padding-left:0;border-left:0}
+  .pains li:nth-child(2n){padding-left:24px;border-left:1px solid var(--line-soft)}
+}
+@media (max-width:560px){.pains{grid-template-columns:1fr}.pains li:nth-child(2n){padding-left:0;border-left:0}.pains li{padding-right:0}}
+
+/* программы */
+.pgrid{display:grid;grid-template-columns:repeat(12,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--line)}
+.prog{grid-column:span 6;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(22px,2.6vw,38px);display:flex;flex-direction:column;gap:20px;min-width:0}
+.prog--w7{grid-column:span 7}.prog--w5{grid-column:span 5}
+.prog--paper{background:var(--paper)}
+.prog-tag{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink-3)}
+.prog-tag .g{font-size:26px;color:var(--accent)}
+.prog h3{font-size:clamp(26px,2.6vw,38px);text-transform:uppercase;line-height:1.08}
+.prog .idea{color:var(--ink-2);max-width:34em}
+.nums{display:flex;flex-wrap:wrap;gap:12px 40px;padding:16px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.nums div{display:flex;flex-direction:column}
+.nums .mono{color:var(--ink-3)}
+.big{font-family:var(--f-display);font-size:clamp(32px,3.6vw,52px);line-height:1.05;letter-spacing:.01em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.big small{font-size:.42em;letter-spacing:.08em;margin-left:.2em;color:var(--ink-2)}
+.prog-foot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.prog-foot .mono{color:var(--ink-3)}
+
+.score-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:transparent;padding:8px 14px;min-height:40px;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.chip[aria-pressed="true"],.chip:has(input:checked){background:var(--ink);color:var(--on-dark);border-color:var(--ink)}
+.chip:hover{border-color:var(--ink)}
+.score{display:flex;flex-direction:column;gap:14px}
+.score-bar{display:flex;height:34px;gap:2px}
+.seg{flex:1 1 0;min-width:0;display:flex;align-items:center;padding-left:6px;font-family:var(--f-mono);font-size:11px;color:var(--on-dark);overflow:hidden;transition:flex-grow .8s var(--ease)}
+.seg--earth{background:var(--earth)}.seg--water{background:var(--water)}.seg--fire{background:var(--fire)}.seg--air{background:var(--air)}
+.score-list{list-style:none;margin:0;padding:0;counter-reset:s}
+.score-list li{display:grid;grid-template-columns:18px 64px 1fr;gap:10px;align-items:baseline;padding:6px 0;border-bottom:1px dotted var(--line);font-size:16px;line-height:1.4}
+.score-list .g{font-size:13px;transform:translateY(2px)}
+.score-list .m{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.score-total{color:var(--ink-3)}
+.score-note{color:var(--ink-3);font-size:11px}
+
+.tablewrap{overflow-x:auto;margin-top:clamp(40px,5vw,64px);border-top:1px solid var(--ink)}
+.cmp{width:100%;min-width:640px;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.cmp caption{text-align:left;padding:20px 0 16px;font-family:var(--f-display);font-size:clamp(22px,2vw,28px);text-transform:uppercase;letter-spacing:.06em}
+.cmp th,.cmp td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+.cmp thead th{font-family:var(--f-mono);font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.cmp tbody th{font-family:var(--f-display);font-weight:400;font-size:18px;letter-spacing:.04em}
+.cmp td{font-family:var(--f-mono);font-size:15px}
+.cmp td.soft{color:var(--ink-3);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.cmp .hl{color:var(--accent)}
+@media (max-width:900px){.prog,.prog--w7,.prog--w5{grid-column:1/-1}}
+
+/* стихии и квиз */
+.elems{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.elem-list{grid-column:1/8;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.elem-list li{padding:22px 22px 22px 0;border-bottom:1px solid var(--line);display:flex;gap:16px}
+.elem-list li:nth-child(2n){padding-left:22px;border-left:1px solid var(--line-soft)}
+.elem-list .g{font-size:34px;stroke-width:1.3}
+.elem-list h3{font-size:22px;text-transform:uppercase;letter-spacing:.12em}
+.elem-list p{color:var(--ink-2);font-size:16px}
+.rule{grid-column:8/13;display:flex;flex-direction:column;align-items:center;gap:16px}
+.rule svg.dia{width:min(100%,300px);height:auto}
+.rule p{font-size:16px;color:var(--ink-2);text-align:center;max-width:24em}
+@media (max-width:900px){.elem-list,.rule{grid-column:1/-1}}
+@media (max-width:520px){.elem-list{grid-template-columns:1fr}.elem-list li:nth-child(2n){padding-left:0;border-left:0}}
+
+.quiz{margin-top:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(12,1fr);background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--accent)}
+.quiz-side{grid-column:1/5;padding:clamp(22px,3vw,40px);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:18px}
+.quiz-side h3{font-size:clamp(28px,2.8vw,40px);text-transform:uppercase}
+.quiz-side p{color:var(--ink-2);font-size:16px}
+.prog-dots{display:flex;gap:4px}
+.prog-dots span{flex:1;height:3px;background:var(--line);transition:background .4s}
+.prog-dots span.on{background:var(--accent)}
+.quiz-main{grid-column:5/13;padding:clamp(22px,3vw,40px);min-height:420px;display:flex;flex-direction:column}
+.q{border:0;margin:0;padding:0;min-width:0}
+.q-title{font-family:var(--f-display);font-size:clamp(22px,2.2vw,32px);line-height:1.2;letter-spacing:.02em;padding:0;margin-bottom:22px}
+.q-title:focus{outline:none}
+.q-opts{display:grid;gap:8px}
+.opt{position:relative;display:flex;align-items:center;gap:14px;padding:14px 16px;min-height:56px;border:1px solid var(--line);cursor:pointer;background:var(--bg);transition:border-color .25s,background .25s}
+.opt:hover{border-color:var(--ink)}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt .mk{font-family:var(--f-mono);font-size:12px;width:26px;height:26px;border:1px solid var(--ink-3);display:grid;place-items:center;flex:none}
+.opt:has(input:checked){border-color:var(--accent);background:var(--paper)}
+.opt:has(input:checked) .mk{background:var(--accent);border-color:var(--accent);color:var(--on-dark)}
+.opt:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.q-nav{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:24px}
+.q-nav button[disabled]{opacity:.4;cursor:default}
+.q-result{display:grid;grid-template-columns:auto 1fr;gap:24px 32px;align-items:start}
+.q-result[hidden]{display:none}
+.q-result .rg{font-size:clamp(84px,10vw,140px);color:var(--accent);stroke-width:1}
+.q-result h4{font-size:clamp(30px,3.4vw,48px);text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}
+.q-result .why{color:var(--ink-2);margin-top:10px}
+.rec{grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:flex-end;justify-content:space-between}
+.rec .mono{color:var(--ink-3)}
+.rec-name{font-family:var(--f-display);font-size:24px;letter-spacing:.04em;margin-top:4px}
+.rec-acts{display:flex;flex-wrap:wrap;gap:10px}
+@media (max-width:900px){.quiz-side,.quiz-main{grid-column:1/-1}.quiz-side{border-right:0;border-bottom:1px solid var(--line)}}
+@media (max-width:520px){.q-result{grid-template-columns:1fr}.quiz-main{min-height:0}}
+
+/* путь гостя */
+.journey{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.journey::before{content:"";position:absolute;left:0;right:0;top:15px;height:1px;background:var(--line)}
+.journey li{position:relative;padding:0 24px 0 0}
+.step-n{position:relative;display:inline-grid;place-items:center;width:31px;height:31px;background:var(--bg);border:1px solid var(--ink);font-family:var(--f-mono);font-size:12px;margin-bottom:22px}
+.journey li:last-child .step-n{background:var(--accent);border-color:var(--accent);color:var(--on-dark)}
+.journey h3{font-size:clamp(20px,1.7vw,24px);text-transform:uppercase;letter-spacing:.06em;line-height:1.2;margin-bottom:10px}
+.journey p{color:var(--ink-2);font-size:16px}
+.journey-row{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:clamp(40px,5vw,64px);align-items:end}
+.journey-row .ph{grid-column:1/8;aspect-ratio:16/8}
+.course{grid-column:8/13;border-left:1px solid var(--line);padding-left:24px}
+.course .big{color:var(--accent)}
+.course p{color:var(--ink-2);font-size:16px;margin-top:8px}
+@media (max-width:900px){
+  .journey{grid-template-columns:1fr 1fr;gap:36px 0}
+  .journey::before{display:none}
+  .journey-row .ph,.course{grid-column:1/-1}
+  .course{border-left:0;padding-left:0}
+}
+@media (max-width:520px){.journey{grid-template-columns:1fr;gap:28px}.journey li{padding:0 0 0 48px}.step-n{position:absolute;left:0;top:-4px}}
+
+/* основатели */
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px)}
+.founder{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:24px;align-items:end}
+.portrait{position:relative;aspect-ratio:3/4;border:1px solid var(--line);background:var(--paper);overflow:hidden}
+.portrait svg{width:100%;height:100%}
+.portrait figcaption{position:absolute;left:10px;bottom:10px;color:var(--ink-2);background:rgba(236,239,235,.9);padding:3px 8px}
+.founder h3{font-size:clamp(22px,2vw,30px);text-transform:uppercase;letter-spacing:.08em;line-height:1.15}
+.founder .role{margin-top:10px;color:var(--ink-3)}
+.founder p.txt{margin-top:14px;color:var(--ink-2);font-size:16px}
+@media (max-width:900px){.founders{grid-template-columns:1fr}}
+@media (max-width:480px){.founder{grid-template-columns:1fr}.portrait{aspect-ratio:4/3}}
+
+/* отзывы */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.review{padding:28px 28px 28px 0;display:flex;flex-direction:column;gap:18px}
+.review+.review{padding-left:28px;border-left:1px solid var(--line-soft)}
+.review .g{font-size:22px;color:var(--accent)}
+.review blockquote{margin:0;font-size:19px;line-height:1.5}
+.review footer{margin-top:auto;font-family:var(--f-display);letter-spacing:.14em;text-transform:uppercase;font-size:14px}
+.mock-note{margin-top:18px;color:var(--ink-3);font-size:11px}
+@media (max-width:900px){.reviews{grid-template-columns:1fr}.review+.review{padding-left:0;border-left:0;border-top:1px solid var(--line-soft)}.review{padding-right:0}}
+
+/* сертификат */
+.gift{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.cert{grid-column:1/7;position:relative;aspect-ratio:1.6;background:var(--accent);color:var(--on-dark);overflow:hidden;padding:clamp(20px,3vw,36px);display:flex;flex-direction:column;justify-content:space-between}
+.cert-pat{position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:var(--on-dark)}
+.cert>*{position:relative}
+.cert-top{display:flex;justify-content:space-between;align-items:center}
+.cert-top .logo{color:var(--on-dark)}.cert-top .logo svg{color:var(--on-dark)}
+.cert-amt{font-family:var(--f-display);font-size:clamp(40px,5.6vw,80px);line-height:1;letter-spacing:.02em}
+.gift-form{grid-column:8/13;display:flex;flex-direction:column;gap:20px}
+.gift-form fieldset{border:0;padding:0;margin:0}
+.gift-form legend{margin-bottom:12px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip{position:relative;display:inline-flex;align-items:center}
+.chip:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:900px){.cert,.gift-form{grid-column:1/-1}}
+
+/* поля */
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.field input,.field select,.field textarea{width:100%;min-height:48px;padding:12px 14px;border:1px solid var(--line);background:var(--bg);border-radius:0;font-size:17px}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink-2)}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent);flex:none}
+.demo-msg{border-left:3px solid var(--accent);background:var(--paper);padding:12px 16px;font-size:16px}
+.demo-msg:empty{display:none}
+
+/* FAQ */
+.faq{border-top:1px solid var(--ink)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item h3{font-size:inherit;letter-spacing:inherit}
+.faq-q{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;cursor:pointer;font-family:var(--f-display);font-size:clamp(19px,1.7vw,24px);letter-spacing:.03em}
+.faq-q:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.faq-q .g{font-size:18px;transition:transform .5s var(--ease);color:var(--accent)}
+.faq-q[aria-expanded="true"] .g{transform:rotate(180deg)}
+.faq-a{padding:0 0 24px;max-width:46em;color:var(--ink-2);animation:fadeIn .5s var(--ease)}
+.faq-a .mono{color:var(--ink-3);display:block;margin-top:6px;font-size:11px}
+@keyframes fadeIn{from{opacity:.2;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* контакты */
+.contacts{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.c-info{grid-column:1/6;display:flex;flex-direction:column;gap:0}
+.c-row{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.c-row:first-child{border-top:1px solid var(--line)}
+.c-row dt{color:var(--ink-3)}
+.c-row dd{margin:0;font-size:17px}
+.c-row a{text-decoration-thickness:1px;text-underline-offset:3px}
+.map{margin-top:24px;aspect-ratio:16/10;position:relative;border:1px solid var(--line);background:var(--paper);overflow:hidden}
+.map svg{width:100%;height:100%}
+.map figcaption{position:absolute;left:10px;bottom:10px;color:var(--ink-2);background:rgba(236,239,235,.9);padding:3px 8px}
+.booking{grid-column:7/13;background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--accent);padding:clamp(22px,3vw,40px);display:flex;flex-direction:column;gap:16px}
+.booking h3{font-size:clamp(24px,2.4vw,34px);text-transform:uppercase}
+.booking .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.booking .hint{color:var(--ink-3)}
+@media (max-width:900px){.c-info,.booking{grid-column:1/-1}}
+@media (max-width:520px){.booking .two{grid-template-columns:1fr}.c-row{grid-template-columns:1fr;gap:2px}}
+
+/* подвал */
+.ftr{margin-top:clamp(80px,10vw,140px);background:var(--ink);color:var(--on-dark);padding:48px 0 32px}
+.ftr .logo{color:var(--on-dark)}.ftr .logo svg{color:var(--on-dark)}
+.ftr-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center;padding-bottom:28px;border-bottom:1px solid rgba(241,243,239,.2)}
+.ftr-glyphs{display:flex;gap:18px;font-size:22px}
+.ftr-bot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:22px;font-size:14px;color:#C8CEC9}
+.ftr-bot a{color:#C8CEC9}
+.ftr-bot nav{display:flex;flex-wrap:wrap;gap:20px}
+.nonmed{width:100%;font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--on-dark)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+.sec{content-visibility:auto;contain-intrinsic-size:auto 900px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="g-fire" viewBox="0 0 40 40"><path d="M20 4.5 36.5 33.5h-33Z" vector-effect="non-scaling-stroke"/></symbol>
+    <symbol id="g-water" viewBox="0 0 40 40"><path d="M3.5 6.5h33L20 35.5Z" vector-effect="non-scaling-stroke"/></symbol>
+    <symbol id="g-air" viewBox="0 0 40 40"><path d="M20 4.5 36.5 33.5h-33Z" vector-effect="non-scaling-stroke"/><path d="M7 22.5h26" vector-effect="non-scaling-stroke"/></symbol>
+    <symbol id="g-earth" viewBox="0 0 40 40"><path d="M3.5 6.5h33L20 35.5Z" vector-effect="non-scaling-stroke"/><path d="M7 17.5h26" vector-effect="non-scaling-stroke"/></symbol>
+    <symbol id="g-ether" viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" vector-effect="non-scaling-stroke"/><circle cx="20" cy="20" r="1.6" vector-effect="non-scaling-stroke"/></symbol>
+    <symbol id="g-mark" viewBox="0 0 40 40"><path d="M20 3 36 31H4Z" vector-effect="non-scaling-stroke"/><path d="M4 9h32L20 37Z" vector-effect="non-scaling-stroke"/><path d="M11 20h18" vector-effect="non-scaling-stroke"/></symbol>
+    <symbol id="g-yinyang" viewBox="0 0 40 40"><path d="M11 5 21 22H1Z" vector-effect="non-scaling-stroke"/><path d="M19 18h20L29 35Z" vector-effect="non-scaling-stroke"/></symbol>
+    <symbol id="g-down" viewBox="0 0 40 40"><path d="M8 14h24L20 30Z" vector-effect="non-scaling-stroke"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Перейти к содержанию</a>
+<div class="banner" role="note">Концепт редизайна 2 · «Стихии» · не является действующим сайтом</div>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="IN FLOW — на главную"><svg class="g" aria-hidden="true"><use href="#g-mark"/></svg><span>IN FLOW</span></a>
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <a href="#programs">Программы</a>
+      <a href="#elements">Стихии</a>
+      <a href="#about">О студии</a>
+      <a href="#gift">Сертификаты</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="hdr-tel" href="tel:+79934833090">+7 (993) 483-30-90</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню"><span></span></button>
+    <a class="btn btn--sm" href="#booking">Записаться</a>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-top">
+    <div class="hero-copy">
+      <p class="eyebrow mono"><svg class="g" aria-hidden="true"><use href="#g-mark"/></svg>Пространство души и тела · Санкт-Петербург</p>
+      <h1 id="hero-title">Вернуться в&nbsp;своё <em>естество</em></h1>
+      <p class="hero-sub">Авторские программы из дыхательных практик, потокового массажа, звука, тепла и чайной церемонии. Один визит длится от 90&nbsp;минут до 3,5&nbsp;часов.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#booking">Записаться</a>
+        <a class="btn btn--ghost" href="#quiz"><svg class="g" aria-hidden="true"><use href="#g-mark"/></svg>Узнать свою стихию</a>
+      </div>
+    </div>
+    <dl class="hero-facts mono">
+      <div><dt>Визит</dt><dd>90–210 мин</dd></div>
+      <div><dt>Программа</dt><dd>4–6 практик</dd></div>
+      <div><dt>Курс</dt><dd>5–7 визитов</dd></div>
+      <div><dt>Ежедневно</dt><dd>10:00–23:00</dd></div>
+    </dl>
+  </div>
+
+  <div class="cols" id="cols">
+    <article class="col col--earth" data-el="earth">
+      <canvas aria-hidden="true"></canvas>
+      <div class="col-in">
+        <div class="col-head"><span class="mono">опора</span><svg class="g" aria-hidden="true"><use href="#g-earth"/></svg></div>
+        <div>
+          <h3><button class="col-toggle" type="button" aria-expanded="false" aria-controls="cm-earth">Земля</button></h3>
+          <p class="q mono">опора · устойчивость · телесность</p>
+          <div class="col-more" id="cm-earth">
+            <p>«В стихии» · сценарий Земли: дыхание, эмбодимент, ИК-сауна, травяные мешочки, чай.</p>
+            <p class="num">140–160 мин · от 10&nbsp;000&nbsp;₽</p>
+            <a class="link" href="#booking" data-program="В стихии: Земля">Записаться</a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="col col--water" data-el="water">
+      <canvas aria-hidden="true"></canvas>
+      <div class="col-in">
+        <div class="col-head"><span class="mono">текучесть</span><svg class="g" aria-hidden="true"><use href="#g-water"/></svg></div>
+        <div>
+          <h3><button class="col-toggle" type="button" aria-expanded="false" aria-controls="cm-water">Вода</button></h3>
+          <p class="q mono">текучесть · чувства · мягкость</p>
+          <div class="col-more" id="cm-water">
+            <p>«В стихии» · сценарий Воды: мягкие практики, которые возвращают чувствительность.</p>
+            <p class="num">140–160 мин · от 10&nbsp;000&nbsp;₽</p>
+            <a class="link" href="#booking" data-program="В стихии: Вода">Записаться</a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="col col--fire" data-el="fire">
+      <canvas aria-hidden="true"></canvas>
+      <div class="col-in">
+        <div class="col-head"><span class="mono">энергия</span><svg class="g" aria-hidden="true"><use href="#g-fire"/></svg></div>
+        <div>
+          <h3><button class="col-toggle" type="button" aria-expanded="false" aria-controls="cm-fire">Огонь</button></h3>
+          <p class="q mono">энергия · воля · тепло</p>
+          <div class="col-more" id="cm-fire">
+            <p>«В стихии» · сценарий Огня: тепло, движение и дыхание для возвращения сил.</p>
+            <p class="num">140–160 мин · от 10&nbsp;000&nbsp;₽</p>
+            <a class="link" href="#booking" data-program="В стихии: Огонь">Записаться</a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="col col--air" data-el="air">
+      <canvas aria-hidden="true"></canvas>
+      <div class="col-in">
+        <div class="col-head"><span class="mono">ясность</span><svg class="g" aria-hidden="true"><use href="#g-air"/></svg></div>
+        <div>
+          <h3><button class="col-toggle" type="button" aria-expanded="false" aria-controls="cm-air">Воздух</button></h3>
+          <p class="q mono">лёгкость · ясность · свобода</p>
+          <div class="col-more" id="cm-air">
+            <p>«В стихии» · сценарий Воздуха: дыхание и звук, после которых становится просторно.</p>
+            <p class="num">140–160 мин · от 10&nbsp;000&nbsp;₽</p>
+            <a class="link" href="#booking" data-program="В стихии: Воздух">Записаться</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="wrap hero-note mono"><span>Наведите или коснитесь стихии</span><span>59.95° N · 30.31° E</span></div>
+</section>
+
+<!-- ФИЛОСОФИЯ -->
+<section class="sec" id="about" aria-labelledby="philo-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-ether"/></svg>Философия</p>
+      <h2 id="philo-title">Счастье — это состояние</h2>
+    </div>
+    <div class="philo">
+      <p class="philo-quote">Свобода, удовлетворённость, гармония с&nbsp;собой и&nbsp;миром. <span>Мы соединяем практики Запада и&nbsp;Востока.</span></p>
+      <figure class="ph philo-ph" style="margin:0"><figcaption class="mono">здесь фото пространства</figcaption></figure>
+      <div class="philo-pts">
+        <p><svg class="g" aria-hidden="true"><use href="#g-earth"/></svg><span>Работаем с телом, чтобы освободить внимание.</span></p>
+        <p><svg class="g" aria-hidden="true"><use href="#g-air"/></svg><span>Работаем с вниманием, чтобы тело отпустило напряжение.</span></p>
+      </div>
+      <ul class="practices mono" aria-label="Практики в программах">
+        <li><svg class="g c-air" aria-hidden="true"><use href="#g-air"/></svg>Дыхание</li>
+        <li><svg class="g c-air" aria-hidden="true"><use href="#g-ether"/></svg>Звук поющих чаш</li>
+        <li><svg class="g c-fire" aria-hidden="true"><use href="#g-fire"/></svg>Тепло ИК-сауны</li>
+        <li><svg class="g c-water" aria-hidden="true"><use href="#g-water"/></svg>Потоковый массаж</li>
+        <li><svg class="g c-earth" aria-hidden="true"><use href="#g-earth"/></svg>Чайная церемония</li>
+      </ul>
+    </div>
+    <div class="sec-cta"><a class="btn" href="#booking">Записаться</a><span class="mono">Ежедневно 10:00–23:00</span></div>
+  </div>
+</section>
+
+<!-- УЗНАЁТЕ СЕБЯ -->
+<section class="sec" aria-labelledby="pains-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-water"/></svg>Узнаёте себя?</p>
+      <h2 id="pains-title">Когда пора остановиться</h2>
+    </div>
+    <ul class="pains">
+      <li><svg class="g c-air" aria-hidden="true"><use href="#g-air"/></svg><p>Постоянный стресс и&nbsp;спешка</p></li>
+      <li><svg class="g c-air" aria-hidden="true"><use href="#g-air"/></svg><p>Перенасыщение информацией</p></li>
+      <li><svg class="g c-water" aria-hidden="true"><use href="#g-water"/></svg><p>Не хватает нежности к&nbsp;себе</p></li>
+      <li><svg class="g c-earth" aria-hidden="true"><use href="#g-earth"/></svg><p>Ощущение, что жизнь идёт по&nbsp;кругу</p></li>
+      <li><svg class="g c-water" aria-hidden="true"><use href="#g-water"/></svg><p>Хочется понять себя</p></li>
+      <li><svg class="g c-fire" aria-hidden="true"><use href="#g-fire"/></svg><p>Тоска по новому опыту</p></li>
+    </ul>
+    <div class="sec-cta"><a class="btn" href="#booking">Записаться</a><a class="link" href="#quiz">Подобрать программу по стихии</a></div>
+  </div>
+</section>
+
+<!-- ПРОГРАММЫ -->
+<section class="sec" id="programs" aria-labelledby="prog-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-mark"/></svg>Программы</p>
+      <h2 id="prog-title">Программа — это сценарий визита</h2>
+      <p class="lead">Каждая программа — последовательность практик. Длительность и цена открыты, абонементы на 5 и 7 сеансов — в таблице ниже.</p>
+    </div>
+
+    <div class="pgrid">
+      <article class="prog prog--w5 prog--paper" id="p-intro">
+        <div class="prog-tag mono"><span>Первый визит · 4 практики</span><svg class="g" aria-hidden="true"><use href="#g-ether"/></svg></div>
+        <h3>Ознакомительная</h3>
+        <p class="idea">Чувственное знакомство с собой и пространством. Два сценария на выбор.</p>
+        <div class="nums">
+          <div><span class="mono">Длительность</span><span class="big">90<small>мин</small></span></div>
+          <div><span class="mono">Сеанс</span><span class="big">6&nbsp;000<small>₽</small></span></div>
+        </div>
+        <div class="score" data-score="intro">
+          <div class="score-tabs" aria-label="Сценарий"></div>
+          <div class="score-bar" aria-hidden="true"></div>
+          <ol class="score-list"></ol>
+          <p class="score-total mono"></p>
+        </div>
+        <div class="prog-foot"><span class="mono score-note">длительность практик ориентировочная</span><a class="btn btn--sm" href="#booking" data-program="Ознакомительная">Записаться</a></div>
+      </article>
+
+      <article class="prog prog--w7" id="p-element">
+        <div class="prog-tag mono"><span>Четыре первоэлемента · 5 практик</span><svg class="g" aria-hidden="true"><use href="#g-mark"/></svg></div>
+        <h3>В стихии</h3>
+        <p class="idea">Контакт с собой через четыре первоэлемента: Земля, Вода, Огонь, Воздух. Сценарий подбирается под вашу стихию.</p>
+        <div class="nums">
+          <div><span class="mono">Длительность</span><span class="big">140–160<small>мин</small></span></div>
+          <div><span class="mono">Сеанс</span><span class="big">от 10&nbsp;000<small>₽</small></span></div>
+        </div>
+        <div class="score" data-score="element">
+          <div class="score-tabs" aria-label="Сценарий"></div>
+          <div class="score-bar" aria-hidden="true"></div>
+          <ol class="score-list"></ol>
+          <p class="score-total mono"></p>
+        </div>
+        <div class="prog-foot"><span class="mono score-note">сценарий Земли — для примера; длительность ориентировочная</span><a class="btn btn--sm" href="#booking" data-program="В стихии: Земля">Записаться</a></div>
+      </article>
+
+      <article class="prog prog--w7" id="p-yinyang">
+        <div class="prog-tag mono"><span>Два пути · 5–6 практик</span><svg class="g" aria-hidden="true"><use href="#g-yinyang"/></svg></div>
+        <h3>Инь-Ян: Женское</h3>
+        <p class="idea">Гармония мужского и женского начал. Телесный или психосоматический путь.</p>
+        <div class="nums">
+          <div><span class="mono">Длительность</span><span class="big">120–210<small>мин</small></span></div>
+          <div><span class="mono">Сеанс</span><span class="big">от 10&nbsp;000<small>₽</small></span></div>
+        </div>
+        <div class="score" data-score="yinyang">
+          <div class="score-tabs" aria-label="Путь"></div>
+          <div class="score-bar" aria-hidden="true"></div>
+          <ol class="score-list"></ol>
+          <p class="score-total mono"></p>
+        </div>
+        <div class="prog-foot"><span class="mono score-note">длительность практик подбирается на визите</span><a class="btn btn--sm" href="#booking" data-program="Инь-Ян: Женское">Записаться</a></div>
+      </article>
+
+      <article class="prog prog--w5 prog--paper" id="p-vata">
+        <div class="prog-tag mono"><span>Аюрведа · 6 практик</span><svg class="g" aria-hidden="true"><use href="#g-air"/></svg></div>
+        <h3>В Аюрведе: Вата</h3>
+        <p class="idea">Баланс тела, ума и эмоций по аюрведической традиции.</p>
+        <div class="nums">
+          <div><span class="mono">Длительность</span><span class="big">160–210<small>мин</small></span></div>
+          <div><span class="mono">Сеанс</span><span class="big">от 10&nbsp;000<small>₽</small></span></div>
+        </div>
+        <div class="score" data-score="vata">
+          <div class="score-tabs" aria-label="Сценарий"></div>
+          <div class="score-bar" aria-hidden="true"></div>
+          <ol class="score-list"></ol>
+          <p class="score-total mono"></p>
+        </div>
+        <div class="prog-foot"><span class="mono score-note">длительность практик ориентировочная</span><a class="btn btn--sm" href="#booking" data-program="В Аюрведе: Вата">Записаться</a></div>
+      </article>
+
+      <article class="prog" id="p-perception">
+        <div class="prog-tag mono"><span>Работа с чувствами</span><svg class="g" aria-hidden="true"><use href="#g-ether"/></svg></div>
+        <h3>В восприятии</h3>
+        <p class="idea">Новые внутренние настройки через отключение или усиление одного из чувств. Состав программы уточняется.</p>
+        <div class="nums">
+          <div><span class="mono">Длительность</span><span class="big">150–210<small>мин</small></span></div>
+          <div><span class="mono">Сеанс</span><span class="big" style="font-size:clamp(24px,2.4vw,34px)">по запросу</span></div>
+        </div>
+        <div class="prog-foot"><span class="mono score-note">состав уточняется</span><a class="btn btn--sm btn--ghost" href="#booking" data-program="В восприятии">Узнать подробнее</a></div>
+      </article>
+
+      <article class="prog prog--paper" id="p-face">
+        <div class="prog-tag mono"><span>Отдельная услуга</span><svg class="g" aria-hidden="true"><use href="#g-water"/></svg></div>
+        <h3>Испанский массаж лица</h3>
+        <p class="idea">Самостоятельный ритуал или часть пути «Инь-Ян: Женское».</p>
+        <div class="nums">
+          <div><span class="mono">Длительность</span><span class="big">60<small>мин</small></span></div>
+          <div><span class="mono">Сеанс</span><span class="big">2&nbsp;500<small>₽</small></span></div>
+        </div>
+        <div class="prog-foot"><span class="mono score-note">можно добавить к любой программе</span><a class="btn btn--sm" href="#booking" data-program="Испанский массаж лица">Записаться</a></div>
+      </article>
+    </div>
+
+    <div class="tablewrap" role="region" aria-labelledby="cmp-cap" tabindex="0">
+      <table class="cmp">
+        <caption id="cmp-cap">Сравнение и абонементы</caption>
+        <thead><tr><th scope="col">Программа</th><th scope="col">Длительность</th><th scope="col">1 сеанс</th><th scope="col">5 сеансов</th><th scope="col">7 сеансов</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Ознакомительная</th><td>90 мин</td><td>6 000 ₽</td><td class="soft" colspan="2">только разовый визит</td></tr>
+          <tr><th scope="row">В стихии</th><td>140–160 мин</td><td>от 10 000 ₽</td><td class="hl">от 45 000 ₽</td><td class="hl">от 60 000 ₽</td></tr>
+          <tr><th scope="row">Инь-Ян: Женское</th><td>120–210 мин</td><td>от 10 000 ₽</td><td class="hl">от 45 000 ₽</td><td class="hl">от 60 000 ₽</td></tr>
+          <tr><th scope="row">В Аюрведе: Вата</th><td>160–210 мин</td><td>от 10 000 ₽</td><td class="hl">от 45 000 ₽</td><td class="hl">от 60 000 ₽</td></tr>
+          <tr><th scope="row">В восприятии</th><td>150–210 мин</td><td class="soft" colspan="3">цена по запросу</td></tr>
+          <tr><th scope="row">Испанский массаж лица</th><td>60 мин</td><td>2 500 ₽</td><td class="soft" colspan="2">разовая услуга</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sec-cta"><a class="btn" href="#booking">Записаться</a><a class="link" href="#quiz">Не знаете, что выбрать? Пройдите квиз</a></div>
+  </div>
+</section>
+
+<!-- СТИХИИ + КВИЗ -->
+<section class="sec" id="elements" aria-labelledby="el-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-mark"/></svg>Стихии</p>
+      <h2 id="el-title">Четыре первоэлемента</h2>
+      <p class="lead">В каждом из нас есть все стихии, но в разной пропорции. Программа подбирается по той, что сейчас нужна вам.</p>
+    </div>
+    <div class="elems">
+      <ul class="elem-list">
+        <li><svg class="g c-earth" aria-hidden="true"><use href="#g-earth"/></svg><div><h3 class="c-earth">Земля</h3><p>Опора, устойчивость, телесность.</p></div></li>
+        <li><svg class="g c-water" aria-hidden="true"><use href="#g-water"/></svg><div><h3 class="c-water">Вода</h3><p>Текучесть, чувства, мягкость.</p></div></li>
+        <li><svg class="g c-fire" aria-hidden="true"><use href="#g-fire"/></svg><div><h3 class="c-fire">Огонь</h3><p>Энергия, воля, тепло.</p></div></li>
+        <li><svg class="g c-air" aria-hidden="true"><use href="#g-air"/></svg><div><h3 class="c-air">Воздух</h3><p>Лёгкость, ясность, свобода.</p></div></li>
+      </ul>
+      <div class="rule">
+        <svg class="dia" viewBox="0 0 300 300" role="img" aria-labelledby="dia-t">
+          <title id="dia-t">Противоположные стихии: Земля и Воздух, Вода и Огонь</title>
+          <circle cx="150" cy="150" r="104" fill="none" stroke="#B4BEB8" stroke-width="1"/>
+          <path d="M150 64V236M64 150H236" stroke="#55605B" stroke-width="1" stroke-dasharray="3 5"/>
+          <g fill="none" stroke-width="1.5">
+            <g transform="translate(130 18)" stroke="#3E5A70"><path d="M20 2 38 34H2Z"/><path d="M6 22h28"/></g>
+            <g transform="translate(130 246)" stroke="#5B5232"><path d="M2 2h36L20 34Z"/><path d="M6 14h28"/></g>
+            <g transform="translate(14 132)" stroke="#0E4A50"><path d="M2 2h36L20 34Z"/></g>
+            <g transform="translate(246 132)" stroke="#944424"><path d="M20 2 38 34H2Z"/></g>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1" fill="#434E49" text-anchor="middle">
+            <text x="150" y="80">ВОЗДУХ</text><text x="150" y="228">ЗЕМЛЯ</text>
+            <text x="92" y="146">ВОДА</text><text x="208" y="146">ОГОНЬ</text>
+          </g>
+          <circle cx="150" cy="150" r="3" fill="#1B2220"/>
+        </svg>
+        <p>Правило студии: если стихии не хватает — выбираем программу этой стихии. Если её избыток — противоположной.</p>
+      </div>
+    </div>
+
+    <div class="quiz" id="quiz" aria-labelledby="quiz-title">
+      <div class="quiz-side">
+        <p class="mono" id="q-count">6 вопросов · около минуты</p>
+        <h3 id="quiz-title">Ваша стихия</h3>
+        <p>Короткая версия квиза студии. Ответьте, как чувствуете себя сейчас, — результат перекрасит страницу в цвет вашей стихии.</p>
+        <div class="prog-dots" id="q-dots" aria-hidden="true"></div>
+      </div>
+      <div class="quiz-main">
+        <form id="q-form" novalidate>
+          <div id="q-stage"></div>
+          <div class="q-nav" id="q-nav">
+            <button class="btn btn--ghost btn--sm" type="button" id="q-back">Назад</button>
+            <button class="btn btn--sm" type="submit" id="q-next" disabled>Далее</button>
+          </div>
+        </form>
+        <div class="q-result" id="q-result" hidden tabindex="-1" aria-live="polite">
+          <svg class="g rg" aria-hidden="true"><use id="q-r-glyph" href="#g-earth"/></svg>
+          <div>
+            <p class="mono">Ваша ресурсная стихия</p>
+            <h4 id="q-r-name">Земля</h4>
+            <p class="why" id="q-r-why"></p>
+          </div>
+          <div class="rec">
+            <div>
+              <p class="mono">Рекомендуем</p>
+              <p class="rec-name" id="q-r-prog">«В стихии» · сценарий Земли</p>
+              <p class="mono">140–160 мин · от 10 000 ₽</p>
+            </div>
+            <div class="rec-acts">
+              <a class="btn" href="#booking" id="q-r-book" data-program="В стихии: Земля">Записаться</a>
+              <button class="btn btn--ghost" type="button" id="q-restart">Пройти заново</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ВИЗИТ -->
+<section class="sec" aria-labelledby="visit-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-earth"/></svg>Как проходит визит</p>
+      <h2 id="visit-title">Без спешки, от чая до чая</h2>
+    </div>
+    <ol class="journey">
+      <li><span class="step-n" aria-hidden="true">1</span><h3>Приходите за 15–20 минут</h3><p>Переодеться и оставить дела за дверью.</p></li>
+      <li><span class="step-n" aria-hidden="true">2</span><h3>Чай и разговор</h3><p>Коротко о вашем состоянии, чтобы настроить программу.</p></li>
+      <li><span class="step-n" aria-hidden="true">3</span><h3>Практики программы</h3><p>Одна за другой, без спешки и без лишних слов.</p></li>
+      <li><span class="step-n" aria-hidden="true">4</span><h3>Чайная церемония</h3><p>Время прийти в себя, прежде чем вернуться в город.</p></li>
+    </ol>
+    <div class="journey-row">
+      <figure class="ph" style="margin:0"><figcaption class="mono">здесь фото чайной комнаты</figcaption></figure>
+      <div class="course">
+        <p class="mono">Рекомендуемый курс</p>
+        <p class="big">5–7<small>визитов</small></p>
+        <p>Первый визит уже даёт почувствовать разницу, курс помогает закрепить состояние.</p>
+      </div>
+    </div>
+    <div class="sec-cta"><a class="btn" href="#booking">Записаться</a><span class="mono">Халат, полотенца и тапочки — наши</span></div>
+  </div>
+</section>
+
+<!-- ОСНОВАТЕЛИ -->
+<section class="sec" aria-labelledby="team-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-yinyang"/></svg>Основатели</p>
+      <h2 id="team-title">Люди, которые ведут практики</h2>
+    </div>
+    <div class="founders">
+      <article class="founder">
+        <figure class="portrait" style="margin:0">
+          <svg viewBox="0 0 300 400" aria-hidden="true">
+            <rect width="300" height="400" fill="#DCE2DD"/>
+            <g fill="none" stroke-width="1.2">
+              <path d="M150 70 260 260H40Z" stroke="#0E4A50"/>
+              <path d="M40 130h220L150 320Z" stroke="#5B5232"/>
+              <path d="M70 196h160" stroke="#5B5232"/>
+              <circle cx="150" cy="196" r="120" stroke="#B4BEB8"/>
+            </g>
+            <text x="150" y="214" text-anchor="middle" font-family="Tenor Sans, Arial, sans-serif" font-size="46" letter-spacing="8" fill="#1B2220">АЗ</text>
+          </svg>
+          <figcaption class="mono">фото основателя</figcaption>
+        </figure>
+        <div>
+          <h3>Анастасия Зайка</h3>
+          <p class="role mono">Основательница In Flow</p>
+          <p class="txt">Автор программ студии. Био и квалификация — от клиента.</p>
+        </div>
+      </article>
+      <article class="founder">
+        <figure class="portrait" style="margin:0">
+          <svg viewBox="0 0 300 400" aria-hidden="true">
+            <rect width="300" height="400" fill="#DCE2DD"/>
+            <g fill="none" stroke-width="1.2">
+              <path d="M150 70 260 260H40Z" stroke="#944424"/>
+              <path d="M70 196h160" stroke="#3E5A70"/>
+              <path d="M40 130h220L150 320Z" stroke="#3E5A70"/>
+              <circle cx="150" cy="196" r="120" stroke="#B4BEB8"/>
+            </g>
+            <text x="150" y="214" text-anchor="middle" font-family="Tenor Sans, Arial, sans-serif" font-size="46" letter-spacing="8" fill="#1B2220">СИ</text>
+          </svg>
+          <figcaption class="mono">фото основателя</figcaption>
+        </figure>
+        <div>
+          <h3>Сергей Игнатёнок</h3>
+          <p class="role mono">Основатель In Flow</p>
+          <p class="txt">Автор потокового массажа. Био и квалификация — от клиента.</p>
+        </div>
+      </article>
+    </div>
+    <div class="sec-cta"><a class="btn" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<!-- ОТЗЫВЫ -->
+<section class="sec" aria-labelledby="rev-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-water"/></svg>Отзывы</p>
+      <h2 id="rev-title">После визита</h2>
+    </div>
+    <div class="reviews">
+      <figure class="review" style="margin:0"><svg class="g" aria-hidden="true"><use href="#g-air"/></svg><blockquote>Пришла уставшей после тяжёлого квартала, ушла с ощущением, что наконец выдохнула. Очень бережная атмосфера.</blockquote><footer>Евгения</footer></figure>
+      <figure class="review" style="margin:0"><svg class="g" aria-hidden="true"><use href="#g-earth"/></svg><blockquote>Всё продумано: чай в начале, тишина, никакой спешки. Вернусь за курсом.</blockquote><footer>Виктория</footer></figure>
+      <figure class="review" style="margin:0"><svg class="g" aria-hidden="true"><use href="#g-water"/></svg><blockquote>Подарила сертификат маме, а потом пришла сама. Чайная церемония в конце — отдельное удовольствие.</blockquote><footer>Мария</footer></figure>
+    </div>
+    <p class="mock-note mono">Макет: тексты отзывов переносятся с действующего сайта</p>
+    <div class="sec-cta"><a class="btn" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<!-- СЕРТИФИКАТ -->
+<section class="sec" id="gift" aria-labelledby="gift-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-fire"/></svg>Сертификаты</p>
+      <h2 id="gift-title">Подарите состояние</h2>
+    </div>
+    <div class="gift">
+      <div class="cert" aria-hidden="true">
+        <svg class="cert-pat" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <pattern id="lat" width="40" height="36" patternUnits="userSpaceOnUse">
+              <path d="M20 2 38 34H2Z" fill="none" stroke="currentColor" stroke-width=".8"/>
+              <path d="M0 2h-0" stroke="none"/>
+            </pattern>
+          </defs>
+          <rect width="400" height="250" fill="url(#lat)"/>
+        </svg>
+        <div class="cert-top"><span class="logo"><svg class="g"><use href="#g-mark"/></svg><span>IN FLOW</span></span><span class="mono">Подарочный сертификат</span></div>
+        <div>
+          <p class="mono">Номинал</p>
+          <p class="cert-amt" id="cert-amt">10 000 ₽</p>
+        </div>
+      </div>
+      <form class="gift-form" id="gift-form">
+        <fieldset>
+          <legend class="mono">Номинал</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="amt" value="10000" checked>10 000 ₽</label>
+            <label class="chip"><input type="radio" name="amt" value="15000">15 000 ₽</label>
+            <label class="chip"><input type="radio" name="amt" value="20000">20 000 ₽</label>
+            <label class="chip"><input type="radio" name="amt" value="custom">Свой номинал</label>
+          </div>
+        </fieldset>
+        <div class="field" id="custom-field" hidden>
+          <label for="custom-amt">Сумма, ₽</label>
+          <input id="custom-amt" type="number" min="2500" step="500" inputmode="numeric" placeholder="Например, 12 000">
+        </div>
+        <p style="color:var(--ink-2);font-size:16px">Сертификат действует на любую программу и абонемент. Электронный или в конверте ручной работы.</p>
+        <div><button class="btn" type="submit">Подарить</button></div>
+        <p class="demo-msg" id="gift-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-ether"/></svg>Вопросы</p>
+      <h2 id="faq-title">Перед первым визитом</h2>
+    </div>
+    <div class="faq" id="faq">
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa1" id="fq1">За сколько приходить?<svg class="g" aria-hidden="true"><use href="#g-down"/></svg></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1" hidden>За 15–20 минут: переодеться, выпить чай и настроиться.</div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">Сколько визитов нужно?<svg class="g" aria-hidden="true"><use href="#g-down"/></svg></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2" hidden>Эффект чувствуется после первого визита; для устойчивого результата рекомендуем курс из 5–7.</div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">Можно ли беременным?<svg class="g" aria-hidden="true"><use href="#g-down"/></svg></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3" hidden>Часть практик подходит в первом и втором триместре. Перед записью проконсультируйтесь с врачом и предупредите администратора.</div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4" id="fq4">Что взять с собой?<svg class="g" aria-hidden="true"><use href="#g-down"/></svg></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4" hidden>Ничего: халат, полотенца и тапочки мы даём.</div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">Можно ли перенести визит?<svg class="g" aria-hidden="true"><use href="#g-down"/></svg></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5" hidden>Да, предупредите нас не позднее чем за 24 часа.<span class="mono">Макет: условие уточняется у студии</span></div></div>
+    </div>
+    <div class="sec-cta"><a class="btn" href="#booking">Записаться</a><a class="link" href="tel:+79934833090">Или позвоните: +7 (993) 483-30-90</a></div>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ + ЗАПИСЬ -->
+<section class="sec" id="contacts" aria-labelledby="ct-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-label mono"><svg class="g" aria-hidden="true"><use href="#g-earth"/></svg>Контакты</p>
+      <h2 id="ct-title">Ждём вас на Петроградской стороне</h2>
+    </div>
+    <div class="contacts">
+      <div class="c-info">
+        <dl style="margin:0">
+          <div class="c-row"><dt class="mono">Адрес</dt><dd>Санкт-Петербург, ул. 1-я Никитинская, 30, лит. А</dd></div>
+          <div class="c-row"><dt class="mono">Часы</dt><dd>Ежедневно 10:00–23:00</dd></div>
+          <div class="c-row"><dt class="mono">Телефон</dt><dd><a href="tel:+79934833090">+7 (993) 483-30-90</a></dd></div>
+          <div class="c-row"><dt class="mono">Telegram</dt><dd><a href="https://t.me/inflowing_ru" rel="noopener">@inflowing_ru</a></dd></div>
+          <div class="c-row"><dt class="mono">VK</dt><dd><a href="https://vk.com/in_flowing" rel="noopener">in_flowing</a></dd></div>
+          <div class="c-row"><dt class="mono">Онлайн</dt><dd>Запись через YCLIENTS</dd></div>
+        </dl>
+        <figure class="map" style="margin:0">
+          <svg viewBox="0 0 400 250" aria-hidden="true">
+            <rect width="400" height="250" fill="#E4E9E5"/>
+            <g fill="none" stroke="#B4BEB8" stroke-width="1">
+              <path d="M-10 60C60 40 110 90 180 70S300 20 410 50"/>
+              <path d="M-10 190C70 170 140 210 220 180S330 140 410 165"/>
+              <path d="M40 -10C60 60 30 140 70 260"/>
+              <path d="M300 -10C280 70 330 150 300 260"/>
+            </g>
+            <path d="M-10 120C80 100 150 140 230 118S350 90 410 104" fill="none" stroke="#9FB4BF" stroke-width="10" stroke-opacity=".5"/>
+            <g stroke="#55605B" stroke-width=".6" stroke-dasharray="2 4"><path d="M0 154H400M196 0V250"/></g>
+            <g transform="translate(184 136)" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M12 2 23 21H1Z"/></g>
+            <text x="212" y="148" font-family="JetBrains Mono, monospace" font-size="10" fill="#1B2220">IN FLOW</text>
+          </svg>
+          <figcaption class="mono">здесь карта · 59.95° N, 30.31° E</figcaption>
+        </figure>
+      </div>
+
+      <form class="booking" id="booking" novalidate aria-labelledby="bk-title">
+        <h3 id="bk-title">Запись на визит</h3>
+        <p class="hint mono">Администратор перезвонит и подтвердит время</p>
+        <div class="two">
+          <div class="field"><label for="bk-name">Имя</label><input id="bk-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="bk-tel">Телефон</label><input id="bk-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7" required></div>
+        </div>
+        <div class="field"><label for="bk-prog">Программа</label>
+          <select id="bk-prog" name="program">
+            <option value="Помогите выбрать">Помогите выбрать</option>
+            <option value="Ознакомительная">Ознакомительная · 90 мин · 6 000 ₽</option>
+            <option value="В стихии: Земля">В стихии: Земля · от 10 000 ₽</option>
+            <option value="В стихии: Вода">В стихии: Вода · от 10 000 ₽</option>
+            <option value="В стихии: Огонь">В стихии: Огонь · от 10 000 ₽</option>
+            <option value="В стихии: Воздух">В стихии: Воздух · от 10 000 ₽</option>
+            <option value="Инь-Ян: Женское">Инь-Ян: Женское · от 10 000 ₽</option>
+            <option value="В Аюрведе: Вата">В Аюрведе: Вата · от 10 000 ₽</option>
+            <option value="В восприятии">В восприятии · по запросу</option>
+            <option value="Испанский массаж лица">Испанский массаж лица · 60 мин · 2 500 ₽</option>
+          </select>
+        </div>
+        <div class="two">
+          <div class="field"><label for="bk-date">Желаемая дата</label><input id="bk-date" name="date" type="date"></div>
+          <div class="field"><label for="bk-pack">Формат</label>
+            <select id="bk-pack" name="pack"><option>1 сеанс</option><option>Абонемент · 5 сеансов</option><option>Абонемент · 7 сеансов</option></select>
+          </div>
+        </div>
+        <div class="field"><label for="bk-note">Комментарий</label><textarea id="bk-note" name="note" placeholder="Пожелания по времени или практикам"></textarea></div>
+        <label class="check"><input type="checkbox" id="bk-ok" required>Согласна(ен) на обработку персональных данных</label>
+        <div><button class="btn" type="submit">Записаться</button></div>
+        <p class="demo-msg" id="bk-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-top">
+      <a class="logo" href="#top" aria-label="IN FLOW — наверх"><svg class="g" aria-hidden="true"><use href="#g-mark"/></svg><span>IN FLOW</span></a>
+      <div class="ftr-glyphs" aria-hidden="true">
+        <svg class="g"><use href="#g-earth"/></svg><svg class="g"><use href="#g-water"/></svg><svg class="g"><use href="#g-fire"/></svg><svg class="g"><use href="#g-air"/></svg><svg class="g"><use href="#g-ether"/></svg>
+      </div>
+      <a class="btn" href="#booking">Записаться</a>
+    </div>
+    <div class="ftr-bot">
+      <span>© IN FLOW, 2026 · Пространство души и тела</span>
+      <nav aria-label="Документы"><a href="#">Политика конфиденциальности</a><a href="#">Пользовательское соглашение</a></nav>
+      <p class="nonmed">Практики студии не являются медицинскими услугами</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var RM = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var root = document.documentElement;
+
+  /* ---------- меню ---------- */
+  var menuBtn = document.querySelector(".menu-btn");
+  var nav = document.getElementById("nav");
+  menuBtn.addEventListener("click", function(){
+    var open = nav.classList.toggle("is-open");
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+  });
+  nav.addEventListener("click", function(e){
+    if (e.target.closest("a")) { nav.classList.remove("is-open"); menuBtn.setAttribute("aria-expanded","false"); }
+  });
+
+  /* ---------- генеративные колонны ---------- */
+  function clampN(v,a,b){ return Math.max(a, Math.min(b, v)); }
+
+  function Earth(c){
+    var ctx = c.getContext("2d"), w=0, h=0, grain=null;
+    var shades = ["#4a432b","#58503a","#403a26","#625a3c","#4d4630","#6a6044","#463f2a","#575034"];
+    function mkGrain(){
+      var g = document.createElement("canvas"); g.width = g.height = 160;
+      var x = g.getContext("2d"), id = x.createImageData(160,160), d = id.data;
+      for (var i=0;i<d.length;i+=4){ var v = Math.random()<.5 ? 235 : 20; d[i]=d[i+1]=d[i+2]=v; d[i+3] = Math.random()<.55 ? (Math.random()*34|0) : 0; }
+      x.putImageData(id,0,0);
+      return ctx.createPattern(g,"repeat");
+    }
+    return {
+      resize: function(cw,ch){
+        var dpr = Math.min(window.devicePixelRatio||1, 1.5);
+        w=cw; h=ch; c.width=Math.round(cw*dpr); c.height=Math.round(ch*dpr);
+        c.style.width=cw+"px"; c.style.height=ch+"px";
+        ctx.setTransform(dpr,0,0,dpr,0,0); grain = mkGrain();
+      },
+      draw: function(t){
+        ctx.fillStyle="#3b3623"; ctx.fillRect(0,0,w,h);
+        var N=22, pts=[];
+        for (var i=0;i<N;i++){
+          var y0 = h*(i/N) - 14; pts.length=0;
+          for (var x=0;x<=w+24;x+=24){
+            pts.push(x, y0 + Math.sin(x*.006 + i*1.9 + t*.07)*12 + Math.sin(x*.017 + i*.7 - t*.045)*5 + Math.sin(x*.0021 + i*1.3)*20);
+          }
+          ctx.beginPath(); ctx.moveTo(0,h+2);
+          for (var k=0;k<pts.length;k+=2) ctx.lineTo(pts[k],pts[k+1]);
+          ctx.lineTo(w+24,h+2); ctx.closePath();
+          ctx.fillStyle = shades[i%shades.length]; ctx.fill();
+          ctx.beginPath(); ctx.moveTo(pts[0],pts[1]);
+          for (k=2;k<pts.length;k+=2) ctx.lineTo(pts[k],pts[k+1]);
+          ctx.strokeStyle = "rgba(226,214,170,.13)"; ctx.lineWidth = .8; ctx.stroke();
+        }
+        ctx.save();
+        var o = (t*5)%160;
+        ctx.translate(-o*.25, -o);
+        ctx.fillStyle = grain; ctx.fillRect(0,0,w+160,h+160);
+        ctx.restore();
+      }
+    };
+  }
+
+  function Water(c){
+    var ctx = c.getContext("2d"), off = document.createElement("canvas"), ox = off.getContext("2d");
+    var w=0,h=0,sw=0,sh=0,img=null, S=5;
+    return {
+      resize: function(cw,ch){
+        w=cw; h=ch; c.width=cw; c.height=ch; c.style.width=cw+"px"; c.style.height=ch+"px";
+        sw=Math.ceil(cw/S); sh=Math.ceil(ch/S); off.width=sw; off.height=sh; img=ox.createImageData(sw,sh);
+      },
+      draw: function(t){
+        var d=img.data, k=.46, p=0;
+        var s1x=sw*(.3+.15*Math.sin(t*.11)), s1y=sh*(.22+.1*Math.cos(t*.09));
+        var s2x=sw*(.78+.1*Math.cos(t*.07)), s2y=sh*(.58+.12*Math.sin(t*.08));
+        var s3x=sw*(.42+.2*Math.sin(t*.05+2)), s3y=sh*1.02;
+        var ph=t*1.1;
+        for (var y=0;y<sh;y++){
+          var a1=(y-s1y)*(y-s1y), a2=(y-s2y)*(y-s2y), a3=(y-s3y)*(y-s3y);
+          for (var x=0;x<sw;x++){
+            var v = Math.sin(Math.sqrt((x-s1x)*(x-s1x)+a1)*k-ph)
+                  + Math.sin(Math.sqrt((x-s2x)*(x-s2x)+a2)*k*.9-ph*.8)
+                  + Math.sin(Math.sqrt((x-s3x)*(x-s3x)+a3)*k*1.15-ph*1.2);
+            var q=(v+3)/6, hl = q>.8 ? (q-.8)/.2 : 0; hl*=hl;
+            d[p]=8+q*34+hl*58; d[p+1]=50+q*64+hl*70; d[p+2]=58+q*60+hl*66; d[p+3]=255; p+=4;
+          }
+        }
+        ox.putImageData(img,0,0);
+        ctx.imageSmoothingEnabled=true; ctx.imageSmoothingQuality="high";
+        ctx.drawImage(off,0,0,w,h);
+      }
+    };
+  }
+
+  function Fire(c){
+    var ctx=c.getContext("2d"), w=0,h=0, ps=[], bg=null;
+    function spawn(p, anywhere){
+      p.x=Math.random()*w; p.y= anywhere ? Math.random()*h : h+Math.random()*30;
+      p.v=16+Math.random()*48; p.r=.5+Math.random()*1.9; p.life= anywhere ? Math.random()*3 : 0;
+      p.max=3+Math.random()*5; p.ph=Math.random()*6.283; p.sw=6+Math.random()*18;
+    }
+    return {
+      resize: function(cw,ch){
+        var dpr=Math.min(window.devicePixelRatio||1,1.5);
+        w=cw; h=ch; c.width=Math.round(cw*dpr); c.height=Math.round(ch*dpr); c.style.width=cw+"px"; c.style.height=ch+"px";
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        bg=ctx.createLinearGradient(0,0,0,h); bg.addColorStop(0,"#2a140c"); bg.addColorStop(.55,"#5a2714"); bg.addColorStop(1,"#86401f");
+        var n=clampN(Math.round(w*h/2400),60,240); ps=[];
+        for (var i=0;i<n;i++){ var p={}; spawn(p,true); ps.push(p); }
+      },
+      draw: function(t,dt){
+        ctx.globalCompositeOperation="source-over";
+        ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
+        var gx=w*.5+Math.sin(t*.3)*w*.12, rg=ctx.createRadialGradient(gx,h*1.05,0,gx,h*1.05,h*.85);
+        rg.addColorStop(0,"rgba(214,118,60,"+(.38+.06*Math.sin(t*1.7))+")"); rg.addColorStop(1,"rgba(214,118,60,0)");
+        ctx.fillStyle=rg; ctx.fillRect(0,0,w,h);
+        ctx.strokeStyle="rgba(255,196,150,.07)"; ctx.lineWidth=1;
+        for (var i=0;i<7;i++){
+          var x0=w*(i+.5)/7; ctx.beginPath(); ctx.moveTo(x0,h);
+          for (var y=h;y>-12;y-=12){ var f=1-y/h; ctx.lineTo(x0+Math.sin(y*.03-t*2.2+i)*6*f+Math.sin(y*.011+t*.7+i*2)*10*f, y); }
+          ctx.stroke();
+        }
+        ctx.globalCompositeOperation="lighter";
+        for (var j=0;j<ps.length;j++){
+          var p=ps[j]; p.life+=dt; p.y-=p.v*dt;
+          var k=p.life/p.max; if (k>=1||p.y<-10){ spawn(p,false); continue; }
+          var x=p.x+Math.sin(t*1.3+p.ph)*p.sw*(1-p.y/h);
+          var a=Math.sin(k*Math.PI)*(.55+.45*Math.sin(t*9+p.ph));
+          ctx.fillStyle="rgba(255,"+(140+(p.r*35|0))+",80,"+(a*.75).toFixed(3)+")";
+          ctx.beginPath(); ctx.arc(x,p.y,p.r,0,6.283); ctx.fill();
+          if (p.r>1.7){ ctx.fillStyle="rgba(255,150,80,"+(a*.12).toFixed(3)+")"; ctx.beginPath(); ctx.arc(x,p.y,p.r*4,0,6.283); ctx.fill(); }
+        }
+        ctx.globalCompositeOperation="source-over";
+      }
+    };
+  }
+
+  function Air(c){
+    var ctx=c.getContext("2d"), w=0,h=0, ps=[];
+    function spawn(p){ p.x=Math.random()*w; p.y=Math.random()*h; p.l=2+Math.random()*5; p.s=.6+Math.random()*.9; }
+    function field(x,y,t){ return Math.sin(x*.0035+t*.12)*1.1 + Math.cos(y*.0062-t*.09)*.9 + Math.sin((x-y)*.0018+t*.05)*.8; }
+    return {
+      warm: 150,
+      resize: function(cw,ch){
+        var dpr=Math.min(window.devicePixelRatio||1,1.5);
+        w=cw; h=ch; c.width=Math.round(cw*dpr); c.height=Math.round(ch*dpr); c.style.width=cw+"px"; c.style.height=ch+"px";
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+        ctx.fillStyle="#C6D2DB"; ctx.fillRect(0,0,w,h);
+        var n=clampN(Math.round(w*h/1700),80,340); ps=[];
+        for (var i=0;i<n;i++){ var p={}; spawn(p); ps.push(p); }
+      },
+      draw: function(t,dt){
+        ctx.fillStyle="rgba(198,210,219,.075)"; ctx.fillRect(0,0,w,h);
+        ctx.beginPath();
+        for (var i=0;i<ps.length;i++){
+          var p=ps[i], a=field(p.x,p.y,t), s=46*dt*p.s;
+          var nx=p.x+(1+.6*Math.cos(a))*s, ny=p.y+Math.sin(a)*s*.85;
+          ctx.moveTo(p.x,p.y); ctx.lineTo(nx,ny);
+          p.x=nx; p.y=ny; p.l-=dt;
+          if (p.l<0||p.x>w+4||p.y<-4||p.y>h+4) spawn(p);
+        }
+        ctx.strokeStyle="rgba(52,80,102,.42)"; ctx.lineWidth=.8; ctx.stroke();
+      }
+    };
+  }
+
+  var colsEl = document.getElementById("cols");
+  var colEls = Array.prototype.slice.call(colsEl.querySelectorAll(".col"));
+  var makers = {earth:Earth, water:Water, fire:Fire, air:Air};
+  var renderers = colEls.map(function(col){ return makers[col.dataset.el](col.querySelector("canvas")); });
+  var T = 8, running=false, raf=0, last=0, inView=true;
+
+  function drawStatic(){
+    renderers.forEach(function(r){
+      var n = r.warm || 1;
+      for (var i=0;i<n;i++) r.draw(T+i/60, 1/60);
+    });
+  }
+  function sizeAll(){
+    var r = colsEl.getBoundingClientRect(), mobile = r.width < 760;
+    var cw = Math.ceil(mobile ? r.width : r.width*.5), ch = Math.ceil(mobile ? r.height*.5 : r.height);
+    renderers.forEach(function(R){ R.resize(cw,ch); });
+    drawStatic();
+  }
+  var weak = (navigator.hardwareConcurrency||4) <= 4 || matchMedia("(pointer: coarse)").matches;
+  var minStep = weak ? 1000/31 : 0;
+  function loop(now){
+    if (now - last < minStep){ raf = requestAnimationFrame(loop); return; }
+    var dt = Math.min(.05, (now-last)/1000 || .016); last=now; T+=dt;
+    for (var i=0;i<renderers.length;i++) renderers[i].draw(T,dt);
+    raf = requestAnimationFrame(loop);
+  }
+  function updateRun(){
+    var should = !RM.matches && inView && !document.hidden;
+    if (should && !running){ running=true; last=performance.now(); raf=requestAnimationFrame(loop); }
+    else if (!should && running){ running=false; cancelAnimationFrame(raf); }
+  }
+  function boot(){
+    sizeAll();
+    var lastW = colsEl.getBoundingClientRect().width;
+    if ("ResizeObserver" in window){
+      new ResizeObserver(function(){
+        var nw = colsEl.getBoundingClientRect().width;
+        if (Math.abs(nw-lastW) > 1){ lastW = nw; sizeAll(); }
+      }).observe(colsEl);
+    }
+    if ("IntersectionObserver" in window){
+      new IntersectionObserver(function(es){ inView = es[0].isIntersecting; updateRun(); }, {threshold:0}).observe(colsEl);
+    }
+    document.addEventListener("visibilitychange", updateRun);
+    if (RM.addEventListener) RM.addEventListener("change", function(){ updateRun(); if (RM.matches) drawStatic(); });
+    updateRun();
+  }
+  var idle = window.requestIdleCallback || function(cb){ return setTimeout(cb, 1); };
+  requestAnimationFrame(function(){ idle(boot, {timeout:400}); });
+
+  function openCol(key){
+    colEls.forEach(function(col){
+      var on = col.dataset.el === key;
+      col.classList.toggle("is-open", on);
+      col.querySelector(".col-toggle").setAttribute("aria-expanded", String(on));
+    });
+  }
+  colEls.forEach(function(col){
+    col.addEventListener("click", function(e){
+      if (e.target.closest("a")) return;
+      var isOpen = col.classList.contains("is-open");
+      openCol(isOpen && e.target.closest(".col-toggle") ? null : col.dataset.el);
+    });
+  });
+
+  /* ---------- партитуры программ ---------- */
+  var PR = {
+    "ИК-сауна":"fire","динамическая медитация":"fire","массаж горячими травяными мешочками":"fire","массаж травяными мешочками":"fire",
+    "дыхательная практика":"air","звучание поющей чаши":"air","медитативная практика":"air",
+    "потоковый массаж":"water","душ":"water","аромамассаж":"water","испанский массаж лица":"water","женская практика":"water","массаж головы (широдхара)":"water",
+    "чайная церемония":"earth","эмбодимент":"earth","телесно-ориентированная практика":"earth","скрабирование":"earth"
+  };
+  var SCORES = {
+    intro:[
+      {name:"В тонусе", items:[["ИК-сауна",15],["динамическая медитация",15],["потоковый массаж",45],["чайная церемония",15]]},
+      {name:"В расслаблении", items:[["дыхательная практика",15],["звучание поющей чаши",10],["потоковый массаж",50],["чайная церемония",15]]}
+    ],
+    element:[
+      {name:"Земля", items:[["дыхательная практика",15],["эмбодимент",20],["ИК-сауна",20],["массаж горячими травяными мешочками",50],["чайная церемония",20]]}
+    ],
+    yinyang:[
+      {name:"Телесный", items:[["скрабирование"],["душ"],["аромамассаж"],["испанский массаж лица"],["чайная церемония"]]},
+      {name:"Психосоматический", items:[["медитативная практика"],["женская практика"],["душ"],["массаж головы (широдхара)"],["потоковый массаж"],["чайная церемония"]]}
+    ],
+    vata:[
+      {name:"Вата", items:[["дыхательная практика",15],["потоковый массаж",50],["душ",10],["массаж травяными мешочками",40],["телесно-ориентированная практика",30],["чайная церемония",20]]}
+    ]
+  };
+  Array.prototype.forEach.call(document.querySelectorAll("[data-score]"), function(box){
+    var variants = SCORES[box.dataset.score], cur = 0;
+    var tabs = box.querySelector(".score-tabs"), bar = box.querySelector(".score-bar"),
+        list = box.querySelector(".score-list"), total = box.querySelector(".score-total");
+    if (variants.length > 1){
+      variants.forEach(function(v,i){
+        var b = document.createElement("button");
+        b.type="button"; b.className="chip"; b.textContent=v.name; b.setAttribute("aria-pressed", String(i===0));
+        b.addEventListener("click", function(){
+          cur=i;
+          Array.prototype.forEach.call(tabs.children, function(x,j){ x.setAttribute("aria-pressed", String(j===i)); });
+          render(true);
+        });
+        tabs.appendChild(b);
+      });
+    } else tabs.remove();
+    function render(anim){
+      var v = variants[cur], timed = v.items.every(function(it){ return it[1]; }), sum=0;
+      var animate = anim && !RM.matches;
+      bar.innerHTML=""; list.innerHTML="";
+      v.items.forEach(function(it){
+        var el = PR[it[0]] || "water", m = it[1] || 0; sum += m;
+        var s = document.createElement("span");
+        s.className = "seg seg--"+el; s.dataset.g = m || 1;
+        s.style.flexGrow = animate ? ".001" : String(m || 1);
+        if (timed) s.textContent = m;
+        bar.appendChild(s);
+        var li = document.createElement("li");
+        li.innerHTML = '<svg class="g c-'+el+'" aria-hidden="true"><use href="#g-'+el+'"/></svg><span class="m">'+(timed ? m+" мин" : "")+'</span><span>'+it[0]+'</span>';
+        list.appendChild(li);
+      });
+      if (animate) requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        Array.prototype.forEach.call(bar.children, function(s){ s.style.flexGrow = s.dataset.g; });
+      }); });
+      total.textContent = timed ? "≈ "+sum+" мин практик · знак — стихия практики" : v.items.length+" практик · порядок визита";
+    }
+    render(false);
+  });
+
+  /* ---------- выбор программы для формы ---------- */
+  var progSelect = document.getElementById("bk-prog");
+  document.addEventListener("click", function(e){
+    var a = e.target.closest("[data-program]");
+    if (a) progSelect.value = a.dataset.program;
+  });
+
+  /* ---------- квиз ---------- */
+  var EL = {
+    earth:{name:"Земля", gen:"Земли", ink:"#5B5232", tone:"#8C7F55", lack:"опоры и устойчивости"},
+    water:{name:"Вода", gen:"Воды", ink:"#0E4A50", tone:"#3F8A8A", lack:"мягкости и права на чувства"},
+    fire:{name:"Огонь", gen:"Огня", ink:"#944424", tone:"#C9774A", lack:"энергии и тепла"},
+    air:{name:"Воздух", gen:"Воздуха", ink:"#3E5A70", tone:"#A9BCCB", lack:"лёгкости и ясности"}
+  };
+  var QS = [
+    {q:"Чего вам сейчас больше всего не хватает?", a:[["Опоры, почвы под ногами","earth"],["Мягкости и нежности","water"],["Сил и желания действовать","fire"],["Ясности в голове","air"]]},
+    {q:"Каким был ваш последний месяц?", a:[["Всё рассыпается, не за что держаться","earth"],["Сухо и жёстко, много контроля","water"],["Вяло, ничего не хочется начинать","fire"],["Тяжело, будто что-то давит","air"]]},
+    {q:"Что звучит как отдых прямо сейчас?", a:[["Лечь и почувствовать, что меня держат","earth"],["Долго смотреть на воду","water"],["Сидеть у огня","fire"],["Ветер и открытое пространство","air"]]},
+    {q:"Где вы обычно чувствуете напряжение?", a:[["В ногах и пояснице","earth"],["В груди и горле","water"],["В животе, будто внутри холодно","fire"],["В плечах и голове","air"]]},
+    {q:"Как вы принимаете решения последнее время?", a:[["Сомневаюсь и откладываю","earth"],["Только головой, без чувств","water"],["Знаю, что нужно, но нет сил","fire"],["Застреваю в мелочах","air"]]},
+    {q:"Что вы хотели бы унести с визита?", a:[["Устойчивость","earth"],["Нежность к себе","water"],["Желание жить и делать","fire"],["Лёгкость и свободу","air"]]}
+  ];
+  var qForm = document.getElementById("q-form"), stage = document.getElementById("q-stage"),
+      qNext = document.getElementById("q-next"), qBack = document.getElementById("q-back"),
+      qCount = document.getElementById("q-count"), dots = document.getElementById("q-dots"),
+      result = document.getElementById("q-result");
+  var qi = 0, answers = [], started = false;
+  QS.forEach(function(){ dots.appendChild(document.createElement("span")); });
+  var LETTERS = ["А","Б","В","Г"];
+
+  function renderQ(focus){
+    var Q = QS[qi];
+    var html = '<fieldset class="q"><legend class="q-title" tabindex="-1">'+Q.q+'</legend><div class="q-opts">';
+    Q.a.forEach(function(a,i){
+      html += '<label class="opt"><input type="radio" name="q'+qi+'" value="'+a[1]+'"'+(answers[qi]===a[1]?" checked":"")+'><span class="mk" aria-hidden="true">'+LETTERS[i]+'</span><span>'+a[0]+'</span></label>';
+    });
+    stage.innerHTML = html + "</div></fieldset>";
+    qCount.textContent = "Вопрос "+(qi+1)+" из "+QS.length;
+    Array.prototype.forEach.call(dots.children, function(d,i){ d.classList.toggle("on", i < qi || (i===qi && !!answers[qi])); });
+    qBack.disabled = qi === 0;
+    qNext.disabled = !answers[qi];
+    qNext.textContent = qi === QS.length-1 ? "Узнать стихию" : "Далее";
+    Array.prototype.forEach.call(stage.querySelectorAll(".opt"), function(lab){
+      var inp = lab.querySelector("input");
+      inp.addEventListener("change", function(){
+        answers[qi] = inp.value; qNext.disabled = false;
+        dots.children[qi].classList.add("on");
+      });
+      lab.addEventListener("click", function(e){
+        if (e.detail > 0) setTimeout(function(){ if (answers[qi]) next(); }, RM.matches ? 60 : 420);
+      });
+    });
+    if (focus) stage.querySelector(".q-title").focus({preventScroll:true});
+  }
+  var advancing = false;
+  function next(){
+    if (advancing || !answers[qi]) return;
+    advancing = true; setTimeout(function(){ advancing=false; }, 200);
+    if (qi < QS.length-1){ qi++; renderQ(true); } else finish();
+  }
+  function finish(){
+    var score = {earth:0, water:0, fire:0, air:0};
+    answers.forEach(function(a,i){ score[a] += (i===QS.length-1 ? 1.5 : 1); });
+    var key = Object.keys(score).sort(function(a,b){ return score[b]-score[a] || (a===answers[0] ? -1 : b===answers[0] ? 1 : 0); })[0];
+    var E = EL[key];
+    root.style.setProperty("--accent", E.ink);
+    root.style.setProperty("--accent-tone", E.tone);
+    root.dataset.element = key;
+    document.getElementById("q-r-glyph").setAttribute("href", "#g-"+key);
+    document.getElementById("q-r-name").textContent = E.name;
+    document.getElementById("q-r-why").textContent = "Сейчас вам не хватает "+E.lack+". По правилу студии мы выбираем программу этой стихии — чтобы вернуть её в баланс.";
+    document.getElementById("q-r-prog").textContent = "«В стихии» · сценарий "+E.gen;
+    document.getElementById("q-r-book").dataset.program = "В стихии: "+E.name;
+    qForm.hidden = true; result.hidden = false;
+    qCount.textContent = "Готово · ваша стихия — "+E.name;
+    Array.prototype.forEach.call(dots.children, function(d){ d.classList.add("on"); });
+    result.focus({preventScroll:true});
+    openCol(key);
+  }
+  qForm.addEventListener("submit", function(e){ e.preventDefault(); next(); });
+  qBack.addEventListener("click", function(){ if (qi>0){ qi--; renderQ(true); } });
+  document.getElementById("q-restart").addEventListener("click", function(){
+    qi=0; answers=[]; result.hidden=true; qForm.hidden=false; renderQ(true);
+  });
+  renderQ(false);
+
+  /* ---------- сертификат ---------- */
+  var giftForm = document.getElementById("gift-form"), certAmt = document.getElementById("cert-amt"),
+      customField = document.getElementById("custom-field"), customAmt = document.getElementById("custom-amt"),
+      giftMsg = document.getElementById("gift-msg");
+  function fmt(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" ₽"; }
+  function updCert(){
+    var v = giftForm.querySelector("input[name=amt]:checked").value;
+    customField.hidden = v !== "custom";
+    if (v === "custom"){ var n = parseInt(customAmt.value,10); certAmt.textContent = n>0 ? fmt(n) : "Свой номинал"; }
+    else certAmt.textContent = fmt(v);
+  }
+  giftForm.addEventListener("change", updCert);
+  customAmt.addEventListener("input", updCert);
+  giftForm.addEventListener("submit", function(e){
+    e.preventDefault();
+    giftMsg.textContent = "Демо: в рабочей версии здесь откроется оформление и оплата сертификата на "+certAmt.textContent+".";
+  });
+
+  /* ---------- FAQ ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".faq-q"), function(b){
+    b.addEventListener("click", function(){
+      var open = b.getAttribute("aria-expanded") === "true";
+      b.setAttribute("aria-expanded", String(!open));
+      document.getElementById(b.getAttribute("aria-controls")).hidden = open;
+    });
+  });
+
+  /* ---------- запись ---------- */
+  var bk = document.getElementById("booking"), bkMsg = document.getElementById("bk-msg");
+  var today = new Date(), iso = new Date(today.getTime() - today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  document.getElementById("bk-date").min = iso;
+  bk.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (!bk.checkValidity()){ bk.reportValidity(); bkMsg.textContent = "Заполните имя, телефон и отметьте согласие."; return; }
+    bkMsg.textContent = "Демо: в рабочей версии заявка уйдёт в YCLIENTS. Программа: "+progSelect.value+".";
+  });
+})();
+</script>
+</body>
+</html>

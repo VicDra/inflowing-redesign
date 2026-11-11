@@ -1,0 +1,1347 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IN FLOW — Лаборатория состояния</title>
+<meta name="description" content="Концепт редизайна In Flow: пространство души и тела в Санкт-Петербурге. Авторские программы из дыхания, потокового массажа, звука, тепла и чайной церемонии.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Onest:wght@300..700&family=JetBrains+Mono:wght@400..500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300..700&family=JetBrains+Mono:wght@400..500&display=swap"></noscript>
+<style>
+:root{
+  /* layout: 12-col grid, max 1320px, gutter 16–48px, hairline 1px measurement rules */
+  --bg:#F2F5F5;
+  --bg-2:#E8EEEF;
+  --surface:#FBFCFC;
+  --ink:#111A1E;
+  --ink-2:#34414A;
+  --muted:#56636A;
+  --line:rgba(17,26,30,.12);
+  --line-strong:rgba(17,26,30,.30);
+  --sage:#8EC5AF;
+  --sage-soft:#D3EADF;
+  --sage-ink:#2B6450;
+  --ice:#CFE2EC;
+  --ice-ink:#2C5870;
+  --glass:rgba(251,252,252,.62);
+  --glass-line:rgba(255,255,255,.75);
+  --font-display:"Onest","Manrope","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --font-text:"Onest","Manrope","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --font-mono:"JetBrains Mono","Cascadia Mono","Consolas","Menlo",monospace;
+  --max:1320px;
+  --gut:clamp(16px,4vw,48px);
+  --r:14px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+[id]{scroll-margin-top:84px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-text);font-size:17px;line-height:1.55;font-feature-settings:"tnum" 0;-webkit-font-smoothing:antialiased}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--sage-ink);outline-offset:3px;border-radius:4px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:16px;top:-60px;background:var(--ink);color:#fff;padding:10px 14px;border-radius:8px;z-index:100;text-decoration:none}
+.skip:focus{top:8px}
+.mono{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-feature-settings:"tnum" 1,"zero" 0}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+
+/* concept banner */
+.concept{background:var(--ink);color:#DDE6E8;text-align:center;padding:7px 16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(242,245,245,.78);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+.hdr .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.logo{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--font-display);font-weight:600;font-size:18px;letter-spacing:.22em}
+.logo svg{width:26px;height:12px}
+.nav{display:flex;gap:26px;margin-left:auto}
+.nav a{text-decoration:none;font-size:14px;color:var(--ink-2);padding:6px 0;background:linear-gradient(var(--ink),var(--ink)) left bottom/0 1px no-repeat;transition:background-size .3s var(--ease)}
+.nav a:hover{background-size:100% 1px;color:var(--ink)}
+.hdr-phone{font-family:var(--font-mono);font-size:13px;text-decoration:none;color:var(--ink-2);white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 22px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:#F4F8F8;text-decoration:none;font-size:15px;font-weight:500;cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease),transform .25s var(--ease)}
+.btn:hover{background:#24343B}
+.btn:active{transform:translateY(1px)}
+.btn--ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn--ghost:hover{background:var(--surface);border-color:var(--ink)}
+.btn--sm{min-height:40px;padding:0 18px;font-size:14px}
+.btn[disabled]{opacity:.38;cursor:not-allowed}
+.btn .dot{width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.menu-btn{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line-strong);border-radius:50%;background:transparent;cursor:pointer}
+.menu-btn span{display:block;width:16px;height:1px;background:var(--ink);margin:4px auto}
+
+/* rulers */
+.ruler{height:12px;background:
+  repeating-linear-gradient(90deg,var(--line-strong) 0 1px,transparent 1px 10px) left bottom/100% 5px no-repeat,
+  repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 100px) left bottom/100% 12px no-repeat;opacity:.6}
+.sec{padding:clamp(72px,10vw,140px) 0 clamp(56px,7vw,96px);border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-label{grid-column:1/4;display:flex;flex-direction:column;gap:10px;color:var(--muted)}
+.sec-title{grid-column:4/11;font-family:var(--font-display);font-weight:500;font-size:clamp(32px,4.4vw,60px);line-height:1.04;letter-spacing:-.025em}
+.sec-title em{font-style:normal;color:var(--sage-ink)}
+.lead{color:var(--ink-2);font-size:clamp(17px,1.4vw,20px);line-height:1.5;max-width:58ch}
+.sec-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:clamp(40px,5vw,64px);padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap}
+.sec-foot .mono{color:var(--muted)}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);border:1px solid var(--glass-line);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 20px 50px -30px rgba(17,26,30,.35)}
+
+/* hero */
+.hero{position:relative;padding:clamp(28px,4vw,56px) 0 clamp(48px,6vw,88px);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 88px,
+  linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/88px 100%;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 70% 45%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 70% 45%,#000 10%,transparent 75%);opacity:.55;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.hero-text{grid-column:1/7}
+.hero-meta{display:flex;justify-content:space-between;gap:12px;color:var(--muted);margin-bottom:28px}
+.eyebrow{color:var(--sage-ink)}
+h1{font-family:var(--font-display);font-weight:600;font-size:clamp(46px,7.4vw,112px);line-height:.95;letter-spacing:-.045em;margin:18px 0 28px}
+h1 span{display:block;font-weight:300;color:var(--ink-2)}
+.hero-sub{max-width:46ch;color:var(--ink-2);font-size:clamp(17px,1.35vw,19px)}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin:34px 0 40px}
+.hero-data{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero-data div{padding:14px 28px 14px 0;margin-right:28px;border-right:1px solid var(--line)}
+.hero-data div:last-child{border-right:0;margin-right:0}
+.hero-data b{display:block;font-family:var(--font-display);font-weight:500;font-size:clamp(20px,2vw,28px);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hero-data .mono{color:var(--muted);font-size:11px}
+
+.stage{grid-column:7/13;position:relative;aspect-ratio:1/1;width:100%;max-width:640px;justify-self:end}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.ring .t{stroke:var(--line-strong);stroke-width:1}
+.ring .t.s{stroke:var(--ink);opacity:.55}
+.ring .prog{fill:none;stroke:var(--sage-ink);stroke-width:1.5;stroke-linecap:round}
+.ring .track{fill:none;stroke:var(--line);stroke-width:1}
+.ring .mark{fill:var(--ink)}
+.ring text{font-family:var(--font-mono);font-size:10px;fill:var(--muted);letter-spacing:.08em}
+.readout{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);width:min(340px,86%);border-radius:18px;padding:14px 16px 14px 20px;display:grid;grid-template-columns:1fr auto;gap:6px 14px;align-items:center}
+.phase{display:flex;align-items:baseline;gap:10px;font-family:var(--font-display);font-size:24px;font-weight:500;letter-spacing:-.02em}
+.phase .count{font-family:var(--font-mono);font-size:24px;font-weight:500;color:var(--sage-ink);min-width:2ch;font-variant-numeric:tabular-nums}
+.phase .sep{color:var(--line-strong);font-weight:300}
+.seg{grid-column:1/2;display:grid;grid-template-columns:4fr 7fr 8fr;gap:3px;height:4px}
+.seg i{position:relative;background:var(--line);border-radius:2px;overflow:hidden}
+.seg i b{position:absolute;inset:0;background:var(--sage-ink);transform-origin:left;transform:scaleX(0)}
+.seg-lbl{grid-column:1/2;display:grid;grid-template-columns:4fr 7fr 8fr;gap:3px;color:var(--muted);font-size:10px}
+.pp{grid-row:1/4;grid-column:2;width:48px;height:48px;border-radius:50%;border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;display:grid;place-items:center}
+.pp:hover{border-color:var(--ink)}
+.pp svg{width:14px;height:14px}
+.stage-cap{position:absolute;left:0;top:4%;color:var(--muted);max-width:180px}
+.stage-cap b{display:block;color:var(--ink);font-family:var(--font-display);font-weight:500;font-size:15px;letter-spacing:0;text-transform:none;margin-bottom:4px}
+.stage-coord{position:absolute;right:0;top:4%;color:var(--muted);text-align:right}
+
+/* philosophy */
+.philo{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.philo-quote{grid-column:4/12;font-family:var(--font-display);font-weight:400;font-size:clamp(26px,3.2vw,44px);line-height:1.18;letter-spacing:-.02em}
+.philo-quote b{font-weight:600}
+.philo-cols{grid-column:4/13;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:56px}
+.philo-cols div{border-top:1px solid var(--ink);padding-top:16px}
+.philo-cols .mono{color:var(--sage-ink);display:block;margin-bottom:10px}
+.philo-cols p{color:var(--ink-2);font-size:16px}
+.photo{position:relative;border-radius:var(--r);overflow:hidden;background:var(--bg-2);border:1px solid var(--line);min-height:240px}
+.photo svg{position:absolute;inset:0;width:100%;height:100%}
+.photo .mono{position:absolute;left:14px;bottom:12px;color:var(--ink-2);background:rgba(251,252,252,.8);padding:4px 8px;border-radius:6px;font-size:10px}
+.philo-photo{grid-column:1/4;grid-row:1/3;align-self:stretch}
+
+/* recognise */
+.signals{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line-strong)}
+.signals li{padding:26px 24px 30px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:60px 1fr;gap:12px;align-items:start}
+.signals li:nth-child(3n+2),.signals li:nth-child(3n+3){padding-left:24px;border-left:1px solid var(--line)}
+.signals svg{width:52px;height:22px;margin-top:6px}
+.signals svg path{fill:none;stroke:var(--sage-ink);stroke-width:1.25}
+.signals p{font-size:clamp(18px,1.6vw,22px);line-height:1.3;letter-spacing:-.01em}
+.signals-note{margin-top:28px;color:var(--ink-2);max-width:60ch}
+
+/* state check */
+.state{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.sliders{grid-column:1/7;display:flex;flex-direction:column;gap:30px}
+.sl{display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:end}
+.sl label{font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:-.01em}
+.sl output{font-family:var(--font-mono);font-size:28px;font-weight:500;font-variant-numeric:tabular-nums;min-width:3ch;text-align:right;color:var(--sage-ink)}
+.sl .range-box{grid-column:1/3;position:relative}
+.sl .ends{grid-column:1/3;display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:34px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(90deg,var(--sage-ink) 0 var(--p,50%),var(--line-strong) var(--p,50%) 100%);border-radius:2px}
+input[type=range]::-moz-range-track{height:2px;background:var(--line-strong)}
+input[type=range]::-moz-range-progress{height:2px;background:var(--sage-ink)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--surface);border:1px solid var(--ink);margin-top:-11px;box-shadow:0 0 0 5px rgba(142,197,175,.35);transition:box-shadow .2s}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--surface);border:1px solid var(--ink);box-shadow:0 0 0 5px rgba(142,197,175,.35)}
+input[type=range]:focus-visible{outline:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--sage-ink)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--sage-ink)}
+.sl .ticks{height:8px;background:repeating-linear-gradient(90deg,var(--line-strong) 0 1px,transparent 1px calc(10% - .1px));background-size:calc(100% + 1px) 100%;margin:0 11px}
+.rec{grid-column:8/13;border-radius:20px;padding:28px;align-self:start;position:sticky;top:96px}
+.rec-head{display:flex;justify-content:space-between;color:var(--muted);margin-bottom:22px}
+.rec-head .live{display:inline-flex;align-items:center;gap:8px;color:var(--sage-ink)}
+.rec-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sage-ink);animation:blink 2.4s infinite}
+@keyframes blink{50%{opacity:.25}}
+.rec h3{font-family:var(--font-display);font-size:clamp(26px,2.4vw,34px);font-weight:600;letter-spacing:-.025em;line-height:1.05}
+.rec .scen{color:var(--sage-ink);margin-top:8px;display:block}
+.rec p{color:var(--ink-2);margin:16px 0 18px;font-size:16px}
+.rec .mini{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:18px}
+.rec .mini svg{width:100%;height:64px}
+.rec-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:20px}
+.rec-meta b{display:block;font-family:var(--font-display);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums}
+.rec-meta .mono{color:var(--muted);font-size:10px}
+.rec small{display:block;margin-top:14px;color:var(--muted);font-size:13px}
+.readings{grid-column:1/7;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:8px}
+.readings div{padding:14px 0 0}
+.readings .mono{color:var(--muted);font-size:10px}
+.readings b{display:block;font-family:var(--font-mono);font-weight:500;font-size:15px;margin-top:4px}
+
+/* programs */
+.protos{border-top:1px solid var(--ink)}
+.proto{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:36px 0 40px;border-bottom:1px solid var(--line)}
+.proto-id{grid-column:1/5;display:flex;flex-direction:column;gap:14px}
+.proto-id .code{color:var(--muted)}
+.proto-id h3{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,2.6vw,38px);letter-spacing:-.03em;line-height:1.02}
+.proto-id p{color:var(--ink-2);font-size:16px;max-width:36ch}
+.proto-nums{display:flex;gap:28px;margin-top:auto;padding-top:10px}
+.proto-nums b{display:block;font-family:var(--font-display);font-weight:500;font-size:22px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.proto-nums .mono{color:var(--muted);font-size:10px}
+.proto-viz{grid-column:5/13;display:flex;flex-direction:column;gap:14px;min-width:0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:1px solid var(--line-strong);background:transparent;border-radius:999px;padding:6px 14px;font-size:13px;cursor:pointer;min-height:34px}
+.tab[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.wave{position:relative;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 25%;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.wave svg{width:100%;height:clamp(96px,10vw,132px);overflow:visible}
+.wave .area{fill:url(#waveFill)}
+.wave .ln{fill:none;stroke:var(--ink);stroke-width:1.4;vector-effect:non-scaling-stroke;transition:d .7s var(--ease)}
+.wave .area{transition:d .7s var(--ease)}
+.wave .sep{stroke:var(--line-strong);stroke-width:1;stroke-dasharray:2 3;vector-effect:non-scaling-stroke}
+.wave .hl{fill:var(--sage);opacity:0;transition:opacity .25s}
+.wave .hl.on{opacity:.22}
+.wave .tk{stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.5}
+.wave-axis{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:6px}
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:0;counter-reset:st}
+.steps li{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:baseline;padding:8px 12px 8px 0;border-bottom:1px solid var(--line);font-size:14px;cursor:default;counter-increment:st}
+.steps li::before{content:counter(st);font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.steps li b{font-family:var(--font-mono);font-weight:500;font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.steps li:hover,.steps li.on{color:var(--sage-ink)}
+.proto-note{color:var(--muted);font-size:13px}
+.proto-cta{display:flex;justify-content:flex-end}
+.approx{color:var(--muted);margin-top:16px;font-size:11px}
+
+.compare{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:clamp(56px,7vw,96px)}
+.compare-head{grid-column:1/5}
+.compare-head h3{font-family:var(--font-display);font-weight:500;font-size:clamp(24px,2.4vw,34px);letter-spacing:-.02em;line-height:1.1;margin:12px 0}
+.compare-head p{color:var(--ink-2);font-size:16px}
+.tbl-wrap{grid-column:5/13;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+caption{text-align:left}
+th,td{padding:14px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:baseline}
+th:first-child,td:first-child{text-align:left;padding-left:0}
+thead th{font-family:var(--font-mono);font-weight:400;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--ink)}
+tbody th{font-weight:500;font-family:var(--font-display)}
+tbody th span{display:block;font-family:var(--font-mono);font-weight:400;font-size:11px;color:var(--muted);letter-spacing:.04em}
+td{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:14px;white-space:nowrap}
+td.na{color:var(--muted);text-align:center;font-size:12px}
+.face{grid-column:5/13;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px 24px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.face h4{font-family:var(--font-display);font-weight:500;font-size:20px}
+.face p{color:var(--muted);font-size:14px}
+.face .px{font-family:var(--font-mono);font-size:18px;font-variant-numeric:tabular-nums}
+
+/* elements */
+.els{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink)}
+.el{padding:28px 24px 32px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;transition:background .3s}
+.el:first-child{padding-left:0}
+.el:last-child{border-right:0}
+.el:hover{background:linear-gradient(180deg,rgba(211,234,223,.45),transparent)}
+.el svg{width:56px;height:56px}
+.el svg *{fill:none;stroke:var(--ink);stroke-width:1.2}
+.el h3{font-family:var(--font-display);font-weight:600;font-size:28px;letter-spacing:-.02em}
+.el .q{color:var(--sage-ink)}
+.el p{color:var(--ink-2);font-size:15px}
+.el .mono{color:var(--muted);font-size:10px;margin-top:auto}
+.rule{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:48px;align-items:center}
+.rule p{grid-column:1/7;font-family:var(--font-display);font-size:clamp(20px,1.8vw,26px);line-height:1.3;letter-spacing:-.01em}
+.quiz{grid-column:8/13;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.quiz .mono{color:var(--muted)}
+.quiz h3{font-family:var(--font-display);font-weight:600;font-size:24px;letter-spacing:-.02em}
+.quiz-bar{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.quiz-bar i{height:3px;background:var(--line-strong);border-radius:2px}
+.quiz-bar i:first-child{background:var(--sage-ink)}
+.demo-msg{font-size:14px;color:var(--sage-ink);min-height:1.4em}
+
+/* journey */
+.journey{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.journey::before{content:"";position:absolute;left:0;right:0;top:15px;height:1px;background:var(--ink)}
+.journey li{position:relative;padding:44px 24px 0 0}
+.journey li::before{content:"";position:absolute;left:0;top:10px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1px solid var(--ink)}
+.journey li:last-child::before{background:var(--sage-ink);border-color:var(--sage-ink)}
+.journey .mono{color:var(--muted);display:block;margin-bottom:12px}
+.journey h3{font-family:var(--font-display);font-weight:500;font-size:22px;letter-spacing:-.015em;line-height:1.2;margin-bottom:8px}
+.journey p{color:var(--ink-2);font-size:15px}
+.course{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:56px;align-items:stretch}
+.course .photo{grid-column:1/8;min-height:300px}
+.course-card{grid-column:8/13;display:flex;flex-direction:column;justify-content:space-between;gap:20px;padding:24px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.course-card b{font-family:var(--font-display);font-weight:600;font-size:clamp(48px,5vw,72px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.course-card p{color:var(--ink-2)}
+.visits{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.visits i{height:22px;border:1px solid var(--line-strong);border-radius:4px}
+.visits i:nth-child(-n+5){background:var(--sage-soft);border-color:var(--sage)}
+
+/* founders */
+.founders{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.founder{grid-column:span 6;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:end}
+.portrait{position:relative;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--bg-2);border:1px solid var(--line)}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.portrait .ini{position:absolute;left:16px;top:14px;font-family:var(--font-display);font-weight:500;font-size:22px;letter-spacing:.06em}
+.portrait .mono{position:absolute;left:14px;bottom:12px;font-size:10px;color:var(--ink-2);background:rgba(251,252,252,.8);padding:4px 8px;border-radius:6px}
+.founder h3{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.2vw,32px);letter-spacing:-.025em;line-height:1.05}
+.founder p{color:var(--ink-2);font-size:15px;margin-top:10px}
+.founder .mono{color:var(--muted);font-size:10px;display:block;margin-top:14px}
+
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.review{padding:28px 24px 30px 0;display:flex;flex-direction:column;gap:22px}
+.review+.review{padding-left:24px;border-left:1px solid var(--line)}
+.review blockquote{margin:0;font-family:var(--font-display);font-size:clamp(19px,1.6vw,22px);line-height:1.35;letter-spacing:-.01em}
+.review footer{display:flex;justify-content:space-between;color:var(--muted);margin-top:auto}
+.review footer b{color:var(--ink);font-family:var(--font-text);font-weight:500;font-size:15px;text-transform:none;letter-spacing:0}
+.mock-note{margin-top:18px;color:var(--muted);font-size:11px}
+
+/* gift */
+.gift{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:center}
+.card-viz{grid-column:1/7;position:relative;aspect-ratio:1.6/1;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#E5F1EC,#D8E7EF 60%,#F3F7F8);border:1px solid var(--glass-line);box-shadow:0 30px 60px -40px rgba(17,26,30,.45)}
+.card-viz svg{position:absolute;inset:0;width:100%;height:100%}
+.card-viz .in{position:absolute;inset:0;padding:clamp(18px,3vw,32px);display:flex;flex-direction:column;justify-content:space-between}
+.card-viz .top{display:flex;justify-content:space-between;align-items:center}
+.card-viz .amount{font-family:var(--font-display);font-weight:600;font-size:clamp(34px,5vw,64px);letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1}
+.card-viz .mono{color:var(--ink-2);font-size:10px}
+.gift-form{grid-column:8/13;display:flex;flex-direction:column;gap:18px}
+.gift-form h3{font-family:var(--font-display);font-weight:600;font-size:clamp(26px,2.4vw,34px);letter-spacing:-.025em}
+.gift-form p{color:var(--ink-2);font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0;margin:0;min-width:0}
+.chips legend{padding:0;margin-bottom:10px;color:var(--muted)}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chip span{display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:42px;padding:6px 14px;border:1px solid var(--line-strong);border-radius:12px;background:var(--surface);font-size:14px;transition:border-color .2s,background .2s;font-variant-numeric:tabular-nums}
+.chip span small{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.chip input:hover+span{border-color:var(--ink)}
+.chip input:checked+span{background:var(--ink);color:#F4F8F8;border-color:var(--ink)}
+.chip input:checked+span small{color:#B9C7CB}
+.chip input:focus-visible+span{outline:2px solid var(--sage-ink);outline-offset:2px}
+.chip input:disabled+span{opacity:.4;text-decoration:line-through;cursor:not-allowed}
+.chip input:disabled{cursor:not-allowed}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{color:var(--muted)}
+.field input{min-height:46px;border:1px solid var(--line-strong);border-radius:12px;background:var(--surface);padding:0 14px;font-size:16px}
+.field input:focus-visible{outline:2px solid var(--sage-ink);outline-offset:1px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.faq-list{grid-column:4/13;border-top:1px solid var(--ink)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item h3{margin:0}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;background:none;border:0;text-align:left;cursor:pointer;font-family:var(--font-display);font-size:clamp(18px,1.6vw,22px);font-weight:500;letter-spacing:-.01em}
+.faq-q i{flex:none;width:28px;height:28px;border:1px solid var(--line-strong);border-radius:50%;position:relative}
+.faq-q i::before,.faq-q i::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1px;background:var(--ink);transform:translate(-50%,-50%);transition:transform .3s var(--ease)}
+.faq-q i::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq-q[aria-expanded="true"] i::after{transform:translate(-50%,-50%) rotate(0)}
+.faq-a{padding:0 48px 24px 0;color:var(--ink-2);max-width:64ch}
+.faq-a .mono{display:inline-block;margin-left:6px;color:var(--muted);font-size:10px}
+
+/* contacts + booking */
+.contact{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
+.contact-info{grid-column:1/5;display:flex;flex-direction:column;gap:0}
+.contact-info dl{border-top:1px solid var(--ink)}
+.contact-info dl div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.contact-info dt{color:var(--muted)}
+.contact-info dd a{text-decoration:none;border-bottom:1px solid var(--line-strong)}
+.contact-info dd a:hover{border-color:var(--ink)}
+.map{margin-top:24px;min-height:220px}
+.booking{grid-column:6/13;border-radius:22px;padding:clamp(20px,2.6vw,32px);display:flex;flex-direction:column;gap:26px}
+.bk-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.bk-head h3{font-family:var(--font-display);font-weight:600;font-size:clamp(24px,2.2vw,30px);letter-spacing:-.02em}
+.bk-head .mono{color:var(--muted);font-size:10px}
+.bk-step{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.bk-step>.mono{color:var(--muted);padding-top:2px;font-size:11px}
+.bk-step .chips legend{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.dates .chip span{min-width:62px;align-items:center;text-align:center}
+.slots .chip span{font-family:var(--font-mono);font-size:13px;min-width:66px;align-items:center}
+.empty{color:var(--muted);font-size:14px}
+.summary{border-top:1px solid var(--ink);padding-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.summary div .mono{color:var(--muted);font-size:10px;display:block}
+.summary div b{display:block;font-weight:500;font-size:15px;margin-top:4px;font-variant-numeric:tabular-nums}
+.summary .total b{font-family:var(--font-mono);font-size:18px;color:var(--sage-ink)}
+.bk-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bk-submit{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.bk-submit small{color:var(--muted);font-size:12px;max-width:34ch}
+.status{border-radius:12px;padding:14px 16px;background:var(--sage-soft);color:#1F4A3B;font-size:15px}
+.status[hidden]{display:none}
+
+/* footer */
+.ftr{border-top:1px solid var(--ink);padding:48px 0 36px;margin-top:0}
+.ftr .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.ftr .logo{grid-column:1/4;font-size:22px;align-self:start}
+.ftr nav{grid-column:4/9;display:flex;gap:20px;flex-wrap:wrap;font-size:14px}
+.ftr nav a{text-decoration:none;color:var(--ink-2)}
+.ftr nav a:hover{color:var(--ink);text-decoration:underline}
+.ftr .soc{grid-column:9/13;display:flex;gap:16px;justify-content:flex-end;font-size:14px}
+.ftr .bottom{grid-column:1/13;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;border-top:1px solid var(--line);color:var(--muted)}
+.ftr .bottom .nonmed{color:var(--ink-2)}
+
+/* responsive */
+@media (max-width:1080px){
+  .nav{gap:18px}
+  .hdr-phone{display:none}
+}
+@media (max-width:900px){
+  .nav{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--surface);border-bottom:1px solid var(--line);padding:8px var(--gut) 16px}
+  .nav.open{display:flex}
+  .nav a{padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+  .menu-btn{display:block}
+  .hdr .btn{margin-left:0}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-text,.stage{grid-column:1/-1}
+  .stage{justify-self:center;max-width:560px;order:-1;margin-top:8px}
+  .sec-head{grid-template-columns:1fr;gap:16px}
+  .sec-label,.sec-title{grid-column:1/-1}
+  .philo,.state,.compare,.rule,.course,.founders,.gift,.faq,.contact{grid-template-columns:1fr}
+  .philo>*,.state>*,.compare>*,.rule>*,.course>*,.founders>*,.gift>*,.faq>*,.contact>*{grid-column:1/-1!important}
+  .philo-photo{grid-row:auto;min-height:220px}
+  .philo-cols{grid-template-columns:1fr;margin-top:32px}
+  .rec{position:static}
+  .proto{grid-template-columns:1fr;gap:20px}
+  .proto-id,.proto-viz{grid-column:1/-1}
+  .signals{grid-template-columns:1fr 1fr}
+  .signals li:nth-child(n){padding-left:0;border-left:0}
+  .signals li:nth-child(2n){padding-left:20px;border-left:1px solid var(--line)}
+  .els{grid-template-columns:1fr 1fr}
+  .el:nth-child(2){border-right:0}
+  .el:nth-child(3){padding-left:0}
+  .el:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .journey{grid-template-columns:1fr 1fr;row-gap:24px}
+  .reviews{grid-template-columns:1fr}
+  .review+.review{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .founder{grid-column:1/-1}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .hdr .wrap{gap:10px}
+  .hdr .btn{padding:0 16px;min-height:40px;font-size:14px}
+  .hero-meta .mono:last-child{display:none}
+  .hero-data{grid-template-columns:1fr 1fr 1fr}
+  .hero-data div{padding:12px 10px 12px 0;margin-right:10px}
+  .hero-cta .btn{flex:1 1 100%}
+  .stage-cap,.stage-coord{display:none}
+  .readout{width:92%;padding:12px 12px 12px 16px}
+  .phase{font-size:20px}.phase .count{font-size:20px}
+  .signals{grid-template-columns:1fr}
+  .signals li:nth-child(2n){padding-left:0;border-left:0}
+  .els{grid-template-columns:1fr}
+  .el{padding-left:0!important;border-right:0;border-bottom:1px solid var(--line)}
+  .journey{grid-template-columns:1fr}
+  .journey::before{left:5px;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .journey li{padding:0 0 8px 32px}
+  .journey li::before{top:6px}
+  .founder{grid-template-columns:1fr 1fr;gap:16px}
+  .summary{grid-template-columns:1fr 1fr}
+  .bk-fields{grid-template-columns:1fr}
+  .bk-step{grid-template-columns:1fr;gap:8px}
+  .readings{grid-template-columns:1fr 1fr 1fr}
+  .faq-a{padding-right:0}
+  .contact-info dl div{grid-template-columns:90px 1fr}
+  .ftr .logo,.ftr nav,.ftr .soc{grid-column:1/-1;justify-content:flex-start}
+  th,td{padding:12px 6px}
+  td{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+.sec{content-visibility:auto;contain-intrinsic-size:auto 900px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<div class="concept" role="note">Концепт редизайна 3 · «Лаборатория состояния» · не является действующим сайтом</div>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="IN FLOW — на главную">IN
+      <svg viewBox="0 0 26 12" aria-hidden="true"><path d="M1 6c3-5 5-5 8 0s5 5 8 0 5-5 8 0" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>FLOW</a>
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <a href="#programs">Программы</a>
+      <a href="#elements">Стихии</a>
+      <a href="#about">О студии</a>
+      <a href="#gift">Сертификаты</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="hdr-phone num" href="tel:+79934833090">+7 (993) 483-30-90</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню"><span></span><span></span></button>
+    <a class="btn btn--sm" href="#booking"><i class="dot" aria-hidden="true"></i>Записаться</a>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="hero-meta"><span class="mono eyebrow">Пространство души и тела · Санкт-Петербург</span></div>
+      <h1 id="hero-title">Состояние<span>потока</span></h1>
+      <p class="hero-sub">Авторские программы из дыхательных практик, потокового массажа, звука, тепла и чайной церемонии. Один визит длится от 90 минут до 3,5 часов.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#booking"><i class="dot" aria-hidden="true"></i>Записаться</a>
+        <a class="btn btn--ghost" href="#elements">Узнать свою стихию</a>
+      </div>
+      <div class="hero-data">
+        <div><b>90–210</b><span class="mono">минут визит</span></div>
+        <div><b>4–6</b><span class="mono">практик подряд</span></div>
+        <div><b>10–23</b><span class="mono">ежедневно</span></div>
+      </div>
+    </div>
+
+    <figure class="stage" aria-labelledby="stage-cap">
+      <canvas id="sphere" aria-hidden="true"></canvas>
+      <svg class="ring" id="ring" viewBox="0 0 600 600" aria-hidden="true"></svg>
+      <figcaption class="stage-cap mono" id="stage-cap"><b>Первая практика начинается здесь</b>Дышите вместе со сферой: вдох 4 · задержка 7 · выдох 8</figcaption>
+      <div class="stage-coord mono num" aria-hidden="true">59.95° N<br>30.31° E</div>
+      <div class="readout glass" role="group" aria-label="Дыхание 4–7–8">
+        <div class="phase" role="timer" aria-live="off"><span id="ph-name">Вдох</span><span class="sep" aria-hidden="true">·</span><span class="count" id="ph-count">4</span></div>
+        <button class="pp" id="pp" type="button" aria-pressed="false" aria-label="Пауза">
+          <svg viewBox="0 0 14 14" aria-hidden="true" id="pp-ico"><rect x="3" y="2" width="2" height="10" fill="currentColor"/><rect x="9" y="2" width="2" height="10" fill="currentColor"/></svg>
+        </button>
+        <div class="seg" aria-hidden="true"><i><b id="sg0"></b></i><i><b id="sg1"></b></i><i><b id="sg2"></b></i></div>
+        <div class="seg-lbl mono" aria-hidden="true"><span>4 с</span><span>7 с</span><span>8 с</span></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="about" aria-labelledby="philo-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Философия<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="philo-title">Счастье — это <em>состояние</em></h2>
+    </div>
+    <div class="philo">
+      <div class="photo philo-photo" aria-label="Место для фото пространства" role="img">
+        <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="pg1" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#F7FBFA"/><stop offset=".55" stop-color="#D5E9E0"/><stop offset="1" stop-color="#C3DAE6"/></radialGradient></defs><rect width="300" height="400" fill="url(#pg1)"/><g fill="none" stroke="#2B6450" stroke-opacity=".18"><path d="M0 260c60-30 120-30 180 0s120 30 120 0"/><path d="M0 285c60-30 120-30 180 0s120 30 120 0"/><path d="M0 310c60-30 120-30 180 0s120 30 120 0"/></g></svg>
+        <span class="mono">здесь фото пространства</span>
+      </div>
+      <p class="philo-quote">Свобода, удовлетворённость, гармония с собой и миром. Мы соединяем практики <b>Запада и Востока</b>.</p>
+      <div class="philo-cols">
+        <div><span class="mono">Тело → внимание</span><p>Работаем с телом, чтобы освободить внимание.</p></div>
+        <div><span class="mono">Внимание → тело</span><p>Работаем с вниманием, чтобы тело отпустило напряжение.</p></div>
+        <div><span class="mono">Ритуал</span><p>Дыхание, звук чаш, ИК-сауна, телесные практики — инструменты, к которым сегодня приходит mental wellness.</p></div>
+      </div>
+    </div>
+    <div class="sec-foot"><span class="mono">Программа — это сценарий визита</span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="signals" aria-labelledby="sig-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Входные данные<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="sig-title">Узнаёте себя?</h2>
+    </div>
+    <ul class="signals" id="signal-list">
+      <li><svg viewBox="0 0 52 22" aria-hidden="true"><path d="M0 11 L6 4 L10 18 L14 3 L18 19 L22 5 L26 17 L30 6 L34 16 L40 8 L46 14 L52 11"/></svg><p>Постоянный стресс и спешка</p></li>
+      <li><svg viewBox="0 0 52 22" aria-hidden="true"><path d="M0 11 L3 6 L5 16 L8 4 L10 18 L13 7 L15 15 L18 3 L20 19 L23 6 L26 16 L29 5 L31 17 L34 8 L37 14 L40 6 L43 16 L46 9 L49 13 L52 11"/></svg><p>Перенасыщение информацией</p></li>
+      <li><svg viewBox="0 0 52 22" aria-hidden="true"><path d="M0 11 C10 11 12 15 20 15 S34 9 52 11"/></svg><p>Не хватает нежности к себе</p></li>
+      <li><svg viewBox="0 0 52 22" aria-hidden="true"><path d="M0 11 C6 3 12 3 13 11 S20 19 26 11 S32 3 39 11 S46 19 52 11"/></svg><p>Ощущение, что жизнь идёт по кругу</p></li>
+      <li><svg viewBox="0 0 52 22" aria-hidden="true"><path d="M0 18 C12 18 18 12 26 11 S40 5 52 4"/></svg><p>Хочется понять себя</p></li>
+      <li><svg viewBox="0 0 52 22" aria-hidden="true"><path d="M0 11 L20 11 C26 11 26 3 32 3 S38 11 52 11"/></svg><p>Тоска по новому опыту</p></li>
+    </ul>
+    <p class="signals-note">Мы не ставим диагнозы. Мы создаём условия, в которых можно замедлиться, прислушаться к себе и вернуться в ровный ритм.</p>
+    <div class="sec-foot"><span class="mono">Сверьте своё состояние ниже</span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="state" aria-labelledby="state-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Самонаблюдение · 3 параметра<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="state-title">Как вы <em>сейчас?</em></h2>
+    </div>
+    <div class="state">
+      <div class="sliders">
+        <p class="lead">Отметьте три ощущения — подскажем, с какой программы начать.</p>
+        <div class="sl">
+          <label for="s-energy">Энергия</label><output id="o-energy" for="s-energy" class="num">50</output>
+          <div class="range-box"><input type="range" id="s-energy" min="0" max="100" step="1" value="50" aria-describedby="e-ends"><div class="ticks" aria-hidden="true"></div></div>
+          <div class="ends mono" id="e-ends"><span>нет сил</span><span>много сил</span></div>
+        </div>
+        <div class="sl">
+          <label for="s-tension">Напряжение</label><output id="o-tension" for="s-tension" class="num">50</output>
+          <div class="range-box"><input type="range" id="s-tension" min="0" max="100" step="1" value="50" aria-describedby="t-ends"><div class="ticks" aria-hidden="true"></div></div>
+          <div class="ends mono" id="t-ends"><span>спокойно</span><span>всё сжато</span></div>
+        </div>
+        <div class="sl">
+          <label for="s-clarity">Ясность</label><output id="o-clarity" for="s-clarity" class="num">50</output>
+          <div class="range-box"><input type="range" id="s-clarity" min="0" max="100" step="1" value="50" aria-describedby="c-ends"><div class="ticks" aria-hidden="true"></div></div>
+          <div class="ends mono" id="c-ends"><span>туман</span><span>ясно</span></div>
+        </div>
+        <div class="readings" aria-hidden="true">
+          <div><span class="mono">Ресурс</span><b id="r1" class="num">—</b></div>
+          <div><span class="mono">Нагрузка</span><b id="r2" class="num">—</b></div>
+          <div><span class="mono">Фокус</span><b id="r3" class="num">—</b></div>
+        </div>
+      </div>
+      <aside class="rec glass" aria-labelledby="rec-name" aria-live="polite">
+        <div class="rec-head mono"><span class="live">Рекомендация</span><span id="rec-code" class="num">P-01</span></div>
+        <h3 id="rec-name">Ознакомительная</h3>
+        <span class="mono scen" id="rec-scen">Сценарий «В расслаблении»</span>
+        <p id="rec-why">Мягкий вход: дыхание, звук чаши и потоковый массаж.</p>
+        <div class="mini" aria-hidden="true"><svg id="rec-wave" viewBox="0 0 600 80" preserveAspectRatio="none"></svg></div>
+        <div class="rec-meta">
+          <div><span class="mono">Длительность</span><b id="rec-dur">90 мин</b></div>
+          <div><span class="mono">Стоимость</span><b id="rec-price">6 000 ₽</b></div>
+        </div>
+        <a class="btn" href="#booking" id="rec-book"><i class="dot" aria-hidden="true"></i>Записаться на программу</a>
+        <small>Это подсказка, а не заключение. Программу уточним вместе с вами перед визитом.</small>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="programs" aria-labelledby="prog-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Протоколы визита<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="prog-title">Программы: каждая — <em>сценарий</em> из 4–6 практик</h2>
+    </div>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+      <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8EC5AF" stop-opacity=".45"/><stop offset="1" stop-color="#CFE2EC" stop-opacity="0"/></linearGradient>
+    </defs></svg>
+    <div class="protos" id="protos"></div>
+    <p class="approx mono">Кривая — условная интенсивность практик во времени. Длительность практик ориентировочная.</p>
+
+    <div class="compare">
+      <div class="compare-head">
+        <span class="mono" style="color:var(--muted)">Сравнение · разово и абонементы</span>
+        <h3>Цена и длительность — открыто</h3>
+        <p>Рекомендуемый курс — 5–7 визитов. Абонемент закрепляет стоимость на весь курс.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <caption class="vh">Стоимость программ: один сеанс и абонементы на 5 и 7 сеансов</caption>
+          <thead><tr><th scope="col">Программа</th><th scope="col">1 сеанс</th><th scope="col">5 сеансов</th><th scope="col">7 сеансов</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Ознакомительная<span>90 мин</span></th><td>6 000 ₽</td><td class="na" colspan="2">только разовый визит</td></tr>
+            <tr><th scope="row">В стихии<span>140–160 мин</span></th><td>от 10 000 ₽</td><td>от 45 000 ₽</td><td>от 60 000 ₽</td></tr>
+            <tr><th scope="row">Инь-Ян: Женское<span>120–210 мин</span></th><td>от 10 000 ₽</td><td>от 45 000 ₽</td><td>от 60 000 ₽</td></tr>
+            <tr><th scope="row">В Аюрведе: Вата<span>160–210 мин</span></th><td>от 10 000 ₽</td><td>от 45 000 ₽</td><td>от 60 000 ₽</td></tr>
+            <tr><th scope="row">В восприятии<span>150–210 мин</span></th><td class="na" colspan="3">цена по запросу</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="face">
+        <div><span class="mono" style="color:var(--muted)">Отдельная услуга</span><h4>Испанский массаж лица</h4><p>60 минут</p></div>
+        <span class="px">2 500 ₽</span>
+        <a class="btn btn--ghost btn--sm" href="#booking" data-book="face">Записаться</a>
+      </div>
+    </div>
+    <div class="sec-foot"><span class="mono">Не знаете, что выбрать? Начните с ознакомительной</span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="elements" aria-labelledby="el-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Четыре первоэлемента + Эфир<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="el-title">Какая стихия ресурсная для вас</h2>
+    </div>
+    <ul class="els">
+      <li class="el"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M8 12 L48 12 L28 46 Z"/><path d="M14 22 L42 22"/></svg><h3>Земля</h3><span class="mono q">Опора</span><p>Опора, устойчивость, телесность.</p><span class="mono">В стихии · Земля</span></li>
+      <li class="el"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M8 12 L48 12 L28 46 Z"/></svg><h3>Вода</h3><span class="mono q">Текучесть</span><p>Текучесть, чувства, мягкость.</p><span class="mono">В стихии · Вода</span></li>
+      <li class="el"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 10 L48 44 L8 44 Z"/></svg><h3>Огонь</h3><span class="mono q">Энергия</span><p>Энергия, воля, тепло.</p><span class="mono">В стихии · Огонь</span></li>
+      <li class="el"><svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 10 L48 44 L8 44 Z"/><path d="M14 34 L42 34"/></svg><h3>Воздух</h3><span class="mono q">Лёгкость</span><p>Лёгкость, ясность, свобода.</p><span class="mono">В стихии · Воздух</span></li>
+    </ul>
+    <div class="rule">
+      <p>Правило студии: если стихии не хватает — выбираем программу этой стихии. Если её в избытке — противоположной.</p>
+      <div class="quiz glass">
+        <span class="mono">Квиз · 9 вопросов · 2 минуты</span>
+        <h3>Ваша стихия</h3>
+        <div class="quiz-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <button class="btn" type="button" id="quiz-btn">Пройти квиз</button>
+        <p class="demo-msg" id="quiz-msg" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="sec-foot"><span class="mono">По результату квиза — запись на программу стихии</span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="visit" aria-labelledby="visit-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Путь гостя · 4 шага<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="visit-title">Как проходит визит</h2>
+    </div>
+    <ol class="journey">
+      <li><span class="mono">Шаг 1 · −20 мин</span><h3>Приходите за 15–20 минут</h3><p>Переоденьтесь и оставьте городской темп за дверью.</p></li>
+      <li><span class="mono">Шаг 2 · 00:00</span><h3>Чай и короткий разговор</h3><p>О вашем состоянии — чтобы настроить программу под вас.</p></li>
+      <li><span class="mono">Шаг 3 · 90–210 мин</span><h3>Практики программы</h3><p>Одна за другой, без спешки.</p></li>
+      <li><span class="mono">Шаг 4 · финал</span><h3>Чайная церемония</h3><p>Время прийти в себя, прежде чем вернуться в город.</p></li>
+    </ol>
+    <div class="course">
+      <div class="photo" role="img" aria-label="Место для фото чайной комнаты">
+        <svg viewBox="0 0 700 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="pg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9F3EE"/><stop offset="1" stop-color="#CADDE8"/></linearGradient></defs><rect width="700" height="300" fill="url(#pg2)"/><g fill="none" stroke="#2C5870" stroke-opacity=".16"><circle cx="520" cy="150" r="60"/><circle cx="520" cy="150" r="100"/><circle cx="520" cy="150" r="140"/><circle cx="520" cy="150" r="180"/></g></svg>
+        <span class="mono">здесь фото пространства · чайная</span>
+      </div>
+      <div class="course-card">
+        <span class="mono" style="color:var(--muted)">Рекомендуемый курс</span>
+        <b>5–7</b>
+        <p>визитов, чтобы ощущение покоя стало привычным, а не разовым.</p>
+        <div class="visits" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <div class="sec-foot"><span class="mono">Халат, полотенца и тапочки — наши</span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="founders" aria-labelledby="f-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Основатели<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="f-title">Люди, которые держат пространство</h2>
+    </div>
+    <div class="founders">
+      <article class="founder">
+        <div class="portrait" role="img" aria-label="Место для фото Анастасии Зайки"><svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" class="contour" data-seed="3"></svg><span class="ini">АЗ</span><span class="mono">фото основателя</span></div>
+        <div><h3>Анастасия Зайка</h3><p>Основательница In Flow, соавтор программ и техники потокового массажа.</p><span class="mono">биография — уточнить у клиента</span></div>
+      </article>
+      <article class="founder">
+        <div class="portrait" role="img" aria-label="Место для фото Сергея Игнатёнка"><svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" class="contour" data-seed="7"></svg><span class="ini">СИ</span><span class="mono">фото основателя</span></div>
+        <div><h3>Сергей Игнатёнок</h3><p>Основатель In Flow, соавтор программ студии.</p><span class="mono">биография — уточнить у клиента</span></div>
+      </article>
+    </div>
+    <div class="sec-foot"><span class="mono">Знакомство начинается с первого визита</span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="reviews" aria-labelledby="rv-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Отзывы гостей<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="rv-title">После визита</h2>
+    </div>
+    <div class="reviews">
+      <figure class="review"><blockquote>Пришла уставшей после долгой недели, а ушла спокойной. Особенно запомнилась чайная церемония в конце.</blockquote><footer class="mono"><b>Евгения</b><span>Ознакомительная</span></footer></figure>
+      <figure class="review"><blockquote>Три часа без телефона и мыслей о работе. Всё происходит неторопливо, и это главное.</blockquote><footer class="mono"><b>Виктория</b><span>В стихии</span></footer></figure>
+      <figure class="review"><blockquote>Бережно и очень внимательно. Хочется вернуться и пройти курс целиком.</blockquote><footer class="mono"><b>Мария</b><span>Инь-Ян</span></footer></figure>
+    </div>
+    <p class="mock-note mono">Макет: тексты отзывов переносятся с действующего сайта</p>
+    <div class="sec-foot"><span class="mono">Ваш первый визит — 90 минут</span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="gift" aria-labelledby="g-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Подарочный сертификат<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="g-title">Подарите <em>состояние</em></h2>
+    </div>
+    <div class="gift">
+      <div class="card-viz" aria-hidden="true">
+        <svg viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="cg" cx="72%" cy="42%" r="45%"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".5" stop-color="#BFE0D2" stop-opacity=".7"/><stop offset="1" stop-color="#CFE2EC" stop-opacity="0"/></radialGradient></defs><circle cx="460" cy="170" r="190" fill="url(#cg)"/><g fill="none" stroke="#111A1E" stroke-opacity=".12"><circle cx="460" cy="170" r="120"/><circle cx="460" cy="170" r="150"/></g></svg>
+        <div class="in">
+          <div class="top"><span class="logo" style="font-size:15px">IN FLOW</span><span class="mono">Сертификат · действует 6 мес.</span></div>
+          <div><span class="mono">Номинал</span><div class="amount" id="gift-amount">10 000 ₽</div></div>
+        </div>
+      </div>
+      <form class="gift-form" id="gift-form" novalidate>
+        <h3>Сертификат на любую программу</h3>
+        <p>Электронный или в конверте. Получатель сам выберет программу и время.</p>
+        <fieldset class="chips">
+          <legend class="mono">Номинал</legend>
+          <label class="chip"><input type="radio" name="g" value="10000" checked><span>10 000 ₽</span></label>
+          <label class="chip"><input type="radio" name="g" value="15000"><span>15 000 ₽</span></label>
+          <label class="chip"><input type="radio" name="g" value="20000"><span>20 000 ₽</span></label>
+          <label class="chip"><input type="radio" name="g" value="custom"><span>Свой номинал</span></label>
+        </fieldset>
+        <div class="field" id="g-custom-wrap" hidden><label class="mono" for="g-custom">Сумма, ₽</label><input id="g-custom" type="number" inputmode="numeric" min="2500" step="500" placeholder="например, 12 000"></div>
+        <button class="btn" type="submit">Подарить</button>
+        <div class="status" id="gift-status" role="status" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Частые вопросы<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="faq-title">Перед визитом</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa1" id="fq1">За сколько приходить?<i aria-hidden="true"></i></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1" hidden><p>За 15–20 минут: переодеться, выпить чай и настроиться.</p></div></div>
+        <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">Сколько визитов нужно?<i aria-hidden="true"></i></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2" hidden><p>Эффект чувствуется после первого визита; для устойчивого результата рекомендуем курс из 5–7.</p></div></div>
+        <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">Можно ли беременным?<i aria-hidden="true"></i></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3" hidden><p>Часть практик подходит в первом и втором триместре. Перед записью проконсультируйтесь с врачом и предупредите администратора.</p></div></div>
+        <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4" id="fq4">Что взять с собой?<i aria-hidden="true"></i></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4" hidden><p>Ничего: халат, полотенца и тапочки мы даём.</p></div></div>
+        <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">Можно ли перенести визит?<i aria-hidden="true"></i></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5" hidden><p>Да, предупредите нас не позднее чем за 24 часа.<span class="mono">уточнить у клиента</span></p></div></div>
+      </div>
+    </div>
+    <div class="sec-foot"><span class="mono">Остались вопросы? Позвоните: <span class="num">+7 (993) 483-30-90</span></span><a class="btn btn--sm" href="#booking">Записаться</a></div>
+  </div>
+</section>
+
+<section class="sec" id="contacts" aria-labelledby="ct-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label mono">Контакты и запись<div class="ruler" aria-hidden="true"></div></div>
+      <h2 class="sec-title" id="ct-title">Выберите время визита</h2>
+    </div>
+    <div class="contact">
+      <div class="contact-info">
+        <dl>
+          <div><dt class="mono">Адрес</dt><dd>Санкт-Петербург, ул. 1-я Никитинская, 30, лит. А</dd></div>
+          <div><dt class="mono">Часы</dt><dd class="num">Ежедневно 10:00–23:00</dd></div>
+          <div><dt class="mono">Телефон</dt><dd><a class="num" href="tel:+79934833090">+7 (993) 483-30-90</a></dd></div>
+          <div><dt class="mono">Telegram</dt><dd><a href="https://t.me/inflowing_ru">@inflowing_ru</a></dd></div>
+          <div><dt class="mono">VK</dt><dd><a href="https://vk.com/in_flowing">in_flowing</a></dd></div>
+          <div><dt class="mono">Онлайн</dt><dd>Запись через YCLIENTS</dd></div>
+        </dl>
+        <div class="photo map" role="img" aria-label="Место для карты проезда">
+          <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="220" fill="#E8EEEF"/><g stroke="#111A1E" stroke-opacity=".1" fill="none"><path d="M0 60 H400 M0 140 H400 M90 0 V220 M230 0 V220 M330 0 V220"/><path d="M0 190 C120 160 220 200 400 150" stroke="#2C5870" stroke-opacity=".3" stroke-width="6"/></g><circle cx="230" cy="100" r="22" fill="#8EC5AF" fill-opacity=".35"/><circle cx="230" cy="100" r="5" fill="#111A1E"/></svg>
+          <span class="mono num">59.95° N · 30.31° E · здесь карта</span>
+        </div>
+      </div>
+
+      <form class="booking glass" id="booking" novalidate aria-labelledby="bk-title">
+        <div class="bk-head"><h3 id="bk-title">Онлайн-запись</h3><span class="mono">демо-виджет · YCLIENTS</span></div>
+        <div class="bk-step"><span class="mono" aria-hidden="true">01</span>
+          <fieldset class="chips" id="bk-progs"><legend>Программа</legend></fieldset>
+        </div>
+        <div class="bk-step"><span class="mono" aria-hidden="true">02</span>
+          <fieldset class="chips dates" id="bk-dates"><legend>Дата · ближайшие 7 дней</legend></fieldset>
+        </div>
+        <div class="bk-step"><span class="mono" aria-hidden="true">03</span>
+          <fieldset class="chips slots" id="bk-slots"><legend>Время</legend></fieldset>
+        </div>
+        <div class="summary" aria-live="polite">
+          <div><span class="mono">Программа</span><b id="sm-prog">—</b></div>
+          <div><span class="mono">Дата и время</span><b id="sm-when">—</b></div>
+          <div><span class="mono">Длительность</span><b id="sm-dur">—</b></div>
+          <div class="total"><span class="mono">Стоимость</span><b id="sm-price">—</b></div>
+        </div>
+        <div class="bk-fields">
+          <div class="field"><label class="mono" for="bk-name">Имя</label><input id="bk-name" name="name" autocomplete="given-name"></div>
+          <div class="field"><label class="mono" for="bk-phone">Телефон</label><input id="bk-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7"></div>
+        </div>
+        <div class="bk-submit">
+          <small>Подтверждение придёт в мессенджер. Перенос — не позднее чем за 24 часа.</small>
+          <button class="btn" type="submit" id="bk-go" disabled>Записаться</button>
+        </div>
+        <div class="status" id="bk-status" role="status" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <a class="logo" href="#top">IN FLOW</a>
+    <nav aria-label="Нижнее меню"><a href="#programs">Программы</a><a href="#elements">Стихии</a><a href="#about">О студии</a><a href="#gift">Сертификаты</a><a href="#contacts">Контакты</a></nav>
+    <div class="soc"><a href="https://t.me/inflowing_ru">Telegram</a><a href="https://vk.com/in_flowing">VK</a><a class="num" href="tel:+79934833090">+7 (993) 483-30-90</a></div>
+    <div class="bottom mono">
+      <span>© IN FLOW, 2026</span>
+      <span class="nonmed">Практики студии не являются медицинскими услугами</span>
+      <span><a href="#" onclick="return false">Политика конфиденциальности</a> · <a href="#" onclick="return false">Пользовательское соглашение</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+var $ = function(s, r){ return (r || document).querySelector(s); };
+var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var fmt = function(n){ return n.toLocaleString('ru-RU').replace(/ /g, ' '); };
+var rub = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽'; };
+
+/* ---------- mobile nav ---------- */
+var menuBtn = $('.menu-btn'), nav = $('#nav');
+menuBtn.addEventListener('click', function(){
+  var open = nav.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+  menuBtn.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+});
+$$('#nav a').forEach(function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
+
+/* ---------- data ---------- */
+var LV = {breath:.34, sound:.22, dynmed:.74, sauna:.84, flow:.58, tea:.12, embod:.68, bags:.6, scrub:.5, shower:.4, aroma:.46, face:.3, med:.26, fem:.56, shiro:.3, body:.64};
+var PROGRAMS = [
+  {id:'intro', code:'P-01', name:'Ознакомительная', dur:'90 мин', max:90, price:6000, from:false,
+   idea:'Чувственное знакомство с собой и пространством.',
+   scen:[
+    {name:'В тонусе', steps:[['ИК-сауна',15,'sauna'],['Динамическая медитация',15,'dynmed'],['Потоковый массаж',45,'flow'],['Чайная церемония',15,'tea']]},
+    {name:'В расслаблении', steps:[['Дыхательная практика',15,'breath'],['Звучание поющей чаши',10,'sound'],['Потоковый массаж',50,'flow'],['Чайная церемония',15,'tea']]}]},
+  {id:'element', code:'P-02', name:'В стихии', dur:'140–160 мин', max:160, price:10000, from:true,
+   idea:'Контакт с собой через четыре первоэлемента: Земля, Вода, Огонь, Воздух.',
+   note:'Для каждой стихии — свой сценарий. Показан сценарий Земли.',
+   scen:[{name:'Земля', steps:[['Дыхательная практика',15,'breath'],['Эмбодимент',20,'embod'],['ИК-сауна',20,'sauna'],['Массаж горячими травяными мешочками',50,'bags'],['Чайная церемония',20,'tea']]}]},
+  {id:'yinyang', code:'P-03', name:'Инь-Ян: Женское', dur:'120–210 мин', max:210, price:10000, from:true,
+   idea:'Гармония мужского и женского начал. Два пути: телесный и психосоматический.',
+   scen:[
+    {name:'Телесный', steps:[['Скрабирование',25,'scrub'],['Душ',10,'shower'],['Аромамассаж',50,'aroma'],['Испанский массаж лица',35,'face'],['Чайная церемония',20,'tea']]},
+    {name:'Психосоматический', steps:[['Медитативная практика',20,'med'],['Женская практика',30,'fem'],['Душ',10,'shower'],['Массаж головы (широдхара)',30,'shiro'],['Потоковый массаж',50,'flow'],['Чайная церемония',20,'tea']]}]},
+  {id:'vata', code:'P-04', name:'В Аюрведе: Вата', dur:'160–210 мин', max:210, price:10000, from:true,
+   idea:'Баланс тела, ума и эмоций по аюрведической традиции.',
+   scen:[{name:'Вата', steps:[['Дыхательная практика',15,'breath'],['Потоковый массаж',50,'flow'],['Душ',10,'shower'],['Массаж травяными мешочками',40,'bags'],['Телесно-ориентированная практика',30,'body'],['Чайная церемония',20,'tea']]}]},
+  {id:'percept', code:'P-05', name:'В восприятии', dur:'150–210 мин', max:210, price:null, from:false,
+   idea:'Новые внутренние настройки через отключение или усиление одного из чувств.',
+   note:'Состав программы уточняется.',
+   scen:[{name:'', steps:[]}]}
+];
+var FACE = {id:'face', code:'S-01', name:'Испанский массаж лица', dur:'60 мин', max:60, price:2500, from:false};
+var byId = {};
+PROGRAMS.concat([FACE]).forEach(function(p){ byId[p.id] = p; });
+var priceLabel = function(p){ return p.price == null ? 'по запросу' : (p.from ? 'от ' : '') + rub(p.price); };
+
+/* ---------- wave geometry ---------- */
+var N = 160;
+function wavePoints(steps, W, H, padTop, padBot){
+  var total = steps.reduce(function(s, x){ return s + x[1]; }, 0);
+  var pts = [];
+  var levelAt = function(m){
+    if (!total) return .3;
+    var acc = 0;
+    for (var i = 0; i < steps.length; i++){ acc += steps[i][1]; if (m < acc) return LV[steps[i][2]]; }
+    return LV[steps[steps.length - 1][2]];
+  };
+  for (var i = 0; i <= N; i++){
+    var m = i / N * (total || 100);
+    var v = 0, k = 0, win = (total || 100) * .022;
+    for (var j = -4; j <= 4; j++){ var mm = Math.min(Math.max(m + j * win, 0), (total || 100) - .001); v += levelAt(mm); k++; }
+    v /= k;
+    if (total) v += .014 * Math.sin(m * .85) + .009 * Math.sin(m * 2.3 + 1.3);
+    v = Math.max(0, Math.min(1, v));
+    pts.push([i / N * W, padTop + (1 - v) * (H - padTop - padBot)]);
+  }
+  return {pts:pts, total:total};
+}
+function pathD(pts){ return 'M' + pts.map(function(p){ return p[0].toFixed(1) + ' ' + p[1].toFixed(1); }).join(' L'); }
+function areaD(pts, H){ return pathD(pts) + ' L' + pts[pts.length - 1][0].toFixed(1) + ' ' + H + ' L0 ' + H + ' Z'; }
+
+var SVGNS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent){
+  var e = document.createElementNS(SVGNS, tag);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+
+/* ---------- protocol cards ---------- */
+var protos = $('#protos');
+PROGRAMS.forEach(function(p){
+  var art = document.createElement('article');
+  art.className = 'proto';
+  art.setAttribute('aria-labelledby', 'h-' + p.id);
+  art.innerHTML =
+    '<div class="proto-id"><span class="mono code num">' + p.code + ' · протокол</span>' +
+    '<h3 id="h-' + p.id + '">' + p.name + '</h3><p>' + p.idea + '</p>' +
+    '<div class="proto-nums"><div><b class="num">' + p.dur + '</b><span class="mono">длительность</span></div>' +
+    '<div><b class="num">' + priceLabel(p) + '</b><span class="mono">1 сеанс</span></div></div></div>' +
+    '<div class="proto-viz"><div class="tabs" role="group" aria-label="Сценарий программы ' + p.name + '"></div>' +
+    '<div class="wave"><svg viewBox="0 0 600 120" preserveAspectRatio="none" role="img" aria-label="Интенсивность практик во времени"></svg></div>' +
+    '<div class="wave-axis mono num"><span>0 мин</span><span class="tot"></span></div>' +
+    '<ol class="steps"></ol>' + (p.note ? '<p class="proto-note">' + p.note + '</p>' : '') +
+    '<div class="proto-cta"><a class="btn btn--ghost btn--sm" href="#booking" data-book="' + p.id + '">Записаться на «' + p.name + '»</a></div></div>';
+  protos.appendChild(art);
+
+  var tabs = $('.tabs', art), svg = $('svg', art), ol = $('.steps', art), tot = $('.tot', art);
+  var W = 600, H = 120;
+  var gHl = el('g', {}, svg), area = el('path', {'class':'area'}, svg), ln = el('path', {'class':'ln'}, svg), gSep = el('g', {}, svg);
+  if (p.scen.length < 2) tabs.remove();
+
+  function draw(si){
+    var sc = p.scen[si], g = wavePoints(sc.steps, W, H, 10, 6);
+    area.setAttribute('d', areaD(g.pts, H));
+    ln.setAttribute('d', pathD(g.pts));
+    if (!g.total) ln.setAttribute('stroke-dasharray', '4 4'); else ln.removeAttribute('stroke-dasharray');
+    gHl.innerHTML = ''; gSep.innerHTML = ''; ol.innerHTML = '';
+    var acc = 0;
+    if (g.total){
+      for (var t = 15; t < g.total; t += 15){ var x = t / g.total * W; el('line', {'class':'tk', x1:x, x2:x, y1:H, y2:H - 5}, gSep); }
+    }
+    sc.steps.forEach(function(s, i){
+      var x0 = acc / g.total * W; acc += s[1]; var x1 = acc / g.total * W;
+      var r = el('rect', {'class':'hl', x:x0, y:0, width:x1 - x0, height:H}, gHl);
+      if (i > 0) el('line', {'class':'sep', x1:x0, x2:x0, y1:0, y2:H}, gSep);
+      var li = document.createElement('li');
+      li.innerHTML = '<span>' + s[0] + '</span><b>' + s[1] + ' мин</b>';
+      li.addEventListener('mouseenter', function(){ r.classList.add('on'); li.classList.add('on'); });
+      li.addEventListener('mouseleave', function(){ r.classList.remove('on'); li.classList.remove('on'); });
+      ol.appendChild(li);
+    });
+    if (!g.total){
+      var li = document.createElement('li'); li.innerHTML = '<span>Состав уточняется</span><b>—</b>'; ol.appendChild(li);
+    }
+    tot.textContent = g.total ? '≈ ' + g.total + ' мин практик' : p.dur;
+  }
+  p.scen.forEach(function(sc, i){
+    if (p.scen.length < 2) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'tab'; b.textContent = sc.name;
+    b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    b.addEventListener('click', function(){
+      $$('.tab', tabs).forEach(function(x){ x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true'); draw(i);
+    });
+    tabs.appendChild(b);
+  });
+  draw(0);
+});
+
+/* ---------- state check ---------- */
+var sE = $('#s-energy'), sT = $('#s-tension'), sC = $('#s-clarity');
+var recWave = $('#rec-wave');
+var recArea = el('path', {fill:'url(#waveFill)'}, recWave);
+var recLn = el('path', {fill:'none', stroke:'#111A1E', 'stroke-width':'1.4', 'vector-effect':'non-scaling-stroke'}, recWave);
+var recommendedId = 'intro';
+function recommend(E, T, C){
+  if (T >= 65 && E <= 40) return {id:'vata', s:0, scen:'Аюрведический баланс', why:'Много напряжения и мало сил: тепло травяных мешочков и медленный ритм помогают замедлиться и собраться.'};
+  if (T >= 65) return {id:'element', s:0, scen:'Стихия Земля или Вода', why:'Силы есть, но всё сжато. Программа стихии даёт опору и мягкость, чтобы отпустить напряжение.'};
+  if (E <= 35) return {id:'element', s:0, scen:'Стихия Огонь', why:'Не хватает энергии — по правилу студии выбираем стихию, которой мало: тепло ИК-сауны и динамика.'};
+  if (C <= 35) return {id:'element', s:0, scen:'Стихия Воздух', why:'В голове туман: дыхательные практики и лёгкий ритм программы Воздуха возвращают ясность внимания.'};
+  if (E >= 70 && C >= 65 && T <= 35) return {id:'percept', s:0, scen:'Новый опыт', why:'Вы в ресурсе и открыты новому: программа, где одно из чувств отключается или усиливается.'};
+  if (E >= 55 && T <= 50) return {id:'intro', s:0, scen:'Сценарий «В тонусе»', why:'Ровное состояние — хорошее время для знакомства: сауна, динамическая медитация и потоковый массаж.'};
+  return {id:'intro', s:1, scen:'Сценарий «В расслаблении»', why:'Мягкий вход: дыхание, звук поющей чаши и потоковый массаж — чтобы просто выдохнуть.'};
+}
+function updateState(){
+  var E = +sE.value, T = +sT.value, C = +sC.value;
+  [[sE,'#o-energy'],[sT,'#o-tension'],[sC,'#o-clarity']].forEach(function(a){
+    a[0].style.setProperty('--p', a[0].value + '%'); $(a[1]).textContent = a[0].value;
+  });
+  $('#r1').textContent = Math.round((E + C) / 2) + '/100';
+  $('#r2').textContent = T + '/100';
+  $('#r3').textContent = Math.round(C * .7 + (100 - T) * .3) + '/100';
+  var r = recommend(E, T, C), p = byId[r.id];
+  recommendedId = r.id;
+  $('#rec-code').textContent = p.code;
+  $('#rec-name').textContent = p.name;
+  $('#rec-scen').textContent = r.scen;
+  $('#rec-why').textContent = r.why;
+  $('#rec-dur').textContent = p.dur;
+  $('#rec-price').textContent = priceLabel(p);
+  var g = wavePoints(p.scen[r.s].steps, 600, 80, 6, 4);
+  recArea.setAttribute('d', areaD(g.pts, 80));
+  recLn.setAttribute('d', pathD(g.pts));
+}
+[sE, sT, sC].forEach(function(s){ s.addEventListener('input', updateState); });
+updateState();
+
+/* ---------- quiz CTA ---------- */
+$('#quiz-btn').addEventListener('click', function(){
+  $('#quiz-msg').textContent = 'Демо: в рабочей версии здесь откроется квиз из 9 вопросов, а по результату — запись на программу стихии.';
+});
+
+/* ---------- founders contour portraits ---------- */
+$$('.contour').forEach(function(svg){
+  var seed = +svg.getAttribute('data-seed');
+  var defs = el('defs', {}, svg);
+  var gr = el('radialGradient', {id:'pf' + seed, cx:'50%', cy:'40%', r:'70%'}, defs);
+  el('stop', {offset:'0', 'stop-color':'#F8FBFA'}, gr);
+  el('stop', {offset:'1', 'stop-color': seed % 2 ? '#D3EADF' : '#CFE2EC'}, gr);
+  el('rect', {width:200, height:250, fill:'url(#pf' + seed + ')'}, svg);
+  for (var k = 0; k < 14; k++){
+    var d = '', rad = 18 + k * 9;
+    for (var a = 0; a <= 64; a++){
+      var t = a / 64 * Math.PI * 2;
+      var w = 1 + .08 * Math.sin(t * 3 + seed + k * .35) + .05 * Math.sin(t * 5 - seed * .7);
+      var x = 100 + Math.cos(t) * rad * w * .82, y = 112 + Math.sin(t) * rad * w;
+      d += (a ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }
+    el('path', {d:d + 'Z', fill:'none', stroke:'#111A1E', 'stroke-opacity':(.16 - k * .008).toFixed(3), 'stroke-width':'.8'}, svg);
+  }
+});
+
+/* ---------- gift ---------- */
+var gForm = $('#gift-form'), gWrap = $('#g-custom-wrap'), gIn = $('#g-custom'), gAmt = $('#gift-amount');
+function giftUpdate(){
+  var v = $('input[name=g]:checked', gForm).value;
+  gWrap.hidden = v !== 'custom';
+  if (v === 'custom'){ var n = parseInt(gIn.value, 10); gAmt.textContent = n > 0 ? rub(n) : '— ₽'; }
+  else gAmt.textContent = rub(+v);
+}
+gForm.addEventListener('change', giftUpdate);
+gIn.addEventListener('input', giftUpdate);
+gForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  var st = $('#gift-status');
+  st.hidden = false;
+  st.textContent = 'Демо: в рабочей версии здесь будет оплата и отправка сертификата на ' + gAmt.textContent + '.';
+});
+
+/* ---------- FAQ ---------- */
+$$('.faq-q').forEach(function(b){
+  b.addEventListener('click', function(){
+    var open = b.getAttribute('aria-expanded') === 'true';
+    b.setAttribute('aria-expanded', String(!open));
+    document.getElementById(b.getAttribute('aria-controls')).hidden = open;
+  });
+});
+
+/* ---------- booking ---------- */
+var bk = {prog:null, date:null, time:null};
+var bkProgs = $('#bk-progs'), bkDates = $('#bk-dates'), bkSlots = $('#bk-slots');
+var bookable = PROGRAMS.concat([FACE]);
+bookable.forEach(function(p){
+  var l = document.createElement('label'); l.className = 'chip';
+  l.innerHTML = '<input type="radio" name="bk-prog" value="' + p.id + '"><span>' + p.name + '<small>' + p.dur + ' · ' + priceLabel(p) + '</small></span>';
+  bkProgs.appendChild(l);
+});
+var today = new Date(); today.setHours(0, 0, 0, 0);
+var days = [];
+var wdFmt = new Intl.DateTimeFormat('ru-RU', {weekday:'short'});
+var dmFmt = new Intl.DateTimeFormat('ru-RU', {day:'numeric', month:'short'});
+var fullFmt = new Intl.DateTimeFormat('ru-RU', {day:'numeric', month:'long', weekday:'short'});
+for (var i = 0; i < 7; i++){
+  var d = new Date(today); d.setDate(today.getDate() + i);
+  days.push(d);
+  var lbl = i === 0 ? 'сегодня' : i === 1 ? 'завтра' : wdFmt.format(d);
+  var l = document.createElement('label'); l.className = 'chip';
+  l.innerHTML = '<input type="radio" name="bk-date" value="' + i + '"><span><small>' + lbl + '</small>' + dmFmt.format(d).replace('.', '') + '</span>';
+  bkDates.appendChild(l);
+}
+function busy(di, h){ var x = Math.sin((days[di].getDate() * 31 + h * 17) * 12.9898) * 43758.5453; return (x - Math.floor(x)) < .28; }
+function renderSlots(){
+  $$('.chip, .empty', bkSlots).forEach(function(n){ n.remove(); });
+  bk.time = null;
+  if (bk.prog == null || bk.date == null){
+    var e = document.createElement('p'); e.className = 'empty'; e.textContent = 'Выберите программу и дату.'; bkSlots.appendChild(e); return;
+  }
+  var p = byId[bk.prog], now = new Date(), count = 0;
+  for (var h = 10; h * 60 + p.max <= 23 * 60; h++){
+    var isPast = bk.date === 0 && (h * 60 <= now.getHours() * 60 + now.getMinutes() + 60);
+    if (isPast) continue;
+    var dis = busy(bk.date, h);
+    var l = document.createElement('label'); l.className = 'chip';
+    l.innerHTML = '<input type="radio" name="bk-time" value="' + h + '"' + (dis ? ' disabled aria-label="' + h + ':00, занято"' : '') + '><span>' + h + ':00</span>';
+    bkSlots.appendChild(l); count++;
+  }
+  if (!count){ var e2 = document.createElement('p'); e2.className = 'empty'; e2.textContent = 'На этот день свободных окон нет — выберите другую дату.'; bkSlots.appendChild(e2); }
+}
+function renderSummary(){
+  var p = bk.prog ? byId[bk.prog] : null;
+  $('#sm-prog').textContent = p ? p.name : '—';
+  $('#sm-dur').textContent = p ? p.dur : '—';
+  $('#sm-price').textContent = p ? priceLabel(p) : '—';
+  $('#sm-when').textContent = bk.date != null ? fullFmt.format(days[bk.date]) + (bk.time != null ? ', ' + bk.time + ':00' : '') : '—';
+  $('#bk-go').disabled = !(p && bk.date != null && bk.time != null);
+}
+var bForm = $('#booking');
+bForm.addEventListener('change', function(e){
+  var t = e.target;
+  if (t.name === 'bk-prog'){ bk.prog = t.value; renderSlots(); }
+  else if (t.name === 'bk-date'){ bk.date = +t.value; renderSlots(); }
+  else if (t.name === 'bk-time'){ bk.time = +t.value; }
+  $('#bk-status').hidden = true;
+  renderSummary();
+});
+bForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  if ($('#bk-go').disabled) return;
+  var st = $('#bk-status');
+  st.hidden = false;
+  st.textContent = 'Демо: в рабочей версии заявка уйдёт в YCLIENTS. ' + $('#sm-prog').textContent + ' · ' + $('#sm-when').textContent + '.';
+});
+function selectProgram(id){
+  var r = $('input[name=bk-prog][value="' + id + '"]', bForm);
+  if (r){ r.checked = true; bk.prog = id; renderSlots(); renderSummary(); }
+}
+document.addEventListener('click', function(e){
+  var a = e.target.closest && e.target.closest('[data-book]');
+  if (a) selectProgram(a.getAttribute('data-book'));
+});
+$('#rec-book').addEventListener('click', function(){ selectProgram(recommendedId); });
+renderSlots(); renderSummary();
+
+/* ---------- breathing sphere ---------- */
+var PH = [{n:'Вдох', d:4}, {n:'Задержка', d:7}, {n:'Выдох', d:8}];
+var CYCLE = 19;
+var canvas = $('#sphere'), stage = $('.stage');
+var ring = $('#ring');
+var CX = 300, CY = 300, RR = 284;
+(function buildRing(){
+  for (var i = 0; i < CYCLE * 4; i++){
+    var a = i / (CYCLE * 4) * Math.PI * 2 - Math.PI / 2, major = i % 4 === 0;
+    var r1 = RR - (major ? 10 : 5);
+    el('line', {'class':'t' + (major ? ' s' : ''), x1:CX + Math.cos(a) * r1, y1:CY + Math.sin(a) * r1, x2:CX + Math.cos(a) * RR, y2:CY + Math.sin(a) * RR}, ring);
+  }
+  [0, 4, 11].forEach(function(s, i){
+    var a = s / CYCLE * Math.PI * 2 - Math.PI / 2;
+    el('circle', {'class':'mark', cx:CX + Math.cos(a) * (RR + 0), cy:CY + Math.sin(a) * (RR + 0), r:2.5}, ring);
+  });
+  el('circle', {'class':'track', cx:CX, cy:CY, r:RR - 18}, ring);
+})();
+var progC = el('circle', {'class':'prog', cx:CX, cy:CY, r:RR - 18, transform:'rotate(-90 300 300)'}, ring);
+var CIRC = 2 * Math.PI * (RR - 18);
+progC.setAttribute('stroke-dasharray', CIRC.toFixed(1));
+
+var phName = $('#ph-name'), phCount = $('#ph-count'), sg = [$('#sg0'), $('#sg1'), $('#sg2')];
+var ease = function(x){ return .5 - .5 * Math.cos(Math.PI * x); };
+function breathState(t){
+  var c = t % CYCLE;
+  if (c < 4) return {i:0, p:c / 4, b:ease(c / 4), c:c};
+  if (c < 11) return {i:1, p:(c - 4) / 7, b:1, c:c};
+  return {i:2, p:(c - 11) / 8, b:1 - ease((c - 11) / 8), c:c};
+}
+var lastShown = '';
+function updateUI(st){
+  var rem = Math.max(1, Math.ceil(PH[st.i].d * (1 - st.p) - 1e-6));
+  var key = st.i + ':' + rem;
+  if (key !== lastShown){ phName.textContent = PH[st.i].n; phCount.textContent = rem; lastShown = key; }
+  for (var k = 0; k < 3; k++) sg[k].style.transform = 'scaleX(' + (k < st.i ? 1 : k === st.i ? st.p : 0) + ')';
+  progC.setAttribute('stroke-dashoffset', (CIRC * (1 - st.c / CYCLE)).toFixed(1));
+}
+
+var VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+var FS = [
+'precision highp float;',
+'uniform vec2 uRes;uniform float uTime;uniform float uB;',
+'float h(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}',
+'float n3(vec3 x){vec3 i=floor(x);vec3 f=fract(x);f=f*f*(3.-2.*f);',
+' return mix(mix(mix(h(i),h(i+vec3(1,0,0)),f.x),mix(h(i+vec3(0,1,0)),h(i+vec3(1,1,0)),f.x),f.y),',
+'  mix(mix(h(i+vec3(0,0,1)),h(i+vec3(1,0,1)),f.x),mix(h(i+vec3(0,1,1)),h(i+vec3(1,1,1)),f.x),f.y),f.z);}',
+'float fbm(vec3 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*n3(p);p=p*2.03+vec3(1.7,9.2,3.1);a*=.5;}return s;}',
+'void main(){',
+' vec2 uv=(gl_FragCoord.xy-.5*uRes)/min(uRes.x,uRes.y);',
+' float aa=1.5/min(uRes.x,uRes.y);',
+' float R=mix(.25,.345,uB);',
+' float d=length(uv);',
+' float ang=atan(uv.y,uv.x);',
+' float wob=fbm(vec3(cos(ang)*1.3,sin(ang)*1.3,uTime*.09))-.5;',
+' float Rw=R*(1.+.035*wob*(1.-.4*uB));',
+' vec3 glowC=vec3(.62,.83,.78);',
+' float g=exp(-pow(max(d-Rw,0.)/(.07+.07*uB),1.25));',
+' vec4 outc=vec4(glowC*g*.42,g*.42);',
+' float ring2=exp(-pow((d-Rw*1.32)/.0025,2.))*.18*uB;',
+' outc+=vec4(vec3(.17,.39,.31)*ring2,ring2);',
+' if(d<Rw+aa){',
+'  float q=clamp(d/Rw,0.,1.);',
+'  vec3 n=normalize(vec3(uv/Rw,sqrt(max(1.-q*q,0.))));',
+'  vec3 L=normalize(vec3(-.45,.55,.75));',
+'  float dif=dot(n,L)*.5+.5;',
+'  float cl=fbm(n*2.4+vec3(uTime*.05,-uTime*.04,uTime*.03));',
+'  float cl2=fbm(n*5.+vec3(-uTime*.03,uTime*.02,0.)+cl);',
+'  vec3 deep=vec3(.36,.64,.56);vec3 mid=vec3(.70,.86,.88);vec3 ice=vec3(.83,.91,.96);vec3 wh=vec3(.98,.995,1.);',
+'  vec3 c=mix(deep,mid,smoothstep(.05,.7,dif));',
+'  c=mix(c,ice,smoothstep(.55,.95,dif)*.8);',
+'  c+=(cl-.5)*.22*vec3(.6,.9,.85)+(cl2-.5)*.08;',
+'  float sss=pow(1.-n.z,1.6)*(.5+.5*dot(normalize(vec2(.6,-.5)),normalize(uv+1e-4)));',
+'  c=mix(c,vec3(.55,.85,.74),sss*.55);',
+'  float rim=pow(1.-n.z,3.);',
+'  c=mix(c,wh,rim*.35);',
+'  float sp=pow(max(dot(reflect(-L,n),vec3(0,0,1)),0.),18.);',
+'  c+=wh*sp*.42;',
+'  c=mix(c,wh,.08+.12*uB);',
+'  float a=1.-smoothstep(Rw-aa,Rw+aa,d);',
+'  outc=mix(outc,vec4(c,1.),a);',
+' }',
+' gl_FragColor=outc;',
+'}'].join('\n');
+
+var gl = null, prog, uRes, uTime, uB, ctx2d = null;
+function initGL(){
+try {
+  gl = canvas.getContext('webgl', {premultipliedAlpha:true, alpha:true, antialias:false}) || canvas.getContext('experimental-webgl');
+  if (gl){
+    var sh = function(type, src){ var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+    prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error('link');
+    gl.useProgram(prog);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(prog, 'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    uRes = gl.getUniformLocation(prog, 'uRes'); uTime = gl.getUniformLocation(prog, 'uTime'); uB = gl.getUniformLocation(prog, 'uB');
+    gl.clearColor(0, 0, 0, 0);
+  }
+} catch (err){ gl = null; }
+if (!gl) ctx2d = canvas.getContext('2d');
+}
+
+function resize(){
+  var r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 1.25);
+  var w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+  if (canvas.width !== w || canvas.height !== h){ canvas.width = w; canvas.height = h; }
+  if (gl) gl.viewport(0, 0, w, h);
+}
+function render(t, b){
+  if (gl){
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uTime, t);
+    gl.uniform1f(uB, b);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  } else if (ctx2d){
+    var w = canvas.width, h = canvas.height, m = Math.min(w, h), cx = w / 2, cy = h / 2;
+    var R = m * (.25 + .095 * b) * (1 + .01 * Math.sin(t * .8));
+    ctx2d.clearRect(0, 0, w, h);
+    var g = ctx2d.createRadialGradient(cx, cy, R * .9, cx, cy, R * (1.6 + .4 * b));
+    g.addColorStop(0, 'rgba(158,212,199,.42)'); g.addColorStop(1, 'rgba(158,212,199,0)');
+    ctx2d.fillStyle = g; ctx2d.beginPath(); ctx2d.arc(cx, cy, R * 2.1, 0, Math.PI * 2); ctx2d.fill();
+    var s = ctx2d.createRadialGradient(cx - R * .35, cy - R * .4, R * .05, cx, cy, R);
+    s.addColorStop(0, '#FBFEFF'); s.addColorStop(.35, '#D6E8F1'); s.addColorStop(.75, '#A9D3C6'); s.addColorStop(1, '#7DB8A6');
+    ctx2d.fillStyle = s; ctx2d.beginPath(); ctx2d.arc(cx, cy, R, 0, Math.PI * 2); ctx2d.fill();
+    var rim = ctx2d.createRadialGradient(cx, cy, R * .82, cx, cy, R);
+    rim.addColorStop(0, 'rgba(255,255,255,0)'); rim.addColorStop(1, 'rgba(255,255,255,.45)');
+    ctx2d.fillStyle = rim; ctx2d.beginPath(); ctx2d.arc(cx, cy, R, 0, Math.PI * 2); ctx2d.fill();
+  }
+}
+
+var running = !RM.matches, onScreen = true, elapsed = 0, last = 0, raf = 0;
+var pp = $('#pp'), ppIco = $('#pp-ico');
+function setPP(){
+  pp.setAttribute('aria-pressed', running ? 'false' : 'true');
+  pp.setAttribute('aria-label', running ? 'Пауза' : 'Продолжить дыхание');
+  ppIco.innerHTML = running
+    ? '<rect x="3" y="2" width="2" height="10" fill="currentColor"/><rect x="9" y="2" width="2" height="10" fill="currentColor"/>'
+    : '<path d="M4 2 L12 7 L4 12 Z" fill="currentColor"/>';
+}
+function frame(ts){
+  raf = 0;
+  if (!running || !onScreen || document.hidden) return;
+  var dt = last ? Math.min((ts - last) / 1000, .1) : 0;
+  last = ts; elapsed += dt;
+  var st = breathState(elapsed);
+  render(elapsed, st.b); updateUI(st);
+  raf = requestAnimationFrame(frame);
+}
+function kick(){ if (!raf && running && onScreen && !document.hidden){ last = 0; raf = requestAnimationFrame(frame); } }
+function drawStatic(){
+  resize();
+  if (RM.matches && elapsed === 0){
+    render(3.0, .62);
+    phName.textContent = 'Ритм'; phCount.textContent = '4·7·8';
+    sg.forEach(function(s){ s.style.transform = 'scaleX(0)'; });
+    progC.setAttribute('stroke-dashoffset', CIRC.toFixed(1));
+  } else {
+    var st = breathState(elapsed); render(elapsed, st.b); updateUI(st);
+  }
+}
+pp.addEventListener('click', function(){
+  running = !running; setPP();
+  if (running) kick();
+});
+if ('ResizeObserver' in window) new ResizeObserver(function(){ drawStatic(); }).observe(stage);
+else window.addEventListener('resize', drawStatic);
+if ('IntersectionObserver' in window){
+  new IntersectionObserver(function(en){ onScreen = en[0].isIntersecting; if (onScreen) kick(); }, {threshold:0}).observe(stage);
+}
+document.addEventListener('visibilitychange', function(){ if (!document.hidden) kick(); });
+RM.addEventListener && RM.addEventListener('change', function(){ running = !RM.matches; setPP(); if (running) kick(); else drawStatic(); });
+setPP();
+var idle = window.requestIdleCallback || function(cb){ return setTimeout(cb, 1); };
+requestAnimationFrame(function(){ idle(function(){ initGL(); drawStatic(); kick(); }, {timeout:400}); });
+})();
+</script>
+</body>
+</html>

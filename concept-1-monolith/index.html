@@ -1,0 +1,1233 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In Flow · Монолит</title>
+<meta name="description" content="Концепт редизайна In Flow — пространство души и тела, Санкт-Петербург. Направление «Монолит».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300..600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@300..600&display=swap"></noscript>
+<style>
+:root{
+  /* Цвета: обсидиан, графит, кость, пепел, шампань, бронза (только декор) */
+  --obsidian:#0d0c0b;
+  --graphite:#171513;
+  --bone:#ece6db;
+  --ash:#a69e91;
+  --champagne:#cbb08a;
+  --bronze:#8a7356;
+  --line:rgba(236,230,219,.13);
+  --line-strong:rgba(236,230,219,.26);
+  --metal:linear-gradient(100deg,#9c8463 0%,#ead7b4 42%,#b3976f 68%,#d8bf98 100%);
+  --f-display:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
+  --f-text:"Manrope","Helvetica Neue",Arial,system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --gutter:clamp(16px,4vw,56px);
+  --gap:clamp(12px,2vw,24px);
+  --ease:cubic-bezier(.7,0,.2,1);
+  /* Раскладка: 12 колонок, max 1440, поля 16–56 px, волосяные линии 1px вместо карточек */
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--obsidian);color:var(--bone);font:400 16px/1.6 var(--f-text);overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:1px solid var(--champagne);outline-offset:4px}
+::selection{background:var(--champagne);color:var(--obsidian)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:16px;top:-60px;z-index:100;background:var(--bone);color:var(--obsidian);padding:10px 14px;font-weight:600}
+.skip:focus{top:44px}
+
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--gutter)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
+.mono{font:500 11px/1.5 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
+.num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1}
+.metal{background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ital{font-style:italic}
+
+/* Служебная плашка */
+.concept{position:relative;z-index:60;background:var(--bone);color:var(--obsidian);text-align:center;font:500 11px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;padding:8px 16px}
+
+/* Шапка */
+.header{position:sticky;top:0;z-index:50;background:rgba(13,12,11,.72);backdrop-filter:blur(14px) saturate(120%);-webkit-backdrop-filter:blur(14px) saturate(120%);border-bottom:1px solid var(--line)}
+.header .wrap{display:flex;align-items:center;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:12px;font:400 20px/1 var(--f-display);letter-spacing:.34em;white-space:nowrap}
+.logo i{display:block;width:26px;height:1px;background:var(--metal)}
+.logo span:last-child{margin-right:-.34em}
+.nav{margin-left:auto}
+.nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.nav a{font-size:13px;letter-spacing:.04em;color:var(--ash);transition:color .3s}
+.nav a:hover{color:var(--bone)}
+.phone{font:500 12px/1 var(--f-mono);letter-spacing:.08em;color:var(--bone);white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:46px;padding:0 24px;border:1px solid var(--bone);background:var(--bone);color:var(--obsidian);font:600 13px/1 var(--f-text);letter-spacing:.06em;cursor:pointer;transition:background .35s,color .35s,border-color .35s;white-space:nowrap}
+.btn:hover{background:transparent;color:var(--bone)}
+.btn.ghost{background:transparent;color:var(--bone);border-color:var(--line-strong)}
+.btn.ghost:hover{border-color:var(--bone)}
+.btn .arr{display:inline-block;width:18px;height:1px;background:currentColor;position:relative;transition:width .35s var(--ease)}
+.btn .arr::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg) translate(-1px,1px)}
+.btn:hover .arr{width:26px}
+.header .btn{min-height:40px;padding:0 18px}
+.burger{display:none;background:none;border:1px solid var(--line-strong);height:40px;padding:0 14px;cursor:pointer;font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+
+/* Hero */
+.hero{position:relative;min-height:calc(100vh - 101px);min-height:calc(100svh - 101px);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate;
+  background:radial-gradient(120% 80% at 70% 30%,#1d1a16 0%,var(--obsidian) 60%)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(13,12,11,.35) 0%,transparent 30%,transparent 50%,rgba(13,12,11,.88) 100%),
+  radial-gradient(70% 60% at 18% 78%,rgba(13,12,11,.75),transparent 70%)}
+.hero-inner{padding-top:96px;padding-bottom:40px}
+.hero h1{grid-column:1/-1;margin:22px 0 0;font:300 clamp(64px,12.4vw,212px)/.86 var(--f-display);letter-spacing:-.02em}
+.hero h1 .l2{display:block;padding-left:clamp(0px,9vw,180px)}
+.hero h1 em{font-style:italic;font-weight:300}
+.hero-over{grid-column:1/-1}
+.hero-sub{grid-column:1/span 5;margin:40px 0 0;max-width:46ch;color:#d6cfc3;font-size:17px}
+.hero-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-data{margin-top:64px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr)}
+.hero-data div{padding:16px 16px 0 0}
+.hero-data b{display:block;font:400 24px/1.1 var(--f-display);color:var(--bone);letter-spacing:0;text-transform:none;margin-bottom:4px}
+.hint{position:absolute;right:var(--gutter);top:40px}
+
+/* Разделы */
+section{position:relative}
+.sec{padding:clamp(88px,12vw,176px) 0}
+.sec + .sec{border-top:1px solid var(--line)}
+.label{grid-column:1/-1;display:flex;align-items:center;gap:16px;margin-bottom:clamp(40px,6vw,80px)}
+.label::after{content:"";flex:1;height:1px;background:var(--line)}
+h2{font:300 clamp(42px,6.2vw,96px)/.98 var(--f-display);letter-spacing:-.015em;margin:0}
+h2 em{font-style:italic}
+h3{font:400 clamp(26px,2.4vw,34px)/1.1 var(--f-display);margin:0}
+p{margin:0}
+.lead{font-size:18px;color:#d6cfc3;max-width:52ch}
+.muted{color:var(--ash)}
+.sec-cta{grid-column:1/-1;margin-top:clamp(56px,7vw,96px);padding-top:24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.sec-cta p{font:300 italic 26px/1.2 var(--f-display);color:#d6cfc3}
+
+/* Окно-заглушка фото */
+.window{position:relative;overflow:hidden;background:#12100e;border:1px solid var(--line);min-height:320px}
+.window::before{content:"";position:absolute;inset:-30%;background:
+  radial-gradient(40% 50% at 30% 40%,rgba(203,176,138,.22),transparent 70%),
+  radial-gradient(35% 40% at 72% 66%,rgba(236,230,219,.10),transparent 70%),
+  conic-gradient(from 210deg at 50% 50%,#0f0e0c,#1c1915,#0f0e0c,#16130f,#0f0e0c);
+  filter:blur(18px);animation:drift 28s ease-in-out infinite alternate}
+.window::after{content:"";position:absolute;inset:0;opacity:.35;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+.window figcaption{position:absolute;left:16px;bottom:14px;z-index:2}
+.window .corner{position:absolute;width:14px;height:14px;border-color:var(--champagne);border-style:solid;z-index:2;opacity:.7}
+.window .c1{left:12px;top:12px;border-width:1px 0 0 1px}.window .c2{right:12px;top:12px;border-width:1px 1px 0 0}
+.window .c3{right:12px;bottom:12px;border-width:0 1px 1px 0}
+@keyframes drift{0%{transform:translate3d(-4%,-2%,0) rotate(0)}100%{transform:translate3d(4%,3%,0) rotate(8deg)}}
+
+/* Философия */
+.phil h2{grid-column:1/span 8}
+.phil .body{grid-column:1/span 5;margin-top:56px;display:grid;gap:20px}
+.phil .window{grid-column:7/-1;grid-row:3/span 2;margin-top:56px;min-height:440px}
+.phil .tenets{grid-column:1/span 5;margin-top:48px;border-top:1px solid var(--line)}
+.tenets div{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.tenets dt{margin:0}.tenets dd{margin:0;color:#d6cfc3}
+
+/* Узнаёте себя */
+.pains h2{grid-column:1/span 6}
+.pains .lead{grid-column:8/-1;align-self:end}
+.pain-list{grid-column:1/-1;list-style:none;margin:72px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.pain-list li{padding:32px 28px 40px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font:300 clamp(24px,2.3vw,32px)/1.15 var(--f-display);min-height:170px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;transition:background .5s}
+.pain-list li:hover{background:rgba(236,230,219,.03)}
+.pain-list li span{display:block;width:24px;height:1px;background:var(--champagne)}
+
+/* Программы и партитура */
+.prog-head h2{grid-column:1/span 7}
+.prog-head .lead{grid-column:8/-1;align-self:end}
+.tabs{grid-column:1/-1;margin-top:64px;display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1 0 auto;background:none;border:0;border-right:1px solid var(--line);padding:20px 22px;text-align:left;cursor:pointer;color:var(--ash);transition:color .3s,background .3s;position:relative}
+.tab:last-child{border-right:0}
+.tab span{display:block;font:400 22px/1.1 var(--f-display);color:inherit;margin-bottom:6px;white-space:nowrap}
+.tab small{font:500 10px/1 var(--f-mono);letter-spacing:.14em}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--metal);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+.tab[aria-selected="true"]{color:var(--bone);background:rgba(236,230,219,.025)}
+.tab[aria-selected="true"]::after{transform:scaleX(1)}
+.tab:hover{color:var(--bone)}
+.panel{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);padding-top:56px}
+.p-info{grid-column:1/span 4}
+.p-info h3{font-size:clamp(36px,3.6vw,54px);font-weight:300;margin:14px 0 18px}
+.p-info .idea{color:#d6cfc3;max-width:38ch}
+.price{margin-top:36px;padding-top:20px;border-top:1px solid var(--line)}
+.price b{display:block;font:300 clamp(44px,4.4vw,64px)/1 var(--f-display);margin-top:8px}
+.p-info .btn{margin-top:28px}
+.p-score{grid-column:6/-1}
+.scen{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:36px;margin-bottom:28px}
+.scen .mono{margin-right:8px}
+.chip{background:none;border:1px solid var(--line-strong);padding:8px 14px;font:500 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ash);cursor:pointer;transition:all .3s}
+.chip[aria-pressed="true"]{border-color:var(--champagne);color:var(--bone)}
+.chip:hover{color:var(--bone)}
+.score{position:relative;height:112px;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);
+  background:repeating-linear-gradient(90deg,transparent 0,transparent calc(100%/7 - 1px),var(--line) calc(100%/7 - 1px),var(--line) calc(100%/7))}
+.seg{position:absolute;top:14px;bottom:14px;left:0;width:0;opacity:0;overflow:hidden;cursor:default;
+  border-left:1px solid var(--champagne);background:linear-gradient(180deg,rgba(236,230,219,.11),rgba(236,230,219,.025));
+  transition:left .8s var(--ease),width .8s var(--ease),opacity .5s,background .35s}
+.seg.on{opacity:1}
+.seg.tea{background:linear-gradient(180deg,rgba(203,176,138,.30),rgba(203,176,138,.06))}
+.seg.tbd{border-left-style:dashed;background:repeating-linear-gradient(135deg,rgba(236,230,219,.07) 0 1px,transparent 1px 8px)}
+.seg.hl{background:linear-gradient(180deg,rgba(236,230,219,.26),rgba(236,230,219,.06))}
+.seg.tea.hl{background:linear-gradient(180deg,rgba(203,176,138,.5),rgba(203,176,138,.12))}
+.seg i{position:absolute;left:8px;top:8px;font:500 10px/1 var(--f-mono);font-style:normal;letter-spacing:.08em;color:var(--bone)}
+.seg em{position:absolute;left:8px;bottom:8px;font:500 10px/1 var(--f-mono);font-style:normal;color:var(--ash);white-space:nowrap}
+.playhead{position:absolute;top:-6px;bottom:-6px;left:0;width:1px;background:var(--champagne);opacity:0;pointer-events:none;box-shadow:0 0 12px rgba(203,176,138,.7)}
+.playhead.run{animation:play 1.6s var(--ease) forwards}
+@keyframes play{0%{left:0;opacity:0}10%{opacity:1}85%{opacity:1}100%{left:var(--to);opacity:0}}
+.axis{position:relative;height:26px;margin-top:8px}
+.axis span{position:absolute;top:0;transform:translateX(-50%);font:500 10px/1 var(--f-mono);color:var(--ash)}
+.axis span:first-child{transform:none}.axis span:last-child{transform:translateX(-100%)}
+.range{position:relative;height:16px;margin-top:2px}
+.range div{position:absolute;top:6px;height:5px;border:1px solid var(--champagne);border-top:0;transition:left .8s var(--ease),width .8s var(--ease)}
+.range-l{margin-top:4px}
+.legend{list-style:none;margin:32px 0 0;padding:0;border-top:1px solid var(--line)}
+.legend li{display:grid;grid-template-columns:40px 1fr auto auto;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);transition:background .3s,padding .3s}
+.legend li.hl{background:rgba(236,230,219,.035);padding-left:8px}
+.legend .n{font:500 11px/1 var(--f-mono);color:var(--champagne)}
+.legend .t{font:500 11px/1 var(--f-mono);color:var(--ash)}
+.legend .m{font:500 12px/1 var(--f-mono);color:var(--bone);min-width:56px;text-align:right}
+.score-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:18px}
+.fade{transition:opacity .35s}
+.fade.out{opacity:0}
+
+/* Абонементы */
+.subs{grid-column:1/-1;margin-top:clamp(80px,10vw,140px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap)}
+.subs-head{grid-column:1/span 4}
+.subs-head h3{font-size:clamp(32px,3vw,44px);font-weight:300;margin:14px 0 16px}
+.tbl-wrap{grid-column:6/-1}
+table{width:100%;border-collapse:collapse}
+caption{text-align:left}
+th,td{text-align:left;padding:18px 12px 18px 0;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font:500 11px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ash);border-bottom-color:var(--line-strong);padding-top:0}
+tbody th{font:400 22px/1.15 var(--f-display);color:var(--bone)}
+tbody th small{display:block;font:500 10px/1.4 var(--f-mono);letter-spacing:.12em;color:var(--ash);margin-top:6px;text-transform:uppercase}
+td{font:400 17px/1.2 var(--f-text);font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+td small{display:block;font:500 10px/1.4 var(--f-mono);color:var(--ash);margin-top:6px;letter-spacing:.04em}
+td.na{color:var(--ash);font-size:13px;white-space:normal;text-align:left}
+.th-num{text-align:right}
+td,thead th:not(:first-child){text-align:right}
+td.left{text-align:left}
+.extra{margin-top:28px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:24px;border:1px solid var(--line)}
+.extra b{font:300 40px/1 var(--f-display)}
+.note{margin-top:16px;font:400 12px/1.5 var(--f-mono);color:var(--ash)}
+
+/* Стихии */
+.elem h2{grid-column:1/span 7}
+.elem .lead{grid-column:8/-1;align-self:end}
+.el-list{grid-column:1/-1;list-style:none;padding:0;margin:72px 0 0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.el-list li{padding:32px 24px 36px 0;border-right:1px solid var(--line);padding-left:24px}
+.el-list li:first-child{padding-left:0}.el-list li:last-child{border-right:0}
+.el-list svg{width:56px;height:56px;margin-bottom:40px;stroke:var(--champagne);fill:none;stroke-width:1}
+.el-list h3{font-size:clamp(34px,3vw,46px);font-weight:300}
+.el-list .mono{margin:10px 0 18px}
+.el-list p{color:#d6cfc3;font-size:15px;max-width:28ch}
+.rule{grid-column:1/-1;margin-top:56px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);padding:40px 0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.rule p.big{grid-column:1/span 7;font:300 clamp(26px,2.6vw,38px)/1.2 var(--f-display)}
+.rule .pairs{grid-column:9/-1;align-self:center;display:grid;gap:10px}
+.pairs div{display:flex;justify-content:space-between;font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.pairs i{flex:1;margin:0 16px;align-self:center;height:1px;background:var(--metal);opacity:.7}
+.quiz{grid-column:1/-1;margin-top:40px;display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center}
+.quiz p{max-width:56ch;color:#d6cfc3}
+.status{font:500 12px/1.5 var(--f-mono);color:var(--champagne);letter-spacing:.04em}
+.status:empty{display:none}
+
+/* Путь гостя */
+.visit h2{grid-column:1/span 7}
+.steps{grid-column:1/-1;list-style:none;margin:80px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.steps::before{content:"";position:absolute;left:0;right:0;top:7px;height:1px;background:var(--line-strong)}
+.steps li{position:relative;padding:40px 24px 0 0}
+.steps li::before{content:"";position:absolute;left:0;top:0;width:15px;height:15px;border:1px solid var(--champagne);border-radius:50%;background:var(--obsidian)}
+.steps li::after{content:"";position:absolute;left:5px;top:5px;width:5px;height:5px;border-radius:50%;background:var(--champagne)}
+.steps .mono{color:var(--champagne)}
+.steps h3{margin:14px 0 12px;font-size:clamp(26px,2.2vw,32px);font-weight:300}
+.steps p{color:#d6cfc3;font-size:15px;max-width:30ch}
+.course{grid-column:1/-1;margin-top:56px;display:flex;flex-wrap:wrap;gap:12px 40px;align-items:baseline}
+.course b{font:300 clamp(48px,5vw,72px)/1 var(--f-display)}
+
+/* Основатели */
+.found h2{grid-column:1/span 6}
+.found .lead{grid-column:8/-1;align-self:end}
+.people{grid-column:1/-1;margin-top:72px;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.person figure{margin:0}
+.portrait{position:relative;aspect-ratio:4/5;border:1px solid var(--line);overflow:hidden;background:radial-gradient(80% 60% at 50% 40%,#1b1814,#0f0d0b)}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%}
+.portrait .ini{position:absolute;left:24px;bottom:56px;font:300 italic clamp(72px,8vw,128px)/.8 var(--f-display)}
+.portrait figcaption{position:absolute;left:24px;bottom:22px}
+.person h3{margin:22px 0 6px;font-size:clamp(30px,2.8vw,40px);font-weight:300}
+
+/* Отзывы */
+.rev h2{grid-column:1/span 6}
+.rev-list{grid-column:1/-1;margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.rev-list blockquote{margin:0;padding:36px 32px 36px 0;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;gap:40px}
+.rev-list blockquote + blockquote{padding-left:32px}
+.rev-list blockquote:last-child{border-right:0}
+.rev-list p{font:300 clamp(22px,1.9vw,28px)/1.3 var(--f-display)}
+.rev-list footer{display:flex;align-items:center;gap:14px}
+.rev-list footer::before{content:"";width:24px;height:1px;background:var(--champagne)}
+.rev .note{grid-column:1/-1}
+
+/* Сертификат */
+.gift-card{grid-column:1/span 6;position:relative;aspect-ratio:1.6/1;border:1px solid var(--line-strong);overflow:hidden;padding:28px;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(135deg,#1c1916 0%,#100e0c 55%,#1a1612 100%)}
+.gift-card::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(234,215,180,.10) 45%,transparent 60%);transform:translateX(-60%);animation:sheen 9s var(--ease) infinite}
+@keyframes sheen{0%,40%{transform:translateX(-70%)}80%,100%{transform:translateX(70%)}}
+.gift-card .logo{font-size:18px}
+.gift-card .val{font:300 clamp(48px,6vw,88px)/1 var(--f-display)}
+.gift-card .row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;position:relative}
+.gift-form{grid-column:8/-1;align-self:center}
+.gift-form h2{margin-bottom:20px}
+fieldset{border:0;margin:28px 0 0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:12px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt span{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid var(--line-strong);font-variant-numeric:tabular-nums;cursor:pointer;transition:all .3s;font-size:15px}
+.opt input:checked + span{border-color:var(--champagne);background:rgba(203,176,138,.08)}
+.opt input:focus-visible + span{outline:1px solid var(--champagne);outline-offset:3px}
+.field{display:grid;gap:8px;margin-top:20px}
+.field input,.field select{width:100%;min-height:50px;background:transparent;border:0;border-bottom:1px solid var(--line-strong);padding:10px 0;font-size:17px;border-radius:0;color-scheme:dark;transition:border-color .3s}
+.field select option{background:var(--graphite);color:var(--bone)}
+.field input:focus,.field select:focus{outline:none;border-bottom-color:var(--champagne)}
+.field input::placeholder{color:#8e877b}
+.form-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:28px}
+
+/* FAQ */
+.faq h2{grid-column:1/span 4}
+.faq-list{grid-column:6/-1;border-top:1px solid var(--line-strong)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item h3{font-size:inherit}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;padding:26px 0;cursor:pointer;text-align:left;font:300 clamp(24px,2.2vw,32px)/1.15 var(--f-display);color:var(--bone)}
+.faq-q .pm{position:relative;flex:0 0 18px;height:18px}
+.faq-q .pm::before,.faq-q .pm::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--champagne);transition:transform .5s var(--ease)}
+.faq-q .pm::after{transform:rotate(90deg)}
+.faq-q[aria-expanded="true"] .pm::after{transform:rotate(0)}
+.faq-a{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .5s var(--ease),visibility 0s .5s}
+.faq-a.open{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .5s var(--ease),visibility 0s}
+.faq-a > div{overflow:hidden}
+.faq-a p{padding:0 48px 28px 0;color:#d6cfc3;max-width:60ch}
+.faq-a .mono{display:block;margin-top:8px}
+
+/* Контакты */
+.cont h2{grid-column:1/span 6}
+.cont-info{grid-column:1/span 5;margin-top:56px}
+.cont-info dl{margin:0;border-top:1px solid var(--line)}
+.cont-info div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+.cont-info dd{margin:0;font-size:17px}
+.cont-info a{border-bottom:1px solid var(--line-strong);transition:border-color .3s}
+.cont-info a:hover{border-color:var(--champagne)}
+.map{margin-top:24px;min-height:260px}
+.map svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.book{grid-column:7/-1;margin-top:56px;padding:clamp(24px,3vw,48px);border:1px solid var(--line-strong);background:linear-gradient(180deg,rgba(236,230,219,.025),transparent)}
+.book h3{font-size:clamp(32px,3vw,44px);font-weight:300;margin:12px 0 8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.fine{margin-top:16px;font-size:12px;color:var(--ash)}
+
+/* Подвал */
+.footer{border-top:1px solid var(--line);padding:56px 0 40px}
+.footer .wrap{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);row-gap:32px}
+.footer .big{grid-column:1/-1;font:300 clamp(64px,15vw,240px)/.8 var(--f-display);letter-spacing:.06em;white-space:nowrap;overflow:hidden}
+.footer .links{grid-column:1/span 6;display:flex;flex-wrap:wrap;gap:12px 28px;font-size:13px;color:var(--ash)}
+.footer .links a:hover{color:var(--bone)}
+.footer .disc{grid-column:7/-1;text-align:right}
+
+/* Адаптив */
+@media (max-width:1100px){
+  .phone{display:none}
+  .nav ul{gap:20px}
+}
+@media (max-width:960px){
+  .burger{display:inline-flex;align-items:center}
+  .nav{position:absolute;left:0;right:0;top:100%;background:rgba(13,12,11,.97);border-bottom:1px solid var(--line);display:none}
+  .nav.open{display:block}
+  .nav ul{flex-direction:column;gap:0;padding:8px var(--gutter) 20px}
+  .nav a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;color:var(--bone)}
+  .header .btn{margin-left:auto}
+  .hero-sub{grid-column:1/span 9}
+  .phil h2,.pains h2,.prog-head h2,.elem h2,.visit h2,.found h2,.rev h2,.cont h2{grid-column:1/-1}
+  .pains .lead,.prog-head .lead,.elem .lead,.found .lead{grid-column:1/-1;margin-top:28px}
+  .phil .body,.phil .tenets{grid-column:1/-1}
+  .phil .window{grid-column:1/-1;grid-row:auto;min-height:340px}
+  .pain-list{grid-template-columns:repeat(2,1fr)}
+  .p-info,.p-score{grid-column:1/-1}
+  .p-score{margin-top:48px}
+  .subs-head,.tbl-wrap{grid-column:1/-1}
+  .tbl-wrap{margin-top:32px}
+  .el-list{grid-template-columns:repeat(2,1fr)}
+  .el-list li{padding-left:24px!important;border-bottom:1px solid var(--line)}
+  .el-list li:nth-child(odd){padding-left:0!important}
+  .el-list li:nth-child(2){border-right:0}
+  .rule p.big,.rule .pairs{grid-column:1/-1}
+  .rule .pairs{margin-top:28px}
+  .steps{grid-template-columns:repeat(2,1fr);row-gap:48px}
+  .rev-list{grid-template-columns:1fr}
+  .rev-list blockquote,.rev-list blockquote + blockquote{padding:32px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .gift-card,.gift-form{grid-column:1/-1}
+  .gift-form{margin-top:48px}
+  .faq h2,.faq-list{grid-column:1/-1}
+  .faq-list{margin-top:40px}
+  .cont-info,.book{grid-column:1/-1}
+  .footer .links,.footer .disc{grid-column:1/-1;text-align:left}
+}
+@media (max-width:640px){
+  body{font-size:15px}
+  .header .wrap{gap:12px;height:60px}
+  .logo{font-size:17px;letter-spacing:.28em;gap:8px}
+  .logo i{width:16px}
+  .header .btn{padding:0 14px;font-size:12px}
+  .burger{padding:0 10px}
+  .hero{min-height:calc(100svh - 110px)}
+  .hero-inner{padding-top:72px}
+  .hero h1 .l2{padding-left:0}
+  .hero-sub{grid-column:1/-1;font-size:16px;margin-top:28px}
+  .hero-actions .btn{flex:1 1 100%}
+  .hero-data{grid-template-columns:1fr 1fr;margin-top:44px}
+  .hero-data div{padding-bottom:12px}
+  .hint{display:none}
+  .pain-list{grid-template-columns:1fr}
+  .pain-list li{min-height:0;padding:24px 20px 28px}
+  .tab{padding:16px 16px}
+  .tab span{font-size:19px}
+  .score{height:88px}
+  .seg em{display:none}
+  .axis span:nth-child(even){display:none}
+  .legend li{grid-template-columns:28px 1fr auto;gap:10px}
+  .legend .t{grid-column:2;grid-row:2;margin-top:4px}
+  .legend .m{grid-column:3;grid-row:1}
+  thead{display:none}
+  tbody tr{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line);padding:18px 0}
+  tbody th{grid-column:1/-1;border:0;padding:0 0 14px}
+  tbody td{border:0;padding:0 8px 0 0;text-align:left;font-size:15px;white-space:normal}
+  tbody td::before{content:attr(data-l);display:block;font:500 10px/1.4 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:6px}
+  tbody td.na{grid-column:1/-1}
+  tbody td.na::before{display:none}
+  .extra{grid-template-columns:1fr}
+  .el-list{grid-template-columns:1fr}
+  .el-list li{padding:28px 0!important;border-right:0}
+  .el-list svg{margin-bottom:24px}
+  .steps{grid-template-columns:1fr;row-gap:40px}
+  .steps::before{left:7px;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .steps li{padding:0 0 0 40px}
+  .people{grid-template-columns:1fr;row-gap:48px}
+  .gift-card{aspect-ratio:auto;min-height:220px;padding:22px}
+  .two{grid-template-columns:1fr}
+  .cont-info div{grid-template-columns:1fr;gap:4px}
+  .sec-cta .btn,.form-actions .btn,.quiz .btn{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .window::before,.gift-card::before{animation:none!important}
+  .playhead{display:none}
+}
+.sec{content-visibility:auto;contain-intrinsic-size:auto 900px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+<div class="concept" role="note">Концепт редизайна 1 · «Монолит» · не является действующим сайтом</div>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="IN FLOW — на главную"><span>IN</span><i aria-hidden="true"></i><span>FLOW</span></a>
+    <nav class="nav" id="nav" aria-label="Основное меню">
+      <ul>
+        <li><a href="#programs">Программы</a></li>
+        <li><a href="#elements">Стихии</a></li>
+        <li><a href="#about">О студии</a></li>
+        <li><a href="#gift">Сертификаты</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+    <a class="phone num" href="tel:+79934833090">+7 (993) 483-30-90</a>
+    <a class="btn" href="#book">Записаться</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="nav">Меню</button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <p class="mono hint" id="hint" aria-hidden="true">Проведите курсором — поток откликнется</p>
+  <div class="wrap hero-inner">
+    <div class="grid">
+      <p class="mono hero-over">Пространство души и тела · Санкт-Петербург</p>
+      <h1 id="hero-title">Состояние <span class="l2"><em class="metal">потока</em></span></h1>
+      <p class="hero-sub">Авторские программы из дыхательных практик, потокового массажа, звука, тепла и чайной церемонии. Один визит длится от 90 минут до 3,5 часов.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#book">Записаться <span class="arr" aria-hidden="true"></span></a>
+        <a class="btn ghost" href="#elements">Узнать свою стихию</a>
+      </div>
+    </div>
+    <div class="hero-data mono">
+      <div><b class="num">90–210</b>минут визит</div>
+      <div><b class="num">4–6</b>практик подряд</div>
+      <div><b class="num">10:00–23:00</b>ежедневно</div>
+      <div><b class="num">59.95° N</b>30.31° E · Петроградская</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec phil" id="about" aria-labelledby="phil-title">
+  <div class="wrap grid">
+    <p class="mono label">Философия</p>
+    <h2 id="phil-title">Счастье — это <em>состояние</em></h2>
+    <div class="body">
+      <p class="lead">Свобода, удовлетворённость, гармония с собой и миром. Мы соединяем практики Запада и Востока.</p>
+      <p class="muted">Работаем с телом, чтобы освободить внимание. Работаем с вниманием, чтобы тело отпустило напряжение.</p>
+    </div>
+    <figure class="window" aria-label="Место для фотографии пространства студии">
+      <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span>
+      <figcaption class="mono">Здесь фото пространства</figcaption>
+    </figure>
+    <dl class="tenets">
+      <div><dt class="mono">Тело</dt><dd>Потоковый массаж, тепло ИК-сауны, телесные практики.</dd></div>
+      <div><dt class="mono">Дыхание</dt><dd>Дыхательные практики и медитации, которые замедляют ритм.</dd></div>
+      <div><dt class="mono">Звук</dt><dd>Поющие чаши и тишина между практиками.</dd></div>
+      <div><dt class="mono">Ритуал</dt><dd>Чайная церемония в начале и в конце каждого визита.</dd></div>
+    </dl>
+    <div class="sec-cta">
+      <p>Первый визит — ознакомительная программа, 90 минут.</p>
+      <a class="btn ghost" href="#book">Записаться <span class="arr" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec pains" aria-labelledby="pains-title">
+  <div class="wrap grid">
+    <p class="mono label">Узнаёте себя</p>
+    <h2 id="pains-title">Когда хочется <em>остановиться</em></h2>
+    <p class="lead">Программа In Flow — от полутора до трёх с половиной часов, в которые можно ничего не решать.</p>
+    <ul class="pain-list">
+      <li><span aria-hidden="true"></span>Постоянный стресс и спешка</li>
+      <li><span aria-hidden="true"></span>Перенасыщение информацией</li>
+      <li><span aria-hidden="true"></span>Не хватает нежности к себе</li>
+      <li><span aria-hidden="true"></span>Ощущение, что жизнь идёт по кругу</li>
+      <li><span aria-hidden="true"></span>Хочется понять себя</li>
+      <li><span aria-hidden="true"></span>Тоска по новому опыту</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="programs" aria-labelledby="prog-title">
+  <div class="wrap grid">
+    <p class="mono label">Программы</p>
+    <div class="prog-head grid" style="grid-column:1/-1">
+      <h2 id="prog-title">Партитура <em>визита</em></h2>
+      <p class="lead">Каждая программа — последовательность практик. Выберите программу и посмотрите, как пройдёт ваш визит, минута за минутой.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Программы студии" id="tabs"></div>
+
+    <div class="panel" role="tabpanel" id="panel" tabindex="0">
+      <div class="p-info fade" id="pInfo">
+        <p class="mono" id="pMeta"></p>
+        <h3 id="pName"></h3>
+        <p class="idea" id="pIdea"></p>
+        <div class="price">
+          <p class="mono">1 сеанс</p>
+          <b class="num metal" id="pPrice"></b>
+        </div>
+        <a class="btn" href="#book" id="pBook">Записаться на программу <span class="arr" aria-hidden="true"></span></a>
+      </div>
+      <div class="p-score">
+        <div class="scen" id="scen"></div>
+        <div class="score" id="score" aria-hidden="true"><div class="playhead" id="playhead"></div></div>
+        <div class="axis" id="axis" aria-hidden="true"></div>
+        <div class="range" aria-hidden="true"><div id="range"></div></div>
+        <div class="score-foot">
+          <p class="mono" id="pTotal"></p>
+          <p class="mono">Шкала 0–210 мин · длительность практик ориентировочная</p>
+        </div>
+        <ol class="legend fade" id="legend" aria-label="Сценарий визита"></ol>
+        <p class="note" id="pNote"></p>
+      </div>
+    </div>
+
+    <div class="subs">
+      <div class="subs-head">
+        <p class="mono">Абонементы</p>
+        <h3>Сравнить <em>в одном месте</em></h3>
+        <p class="muted">Рекомендуемый курс — 5–7 визитов. Абонемент закрепляет за вами программу и стоимость.</p>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <caption class="sr">Стоимость программ: разовый визит и абонементы на 5 и 7 сеансов</caption>
+          <thead><tr><th scope="col">Программа</th><th scope="col">1 сеанс</th><th scope="col">5 сеансов</th><th scope="col">7 сеансов</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Ознакомительная<small>90 мин</small></th><td data-l="1 сеанс">6 000 ₽</td><td class="na" colspan="2">Разовый визит для знакомства, абонемента нет</td></tr>
+            <tr><th scope="row">В стихии<small>140–160 мин</small></th><td data-l="1 сеанс">от 10 000 ₽</td><td data-l="5 сеансов">от 45 000 ₽<small>9 000 ₽ / визит</small></td><td data-l="7 сеансов">от 60 000 ₽<small>≈ 8 570 ₽ / визит</small></td></tr>
+            <tr><th scope="row">Инь-Ян: Женское<small>120–210 мин</small></th><td data-l="1 сеанс">от 10 000 ₽</td><td data-l="5 сеансов">от 45 000 ₽<small>9 000 ₽ / визит</small></td><td data-l="7 сеансов">от 60 000 ₽<small>≈ 8 570 ₽ / визит</small></td></tr>
+            <tr><th scope="row">В Аюрведе: Вата<small>160–210 мин</small></th><td data-l="1 сеанс">от 10 000 ₽</td><td data-l="5 сеансов">от 45 000 ₽<small>9 000 ₽ / визит</small></td><td data-l="7 сеансов">от 60 000 ₽<small>≈ 8 570 ₽ / визит</small></td></tr>
+            <tr><th scope="row">В восприятии<small>150–210 мин</small></th><td class="na" colspan="3">Стоимость по запросу, состав программы уточняется</td></tr>
+          </tbody>
+        </table>
+        <div class="extra">
+          <div>
+            <p class="mono">Отдельная услуга · 60 мин</p>
+            <p style="font:300 28px/1.15 var(--f-display);margin-top:8px">Испанский массаж лица</p>
+          </div>
+          <b class="num">2 500 ₽</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-cta">
+      <p>Не знаете, с чего начать? Администратор поможет выбрать.</p>
+      <a class="btn ghost" href="#book">Записаться <span class="arr" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec elem" id="elements" aria-labelledby="elem-title">
+  <div class="wrap grid">
+    <p class="mono label">Четыре стихии</p>
+    <h2 id="elem-title">Какая стихия <em>ресурсная</em> для вас</h2>
+    <p class="lead">Земля, Вода, Огонь, Воздух — и пятая, Эфир. Каждая стихия задаёт характер программы.</p>
+    <ul class="el-list">
+      <li>
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M6 10 L50 10 L28 48 Z"/><path d="M14 24 L42 24"/></svg>
+        <h3>Земля</h3><p class="mono">Опора · устойчивость · телесность</p>
+        <p>Для дней, когда почва уходит из-под ног.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M6 10 L50 10 L28 48 Z"/></svg>
+        <h3>Вода</h3><p class="mono">Текучесть · чувства · мягкость</p>
+        <p>Чтобы смягчиться и позволить себе чувствовать.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M6 46 L50 46 L28 8 Z"/></svg>
+        <h3>Огонь</h3><p class="mono">Энергия · воля · тепло</p>
+        <p>Когда нужно вернуть силы и желание действовать.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M6 46 L50 46 L28 8 Z"/><path d="M14 32 L42 32"/></svg>
+        <h3>Воздух</h3><p class="mono">Лёгкость · ясность · свобода</p>
+        <p>Чтобы освободить голову и увидеть яснее.</p>
+      </li>
+    </ul>
+    <div class="rule">
+      <p class="big">Правило студии: если стихии не хватает — выбираем программу этой стихии. Если её избыток — <em>противоположной</em>.</p>
+      <div class="pairs" aria-label="Противоположные стихии">
+        <div><span>Земля</span><i aria-hidden="true"></i><span>Воздух</span></div>
+        <div><span>Вода</span><i aria-hidden="true"></i><span>Огонь</span></div>
+      </div>
+    </div>
+    <div class="quiz">
+      <button class="btn" type="button" id="quizBtn">Пройти квиз · 9 вопросов <span class="arr" aria-hidden="true"></span></button>
+      <p>Квиз определит ресурсную стихию и подскажет программу, на которую можно сразу записаться.</p>
+      <p class="status" id="quizStatus" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec visit" aria-labelledby="visit-title">
+  <div class="wrap grid">
+    <p class="mono label">Как проходит визит</p>
+    <h2 id="visit-title">Без спешки, <em>от начала до конца</em></h2>
+    <ol class="steps">
+      <li><p class="mono">Шаг 1</p><h3>Приходите заранее</h3><p>За 15–20 минут до начала: переодеться и выдохнуть.</p></li>
+      <li><p class="mono">Шаг 2</p><h3>Чай и разговор</h3><p>Короткий разговор о вашем состоянии и о том, чего хочется сегодня.</p></li>
+      <li><p class="mono">Шаг 3</p><h3>Практики программы</h3><p>Одна за другой, в заданной последовательности, без спешки.</p></li>
+      <li><p class="mono">Шаг 4</p><h3>Чайная церемония</h3><p>Время прийти в себя, прежде чем вернуться в город.</p></li>
+    </ol>
+    <div class="course">
+      <b class="num">5–7</b>
+      <p class="muted" style="max-width:40ch">визитов — рекомендуемый курс. Первый визит уже даёт почувствовать разницу.</p>
+    </div>
+    <div class="sec-cta">
+      <p>Выберите удобный день — остальное мы подготовим.</p>
+      <a class="btn ghost" href="#book">Записаться <span class="arr" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec found" aria-labelledby="found-title">
+  <div class="wrap grid">
+    <p class="mono label">Основатели</p>
+    <h2 id="found-title">Люди, которые <em>держат пространство</em></h2>
+    <p class="lead">In Flow — авторская студия. Программы и техника потокового массажа созданы основателями.</p>
+    <div class="people">
+      <div class="person">
+        <figure class="portrait" aria-label="Место для фотографии Анастасии Зайки">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="p1"></svg>
+          <span class="ini metal" aria-hidden="true">АЗ</span>
+          <figcaption class="mono">Фото основателя</figcaption>
+        </figure>
+        <h3>Анастасия Зайка</h3>
+        <p class="mono">Сооснователь студии</p>
+      </div>
+      <div class="person">
+        <figure class="portrait" aria-label="Место для фотографии Сергея Игнатёнка">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="p2"></svg>
+          <span class="ini metal" aria-hidden="true">СИ</span>
+          <figcaption class="mono">Фото основателя</figcaption>
+        </figure>
+        <h3>Сергей Игнатёнок</h3>
+        <p class="mono">Сооснователь студии</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec rev" aria-labelledby="rev-title">
+  <div class="wrap grid">
+    <p class="mono label">Отзывы гостей</p>
+    <h2 id="rev-title">Что остаётся <em>после</em></h2>
+    <div class="rev-list">
+      <blockquote><p>Ушла с ощущением, что у меня появилось время. Тихо, бережно и без лишних слов.</p><footer class="mono">Евгения</footer></blockquote>
+      <blockquote><p>Всё идёт одно за другим, и ни о чём не нужно думать. Чайная церемония в конце — отдельное удовольствие.</p><footer class="mono">Виктория</footer></blockquote>
+      <blockquote><p>Подарила сертификат маме, а потом пришла сама. Очень спокойное пространство.</p><footer class="mono">Мария</footer></blockquote>
+    </div>
+    <p class="note">Макет: тексты отзывов переносятся с действующего сайта</p>
+    <div class="sec-cta">
+      <p>Ваш первый визит — 90 минут.</p>
+      <a class="btn ghost" href="#book">Записаться <span class="arr" aria-hidden="true"></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="gift" aria-labelledby="gift-title">
+  <div class="wrap grid">
+    <p class="mono label">Подарочный сертификат</p>
+    <div class="gift-card" aria-hidden="true">
+      <div class="row"><span class="logo"><span>IN</span><i></i><span>FLOW</span></span><span class="mono">Сертификат</span></div>
+      <div class="row"><span class="val num metal" id="giftVal">15 000 ₽</span><span class="mono">На любую программу</span></div>
+    </div>
+    <form class="gift-form" id="giftForm" novalidate>
+      <h2 id="gift-title">Подарить <em>время</em></h2>
+      <p class="muted">Сертификат действует на любую программу и услугу студии.</p>
+      <fieldset>
+        <legend class="mono">Номинал</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="nom" value="10 000 ₽"><span class="num">10 000 ₽</span></label>
+          <label class="opt"><input type="radio" name="nom" value="15 000 ₽" checked><span class="num">15 000 ₽</span></label>
+          <label class="opt"><input type="radio" name="nom" value="20 000 ₽"><span class="num">20 000 ₽</span></label>
+          <label class="opt"><input type="radio" name="nom" value="custom"><span>Свой номинал</span></label>
+        </div>
+      </fieldset>
+      <div class="field" id="customField" hidden>
+        <label class="mono" for="customSum">Сумма, ₽</label>
+        <input id="customSum" name="sum" type="number" inputmode="numeric" min="1000" step="500" placeholder="Например, 12 000">
+      </div>
+      <div class="form-actions">
+        <button class="btn" type="submit">Подарить <span class="arr" aria-hidden="true"></span></button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="sec faq" aria-labelledby="faq-title">
+  <div class="wrap grid">
+    <p class="mono label">Вопросы</p>
+    <h2 id="faq-title">Перед <em>первым визитом</em></h2>
+    <div class="faq-list" id="faq">
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="a1" id="q1">За сколько приходить?<span class="pm" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="a1" role="region" aria-labelledby="q1"><div><p>За 15–20 минут: переодеться, выпить чай и настроиться.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="a2" id="q2">Сколько визитов нужно?<span class="pm" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="a2" role="region" aria-labelledby="q2"><div><p>Эффект чувствуется после первого визита; для устойчивого результата рекомендуем курс из 5–7.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="a3" id="q3">Можно ли беременным?<span class="pm" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="a3" role="region" aria-labelledby="q3"><div><p>Часть практик подходит в первом и втором триместре. Перед записью проконсультируйтесь с врачом и предупредите администратора.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="a4" id="q4">Что взять с собой?<span class="pm" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="a4" role="region" aria-labelledby="q4"><div><p>Ничего: халат, полотенца и тапочки мы даём.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="a5" id="q5">Можно ли перенести визит?<span class="pm" aria-hidden="true"></span></button></h3>
+        <div class="faq-a" id="a5" role="region" aria-labelledby="q5"><div><p>Да, предупредите нас не позднее чем за 24 часа.<span class="mono">Макет: условие уточняется у студии</span></p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec cont" id="contacts" aria-labelledby="cont-title">
+  <div class="wrap grid">
+    <p class="mono label">Контакты и запись</p>
+    <h2 id="cont-title">Ждём вас <em>на Петроградской</em></h2>
+    <div class="cont-info">
+      <dl>
+        <div><dt class="mono">Адрес</dt><dd>Санкт-Петербург, ул. 1-я Никитинская, 30, лит. А</dd></div>
+        <div><dt class="mono">Часы</dt><dd class="num">Ежедневно 10:00–23:00</dd></div>
+        <div><dt class="mono">Телефон</dt><dd><a class="num" href="tel:+79934833090">+7 (993) 483-30-90</a></dd></div>
+        <div><dt class="mono">Telegram</dt><dd><a href="https://t.me/inflowing_ru" rel="noopener">@inflowing_ru</a></dd></div>
+        <div><dt class="mono">VK</dt><dd><a href="https://vk.com/in_flowing" rel="noopener">in_flowing</a></dd></div>
+      </dl>
+      <figure class="window map" aria-label="Место для карты проезда">
+        <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g fill="none" stroke="rgba(236,230,219,.16)" stroke-width="1">
+            <path d="M-10 210 C120 190 210 230 330 200 S520 150 620 170"/>
+            <path d="M-10 90 C140 110 260 60 380 80 S540 120 620 100"/>
+            <path d="M120 -10 L170 310"/><path d="M300 -10 L330 310"/><path d="M460 -10 L430 310"/>
+            <path d="M-10 150 L620 140" stroke-dasharray="2 6"/>
+          </g>
+          <g stroke="#cbb08a" fill="none"><circle cx="318" cy="138" r="5"/><circle cx="318" cy="138" r="18" opacity=".5"/><path d="M318 104 V124 M318 152 V172 M284 138 H304 M332 138 H352" opacity=".7"/></g>
+        </svg>
+        <figcaption class="mono">Здесь карта · 59.95° N · 30.31° E</figcaption>
+      </figure>
+    </div>
+
+    <form class="book" id="book" novalidate aria-labelledby="book-title">
+      <p class="mono">Онлайн-запись · YCLIENTS</p>
+      <h3 id="book-title">Записаться <em>на визит</em></h3>
+      <p class="muted">Администратор перезвонит, уточнит время и ответит на вопросы.</p>
+      <div class="two">
+        <div class="field"><label class="mono" for="bName">Имя</label><input id="bName" name="name" autocomplete="given-name" required placeholder="Как к вам обращаться"></div>
+        <div class="field"><label class="mono" for="bPhone">Телефон</label><input id="bPhone" name="phone" type="tel" autocomplete="tel" required placeholder="+7"></div>
+      </div>
+      <div class="field">
+        <label class="mono" for="bProg">Программа</label>
+        <select id="bProg" name="program">
+          <option>Помогите выбрать</option>
+          <option>Ознакомительная · 90 мин · 6 000 ₽</option>
+          <option>В стихии · 140–160 мин · от 10 000 ₽</option>
+          <option>Инь-Ян: Женское · 120–210 мин · от 10 000 ₽</option>
+          <option>В Аюрведе: Вата · 160–210 мин · от 10 000 ₽</option>
+          <option>В восприятии · 150–210 мин · по запросу</option>
+          <option>Испанский массаж лица · 60 мин · 2 500 ₽</option>
+        </select>
+      </div>
+      <div class="field"><label class="mono" for="bDate">Желаемая дата</label><input id="bDate" name="date" type="date"></div>
+      <div class="form-actions">
+        <button class="btn" type="submit">Записаться <span class="arr" aria-hidden="true"></span></button>
+        <p class="status" role="status" aria-live="polite"></p>
+      </div>
+      <p class="fine">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="big metal" aria-hidden="true">IN FLOW</p>
+    <div class="links">
+      <span>© IN FLOW, 2026</span>
+      <a href="#">Политика конфиденциальности</a>
+      <a href="#">Пользовательское соглашение</a>
+    </div>
+    <p class="mono disc">Практики студии не являются медицинскими услугами</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const reduceMQ = matchMedia('(prefers-reduced-motion: reduce)');
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  const burger = $('.burger'), nav = $('#nav');
+  burger.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') !== 'true';
+    burger.setAttribute('aria-expanded', open);
+    nav.classList.toggle('open', open);
+  });
+  $$('a', nav).forEach(a => a.addEventListener('click', () => {
+    burger.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('open');
+  }));
+
+  const programs = [
+    { name: 'Ознакомительная', tag: 'знакомство', dur: '90 мин', min: 90, max: 90, price: '6 000 ₽',
+      idea: 'Чувственное знакомство с собой и пространством. Два сценария на выбор.',
+      scen: [
+        { name: 'В тонусе', steps: [['ИК-сауна', 15], ['Динамическая медитация', 15], ['Потоковый массаж', 45], ['Чайная церемония', 15]] },
+        { name: 'В расслаблении', steps: [['Дыхательная практика', 15], ['Звучание поющей чаши', 10], ['Потоковый массаж', 50], ['Чайная церемония', 15]] }
+      ] },
+    { name: 'В стихии', tag: 'четыре стихии', dur: '140–160 мин', min: 140, max: 160, price: 'от 10 000 ₽',
+      idea: 'Контакт с собой через четыре первоэлемента: Землю, Воду, Огонь и Воздух.',
+      note: 'Показан сценарий стихии Земля. У Воды, Огня и Воздуха — свои сценарии.',
+      scen: [
+        { name: 'Земля', steps: [['Дыхательная практика', 15], ['Эмбодимент', 20], ['ИК-сауна', 20], ['Массаж горячими травяными мешочками', 50], ['Чайная церемония', 20]] }
+      ] },
+    { name: 'Инь-Ян: Женское', tag: 'гармония начал', dur: '120–210 мин', min: 120, max: 210, price: 'от 10 000 ₽',
+      idea: 'Гармония мужского и женского начал. Два пути: телесный и психосоматический.',
+      scen: [
+        { name: 'Телесный', steps: [['Скрабирование', 20], ['Душ', 10], ['Аромамассаж', 50], ['Испанский массаж лица', 30], ['Чайная церемония', 20]] },
+        { name: 'Психосоматический', steps: [['Медитативная практика', 15], ['Женская практика', 30], ['Душ', 10], ['Массаж головы (широдхара)', 30], ['Потоковый массаж', 50], ['Чайная церемония', 20]] }
+      ] },
+    { name: 'В Аюрведе: Вата', tag: 'аюрведа', dur: '160–210 мин', min: 160, max: 210, price: 'от 10 000 ₽',
+      idea: 'Баланс тела, ума и эмоций по аюрведической традиции.',
+      scen: [
+        { name: 'Вата', steps: [['Дыхательная практика', 15], ['Потоковый массаж', 50], ['Душ', 10], ['Массаж травяными мешочками', 40], ['Телесно-ориентированная практика', 30], ['Чайная церемония', 20]] }
+      ] },
+    { name: 'В восприятии', tag: 'чувства', dur: '150–210 мин', min: 150, max: 210, price: 'по запросу',
+      idea: 'Новые внутренние настройки через отключение или усиление одного из чувств.',
+      note: 'Состав программы уточняется — администратор расскажет подробности.',
+      scen: [{ name: '', steps: [] }] }
+  ];
+  const SCALE = 210, POOL = 6;
+  const plural = n => (n % 10 === 1 && n % 100 !== 11) ? 'практика'
+    : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20)) ? 'практики' : 'практик';
+  const clock = m => Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0');
+
+  const tabsEl = $('#tabs'), panel = $('#panel'), score = $('#score'), legend = $('#legend'),
+        scenEl = $('#scen'), info = $('#pInfo'), playhead = $('#playhead');
+  programs.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.className = 'tab'; b.id = 'tab-' + i;
+    b.setAttribute('aria-controls', 'panel');
+    b.innerHTML = `<span>${p.name}</span><small class="num">${p.dur.toUpperCase()}</small>`;
+    b.addEventListener('click', () => select(i));
+    tabsEl.appendChild(b);
+  });
+  const tabs = $$('.tab', tabsEl);
+  tabsEl.addEventListener('keydown', e => {
+    const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    let i = cur;
+    if (k) i = (cur + k + tabs.length) % tabs.length;
+    else if (e.key === 'Home') i = 0;
+    else if (e.key === 'End') i = tabs.length - 1;
+    else return;
+    e.preventDefault(); select(i); tabs[i].focus();
+  });
+
+  const segs = [];
+  for (let i = 0; i < POOL; i++) {
+    const s = document.createElement('div');
+    s.className = 'seg'; s.innerHTML = '<i></i><em></em>';
+    s.addEventListener('mouseenter', () => highlight(i));
+    s.addEventListener('mouseleave', () => highlight(-1));
+    score.appendChild(s); segs.push(s);
+  }
+  $('#axis').innerHTML = Array.from({ length: 8 }, (_, i) => `<span class="num" style="left:${(i * 30 / SCALE) * 100}%">${i * 30}</span>`).join('');
+
+  function highlight(i) {
+    segs.forEach((s, j) => s.classList.toggle('hl', j === i));
+    $$('li', legend).forEach((l, j) => l.classList.toggle('hl', j === i));
+  }
+
+  let cur = 0, sc = 0, swapTimer = 0;
+  function select(i) {
+    if (i === cur && tabs[i].getAttribute('aria-selected') === 'true') return;
+    cur = i; sc = 0;
+    tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; });
+    panel.setAttribute('aria-labelledby', tabs[i].id);
+    render(true);
+  }
+
+  function render(withText) {
+    const p = programs[cur], s = p.scen[sc], steps = s.steps;
+    const total = steps.reduce((a, b) => a + b[1], 0);
+
+    let t = 0;
+    segs.forEach((el, j) => {
+      el.className = 'seg';
+      el.style.transitionDelay = (j * 45) + 'ms';
+      if (steps.length === 0 && j === 0) {
+        el.classList.add('on', 'tbd');
+        el.style.left = '0%';
+        el.style.width = (p.min / SCALE * 100) + '%';
+        el.querySelector('i').textContent = '—';
+        el.querySelector('em').textContent = 'состав уточняется';
+        el.title = 'Состав уточняется';
+      } else if (j < steps.length) {
+        const [name, m] = steps[j];
+        el.classList.add('on');
+        if (/чайная/i.test(name)) el.classList.add('tea');
+        el.style.left = (t / SCALE * 100) + '%';
+        el.style.width = (m / SCALE * 100) + '%';
+        el.querySelector('i').textContent = String(j + 1);
+        el.querySelector('em').textContent = m + '′';
+        el.title = name + ' · ' + m + ' мин';
+        t += m;
+      } else {
+        el.style.left = (t / SCALE * 100) + '%';
+        el.style.width = '0%';
+        el.title = '';
+      }
+    });
+
+    const r = $('#range');
+    r.style.left = (p.min / SCALE * 100) + '%';
+    r.style.width = Math.max(.6, (p.max - p.min) / SCALE * 100) + '%';
+
+    if (!reduceMQ.matches && steps.length) {
+      playhead.classList.remove('run');
+      void playhead.offsetWidth;
+      playhead.style.setProperty('--to', (total / SCALE * 100) + '%');
+      playhead.classList.add('run');
+    }
+
+    const fill = () => {
+      const n = steps.length;
+      $('#pMeta').textContent = [p.dur, n ? n + ' ' + plural(n) : 'состав уточняется', p.tag].join(' · ').toUpperCase();
+      $('#pName').textContent = p.name;
+      $('#pIdea').textContent = p.idea;
+      $('#pPrice').textContent = p.price;
+      $('#pNote').textContent = p.note || '';
+      $('#pTotal').textContent = n ? 'Сценарий: ' + total + ' мин · программа ' + p.dur : 'Программа ' + p.dur;
+      legend.innerHTML = n ? (() => { let a = 0; return steps.map(([name, m], j) => {
+        const row = `<li><span class="n num">${String(j + 1)}</span><span>${name}</span><span class="t num">${clock(a)}–${clock(a + m)}</span><span class="m num">${m} мин</span></li>`;
+        a += m; return row; }).join(''); })()
+        : '<li><span class="n">—</span><span>Состав программы уточняется</span><span class="t"></span><span class="m num">' + p.dur + '</span></li>';
+      $$('li', legend).forEach((li, j) => {
+        li.addEventListener('mouseenter', () => highlight(j));
+        li.addEventListener('mouseleave', () => highlight(-1));
+      });
+      scenEl.innerHTML = '';
+      if (p.scen.length > 1 || s.name) {
+        const lab = document.createElement('span'); lab.className = 'mono';
+        lab.textContent = p.scen.length > 1 ? 'Сценарий' : 'Пример';
+        scenEl.appendChild(lab);
+        p.scen.forEach((x, k) => {
+          const c = document.createElement('button');
+          c.type = 'button'; c.className = 'chip'; c.textContent = x.name;
+          c.setAttribute('aria-pressed', String(k === sc));
+          if (p.scen.length > 1) c.addEventListener('click', () => { if (k !== sc) { sc = k; render(false); scenEl.querySelectorAll('.chip')[k].focus(); } });
+          else c.disabled = true;
+          scenEl.appendChild(c);
+        });
+      }
+      info.classList.remove('out'); legend.classList.remove('out');
+    };
+
+    clearTimeout(swapTimer);
+    if (reduceMQ.matches) { fill(); return; }
+    if (withText) info.classList.add('out');
+    legend.classList.add('out');
+    swapTimer = setTimeout(fill, 260);
+  }
+  tabs.forEach((t, j) => { t.setAttribute('aria-selected', 'false'); t.tabIndex = j === 0 ? 0 : -1; });
+  cur = -1; select(0);
+
+  $$('.faq-q').forEach(q => q.addEventListener('click', () => {
+    const open = q.getAttribute('aria-expanded') !== 'true';
+    q.setAttribute('aria-expanded', String(open));
+    document.getElementById(q.getAttribute('aria-controls')).classList.toggle('open', open);
+  }));
+
+  const giftForm = $('#giftForm'), giftVal = $('#giftVal'), customField = $('#customField'), customSum = $('#customSum');
+  const fmt = n => n.toLocaleString('ru-RU').replace(/ | /g, ' ') + ' ₽';
+  giftForm.addEventListener('change', () => {
+    const v = giftForm.nom.value;
+    customField.hidden = v !== 'custom';
+    if (v === 'custom') {
+      const n = parseInt(customSum.value, 10);
+      giftVal.textContent = n > 0 ? fmt(n) : 'Ваш номинал';
+    } else giftVal.textContent = v;
+  });
+  customSum.addEventListener('input', () => giftForm.dispatchEvent(new Event('change')));
+
+  const demo = 'Демо: в рабочей версии заявка уйдёт в YCLIENTS';
+  [giftForm, $('#book')].forEach(f => f.addEventListener('submit', e => {
+    e.preventDefault();
+    f.querySelector('.status').textContent = demo;
+  }));
+  $('#quizBtn').addEventListener('click', () => {
+    $('#quizStatus').textContent = 'Демо: в рабочей версии здесь откроется квиз из 9 вопросов, а результат приведёт к записи на программу стихии';
+  });
+
+  const contour = (id, seed) => {
+    const svg = document.getElementById(id); let out = '';
+    for (let k = 0; k < 18; k++) {
+      const r = 30 + k * 13; let d = '';
+      for (let a = 0; a <= 64; a++) {
+        const th = a / 64 * Math.PI * 2;
+        const w = 1 + .08 * Math.sin(th * 3 + seed + k * .35) + .05 * Math.sin(th * 5 - seed * 2 + k * .2);
+        const x = 200 + Math.cos(th) * r * w * .82, y = 210 + Math.sin(th) * r * w;
+        d += (a ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+      }
+      out += `<path d="${d}Z" fill="none" stroke="${k % 5 === 0 ? 'rgba(203,176,138,.45)' : 'rgba(236,230,219,.10)'}" stroke-width="1"/>`;
+    }
+    svg.innerHTML = out;
+  };
+  contour('p1', 1.3); contour('p2', 4.1);
+
+  /* Hero: поток частиц по полю curl-noise */
+  const canvas = $('#flow'), hero = canvas.parentElement, ctx = canvas.getContext('2d', { alpha: false });
+  const perm = new Uint8Array(512);
+  {
+    const p = Array.from({ length: 256 }, (_, i) => i); let s = 1337;
+    for (let i = 255; i > 0; i--) { s = (s * 16807) % 2147483647; const j = s % (i + 1); [p[i], p[j]] = [p[j], p[i]]; }
+    for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
+  }
+  const fade = t => t * t * t * (t * (t * 6 - 15) + 10);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const grad = (h, x, y, z) => { h &= 15; const u = h < 8 ? x : y, v = h < 4 ? y : (h === 12 || h === 14 ? x : z); return ((h & 1) ? -u : u) + ((h & 2) ? -v : v); };
+  function noise(x, y, z) {
+    const X = Math.floor(x) & 255, Y = Math.floor(y) & 255, Z = Math.floor(z) & 255;
+    x -= Math.floor(x); y -= Math.floor(y); z -= Math.floor(z);
+    const u = fade(x), v = fade(y), w = fade(z);
+    const A = perm[X] + Y, AA = perm[A] + Z, AB = perm[A + 1] + Z, B = perm[X + 1] + Y, BA = perm[B] + Z, BB = perm[B + 1] + Z;
+    return lerp(lerp(lerp(grad(perm[AA], x, y, z), grad(perm[BA], x - 1, y, z), u),
+                     lerp(grad(perm[AB], x, y - 1, z), grad(perm[BB], x - 1, y - 1, z), u), v),
+                lerp(lerp(grad(perm[AA + 1], x, y, z - 1), grad(perm[BA + 1], x - 1, y, z - 1), u),
+                     lerp(grad(perm[AB + 1], x, y - 1, z - 1), grad(perm[BB + 1], x - 1, y - 1, z - 1), u), v), w);
+  }
+
+  const CELL = 24, BG = '#0d0c0b';
+  let W = 0, H = 0, dpr = 1, gw = 0, gh = 0, pot, vx, vy;
+  let N = 0, px, py, ox, oy, life, kind;
+  let running = false, visible = true, raf = 0, last = 0, time = Math.random() * 100;
+  const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999, a: 0, ta: 0 };
+  const weak = (navigator.hardwareConcurrency || 4) <= 4 || matchMedia('(pointer: coarse)').matches;
+  const TIER = weak ? .55 : 1;
+  let quality = 1, slow = 0, frames = 0;
+
+  function field(t) {
+    const sc = CELL / 340;
+    for (let j = 0; j < gh; j++) for (let i = 0; i < gw; i++) {
+      const x = i * sc, y = j * sc;
+      pot[j * gw + i] = noise(x, y, t) + .45 * noise(x * 2.3 + 17, y * 2.3 - 9, t * 1.4);
+    }
+    for (let j = 1; j < gh - 1; j++) for (let i = 1; i < gw - 1; i++) {
+      const k = j * gw + i;
+      vx[k] = (pot[k + gw] - pot[k - gw]);
+      vy[k] = -(pot[k + 1] - pot[k - 1]);
+    }
+  }
+  function sample(x, y) {
+    let gx = x / CELL, gy = y / CELL;
+    gx = Math.min(Math.max(gx, 1), gw - 2.001); gy = Math.min(Math.max(gy, 1), gh - 2.001);
+    const i = gx | 0, j = gy | 0, fx = gx - i, fy = gy - j, k = j * gw + i;
+    sx = lerp(lerp(vx[k], vx[k + 1], fx), lerp(vx[k + gw], vx[k + gw + 1], fx), fy);
+    sy = lerp(lerp(vy[k], vy[k + 1], fx), lerp(vy[k + gw], vy[k + gw + 1], fx), fy);
+  }
+  let sx = 0, sy = 0;
+
+  function spawn(i, anywhere) {
+    px[i] = anywhere ? Math.random() * W : -10 - Math.random() * 40;
+    py[i] = Math.random() * H;
+    ox[i] = px[i]; oy[i] = py[i];
+    life[i] = 160 + Math.random() * 420;
+  }
+
+  function resize() {
+    const r = hero.getBoundingClientRect();
+    W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    gw = Math.ceil(W / CELL) + 3; gh = Math.ceil(H / CELL) + 3;
+    pot = new Float32Array(gw * gh); vx = new Float32Array(gw * gh); vy = new Float32Array(gw * gh);
+    N = Math.round(Math.min(4200, W * H / 240) * TIER * quality);
+    slow = 0; frames = 0;
+    px = new Float32Array(N); py = new Float32Array(N); ox = new Float32Array(N); oy = new Float32Array(N);
+    life = new Float32Array(N); kind = new Uint8Array(N);
+    for (let i = 0; i < N; i++) { spawn(i, true); kind[i] = Math.random() < .12 ? 1 : 0; }
+    ctx.fillStyle = BG; ctx.fillRect(0, 0, W, H);
+    field(time);
+    if (reduceMQ.matches) drawStatic();
+  }
+
+  function step(dt) {
+    time += .0016 * dt;
+    if ((frames & 1) === 0) field(time);
+    mouse.x += (mouse.tx - mouse.x) * .12; mouse.y += (mouse.ty - mouse.y) * .12;
+    mouse.a += (mouse.ta - mouse.a) * .05;
+    const R = Math.min(260, W * .3), R2 = R * R, speed = 14, drift = .55;
+
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(13,12,11,0.085)';
+    ctx.fillRect(0, 0, W, H);
+
+    const paths = [new Path2D(), new Path2D()];
+    for (let i = 0; i < N; i++) {
+      sample(px[i], py[i]);
+      let ux = sx * speed + drift, uy = sy * speed;
+      if (mouse.a > .01) {
+        const dx = px[i] - mouse.x, dy = py[i] - mouse.y, d2 = dx * dx + dy * dy;
+        if (d2 < R2 && d2 > 1) {
+          const d = Math.sqrt(d2), f = (1 - d / R) * (1 - d / R) * mouse.a;
+          ux += (-dy / d * 3.2 + dx / d * .9) * f;
+          uy += (dx / d * 3.2 + dy / d * .9) * f;
+        }
+      }
+      ox[i] = px[i]; oy[i] = py[i];
+      px[i] += ux * dt; py[i] += uy * dt;
+      life[i] -= dt;
+      if (life[i] <= 0 || px[i] > W + 20 || px[i] < -60 || py[i] < -20 || py[i] > H + 20) {
+        spawn(i, life[i] <= 0);
+        continue;
+      }
+      const p = paths[kind[i]];
+      p.moveTo(ox[i], oy[i]); p.lineTo(px[i], py[i]);
+    }
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(236,230,219,0.30)'; ctx.stroke(paths[0]);
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = 'rgba(214,186,140,0.62)'; ctx.stroke(paths[1]);
+  }
+
+  function frame(now) {
+    if (!running) return;
+    const dt = Math.min(2.5, (now - (last || now)) / 16.667) || 1;
+    last = now;
+    frames++;
+    if (dt > 1.45) slow++;
+    if (frames % 90 === 0) {
+      if (slow > 45 && quality > .4) { quality *= .7; N = Math.max(600, Math.round(N * .7)); }
+      slow = 0;
+    }
+    step(dt);
+    raf = requestAnimationFrame(frame);
+  }
+  function start() {
+    if (running || reduceMQ.matches || !visible || document.hidden) return;
+    running = true; last = 0; raf = requestAnimationFrame(frame);
+  }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+
+  function drawStatic() {
+    ctx.fillStyle = BG; ctx.fillRect(0, 0, W, H);
+    field(time);
+    const seeds = Math.round(W * H / 1400);
+    const pBone = new Path2D(), pGold = new Path2D();
+    for (let s = 0; s < seeds; s++) {
+      let x = Math.random() * W, y = Math.random() * H;
+      const p = Math.random() < .1 ? pGold : pBone;
+      p.moveTo(x, y);
+      const len = 40 + Math.random() * 60;
+      for (let k = 0; k < len; k++) {
+        sample(x, y);
+        const ux = sx * 14 + .55, uy = sy * 14, m = Math.hypot(ux, uy) || 1;
+        x += ux / m * 2.4; y += uy / m * 2.4;
+        if (x < 0 || x > W || y < 0 || y > H) break;
+        p.lineTo(x, y);
+      }
+    }
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = 'rgba(236,230,219,0.10)'; ctx.stroke(pBone);
+    ctx.strokeStyle = 'rgba(214,186,140,0.28)'; ctx.stroke(pGold);
+  }
+
+  hero.addEventListener('pointermove', e => {
+    const r = canvas.getBoundingClientRect();
+    mouse.tx = e.clientX - r.left; mouse.ty = e.clientY - r.top;
+    if (mouse.a < .01) { mouse.x = mouse.tx; mouse.y = mouse.ty; }
+    mouse.ta = 1;
+  }, { passive: true });
+  hero.addEventListener('pointerleave', () => { mouse.ta = 0; });
+
+  new IntersectionObserver(es => {
+    visible = es[0].isIntersecting;
+    visible ? start() : stop();
+  }, { threshold: 0 }).observe(hero);
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+
+  let rzT = 0, lastW = 0;
+  const ro = new ResizeObserver(() => {
+    clearTimeout(rzT);
+    rzT = setTimeout(() => {
+      const w = hero.clientWidth, h = hero.clientHeight;
+      if (!N || (w === lastW && Math.abs(h - H) < 80)) return;
+      lastW = w; resize();
+    }, 120);
+  });
+  ro.observe(hero);
+
+  const onMotion = () => {
+    $('#hint').hidden = reduceMQ.matches || matchMedia('(hover: none)').matches;
+    if (reduceMQ.matches) { stop(); if (N) drawStatic(); }
+    else { if (N) { ctx.fillStyle = BG; ctx.fillRect(0, 0, W, H); } start(); }
+  };
+  reduceMQ.addEventListener ? reduceMQ.addEventListener('change', onMotion) : reduceMQ.addListener(onMotion);
+
+  const boot = () => { resize(); lastW = hero.clientWidth; onMotion(); };
+  const idle = window.requestIdleCallback || (cb => setTimeout(cb, 1));
+  requestAnimationFrame(() => idle(boot, { timeout: 400 }));
+})();
+</script>
+</body>
+</html>
